@@ -1,0 +1,26 @@
+/* Header */
+.black{
+    background: black;
+}
+.nav-item{
+    display: inline;
+    margin: 10px;
+}
+.col-1{
+    min-width: max-content;
+}
+nav{
+    margin-top: 5px;
+}
+.nav-item a{
+    text-decoration: none;
+    color: black;
+}
+@media (max-width: 767px) {
+    .left-nav .col-md-4, .left-nav .col-1 {
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+}
