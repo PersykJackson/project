@@ -1,0 +1,54 @@
+button{
+    margin: 20px;
+    border: none;
+    background: rgba(80,80,80, 0.2);
+    padding: 10px;
+}
+button:hover{
+    background: orange;
+}
+footer{
+    margin-top: 50px;
+    background: rgba(80, 80, 80, 0.5);
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+footer h1{
+    vertical-align: center;
+}
+.nav-item{
+    display: inline;
+    margin: 10px;
+}
+.col-1{
+    min-width: max-content;
+}
+nav{
+    margin-top: 5px;
+}
+.nav-item a{
+    text-decoration: none;
+    color: black;
+}
+@media (max-width: 767px) {
+    .left-nav .col-md-4, .left-nav .col-1 {
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+}
+main{
+    text-align: center;
+    margin-top: 50px;
+}
+.info{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+button{
+    padding: 30px;
+
+}
