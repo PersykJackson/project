@@ -24,3 +24,38 @@ nav{
     }
 
 }
+.img-fluid{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.product-img{
+    width: 100%;
+    vertical-align: center;
+    margin: 0 0 10px 0;
+}
+.product{
+    text-align: center;
+    margin-top: auto;
+}
+.product button{
+    margin: 10px;
+}
+.products{
+    margin-top: 20px;
+}
+.categories{
+    margin-top: 10px;
+}
+.category{
+    text-align: center;
+    margin-top: auto;
+}
+.category-img{
+    width: 100%;
+    vertical-align: center;
+    margin: 0 0 10px 0;
+}
+.category a{
+    text-decoration: none;
+}
