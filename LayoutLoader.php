@@ -4,17 +4,18 @@
 class LayoutLoader
 {
     private string $template;
-    public array $content;
+    public array $content = [];
     public string $layout = 'layout.php';
     public function __construct(array $content, string $template)
     {
         $this->content = $content;
         $this->template = $template;
+        $this->content['products'] = require_once 'products.php';
     }
     public function render()
     {
         ob_start();
-        require_once 'public/views/register.html';
+        require_once 'public/views/products.php';
         $this->content['main'] = ob_get_clean();
         require $this->layout;
     }
