@@ -1,0 +1,72 @@
+main{
+    text-align: left;
+}
+.product{
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+}
+.image{
+    grid-row: 1/4;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.info{
+    vertical-align: center;
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+.general{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.general p{
+    grid-column: 1/2;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.general strong{
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+.general button{
+    grid-column: 2/3;
+    grid-row: 1/4;
+    height: max-content;
+    vertical-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+@media (max-width: 500px) {
+    .product{
+        grid-template-columns: 1fr;
+    }
+    .info{
+        grid-row: 3/4;
+        grid-column: 1/2;
+    }
+    .image{
+        grid-row: 1/2;
+        width: 80%;
+    }
+    .general button{
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+    .general{
+        grid-template-columns: 1fr;
+        grid-column: 1/2;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .general *{
+        grid-column: 1/2;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .product{
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

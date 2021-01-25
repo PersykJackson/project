@@ -1,3 +1,11 @@
+html{
+    height: 100%;
+}
+body{
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
 button{
     margin: 20px;
     border: none;
@@ -8,12 +16,11 @@ button:hover{
     background: orange;
 }
 footer{
-    margin-top: 50px;
+    margin-top: auto;
     background: rgba(80, 80, 80, 0.5);
     padding: 15px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    grid-row-start: 3;
+    grid-row-end: 4;
 }
 footer h1{
     vertical-align: center;
@@ -24,6 +31,26 @@ footer h1{
 }
 .col-1{
     min-width: max-content;
+}
+.drop-down ul{
+    list-style: none;
+    padding: 0;
+}
+.drop-down li{
+    margin: 5px;
+    padding: 10px 10px 10px 10px;
+}
+.drop-down li:hover{
+    background: orange;
+    cursor: pointer;
+}
+.drop-down{
+    display: none;
+    position: absolute;
+    background: white;
+}
+.drop-trigger:hover .drop-down{
+    display: block;
 }
 nav{
     margin-top: 5px;
@@ -38,17 +65,5 @@ nav{
         margin-right: auto;
         margin-left: auto;
     }
-
-}
-main{
-    text-align: center;
-    margin-top: 50px;
-}
-.info{
-    margin-top: auto;
-    margin-bottom: auto;
-}
-button{
-    padding: 30px;
 
 }
