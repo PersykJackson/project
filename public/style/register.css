@@ -1,0 +1,23 @@
+form{
+    margin-top: 50px;
+    background: white;
+    width: max-content;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+}
+input{
+    background: white;
+    padding: 5px;
+    margin-top: 10px;
+    border: black solid 1px;
+}
+label{
+    margin-top: 10px;
+}
+button{
+    margin-top: 20px;
+    border: none;
+    background: orange;
+    padding: 10px;
+}

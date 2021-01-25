@@ -1,0 +1,79 @@
+ul li{
+    text-decoration: none;
+    list-style: none;
+    display: inline-block;
+}
+.basket{
+    margin-top: 50px;
+}
+.product > *{
+    display: inline-block;
+    vertical-align: top;
+}
+.product img{
+    display: inline;
+    width: 100%;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+.grid img{
+    grid-column: 1/2;
+}
+.grid h1{
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+.grid strong{
+    grid-column: 2/3;
+}
+.info strong{
+    color: orange;
+    font-size: 20px;
+}
+.grid button{
+    height: max-content;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.total{
+    display: inline-block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.total strong{
+    font-size: 30px;
+}
+.basket .total{
+    text-align: center;
+}
+.basket li:last-child{
+    margin-top: 2%;
+    width: 100%;
+    text-align: center;
+}
+.counter input{
+    border: none;
+    outline: none;
+    margin: -4px;
+    height: 100%;
+    text-align: center;
+    background: orange;
+    padding: 5px;
+    width: 100%;
+    max-width: max-content;
+}
+.counter button{
+    margin: 0;
+    border: none;
+    outline: none;
+    padding: 2px 5px;
+    width: 100%;
+    max-width: max-content;
+}
+.counter{
+    padding: 0;
+    margin: 0;
+}
