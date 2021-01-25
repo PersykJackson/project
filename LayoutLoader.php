@@ -14,7 +14,7 @@ class LayoutLoader
     public function render()
     {
         ob_start();
-        require_once 'public/views/index.html';
+        require_once 'public/views/register.html';
         $this->content['main'] = ob_get_clean();
         require $this->layout;
     }
