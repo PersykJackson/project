@@ -1,8 +1,16 @@
 <?php
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 'on');
 
 include_once '../autoload.php';
-$path = trim($_SERVER['REQUEST_URI'], '/');
-$loader = new LayoutLoader(array(), $path);
-$loader->render();
+
+try {
+    $products = require_once '../products.php';
+    $productSearcher = new ProductSearcher($products);
+    $product = $productSearcher->getProduct(11);
+    $path = trim($_SERVER['REQUEST_URI'], '/');
+    $loader = new LayoutLoader(array(), $path);
+    $loader->render();
+} catch (ProductFoundtException $error) {
+    echo $error->getMessage();
+} catch (Exception $error) {
+    echo $error->getMessage();
+}
