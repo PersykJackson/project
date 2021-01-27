@@ -3,12 +3,12 @@
 function autoload(string $name)
 {
     $classMap = [
-        'Logger' => __DIR__.'/Logger/',
-        'LoggerInterface' => __DIR__.'/Logger/',
-        'LogLevel' => __DIR__.'/Logger/',
-        'ProductSearcher' => __DIR__.'/',
-        'LayoutLoader' => __DIR__.'/',
-        'ProductFoundtException' => __DIR__.'/'
+        'Logger' => __DIR__ . '/App/Helpers/Logger/',
+        'LoggerInterface' => __DIR__ . '/App/Helpers/Logger/',
+        'LogLevel' => __DIR__ . '/App/Helpers/Logger/',
+        'ProductSearcher' => __DIR__.'/App/Model/',
+        'LayoutLoader' => __DIR__.'/App/Helpers/',
+        'ProductFoundtException' => __DIR__.'/App/Helpers/Exceptions/'
     ];
     $fileName = $name . '.php';
     include_once $classMap[$name].$fileName;

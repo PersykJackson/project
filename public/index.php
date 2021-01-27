@@ -7,11 +7,11 @@ if ($_SERVER['REQUEST_URI'] === '/favicon.ico') {
     die();
 }
 try {
-    $products = require_once '../products.php';
+    $products = require_once '../App/Database/products.php';
     $productSearcher = new ProductSearcher($products);
-    $product = $productSearcher->getProduct(13);
+    $product = $productSearcher->getProduct(11);
     $path = trim($_SERVER['REQUEST_URI'], '/');
-    $loader = new LayoutLoader(array(), $path);
+    $loader = new LayoutLoader($products, $path);
     $loader->render();
 } catch (ProductFoundtException $error) {
     $logger->warning($error->getMessage(), ['id' => 13]);

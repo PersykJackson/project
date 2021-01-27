@@ -4,7 +4,7 @@
 class LayoutLoader
 {
     public array $content = [];
-    public string $layout = 'layout.php';
+    public string $layout = 'template.php';
     public string $path;
     public function __construct(array $content, string $path)
     {
@@ -12,19 +12,20 @@ class LayoutLoader
         if ($path === '') {
             $this->path = 'index';
         }
-        $this->content = $content;
-        $this->content['products'] = require_once 'products.php';
+        $this->content['products'] = $content;
     }
     public function render()
     {
-        if (file_exists(__DIR__."/public/views/".$this->path.".html")) {
+        $name = __DIR__."/../View/Layouts/".$this->path;
+
+        if (file_exists($name.".html")) {
             ob_start();
-            require_once "public/views/".$this->path.".html";
+            require_once $name.".html";
         } else {
             ob_start();
-            require_once "public/views/".$this->path.".php";
+            require_once $name.".php";
         }
         $this->content['main'] = ob_get_clean();
-        require $this->layout;
+        require __DIR__.'/../View/Templates/'.$this->layout;
     }
 }
