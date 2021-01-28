@@ -7,9 +7,8 @@
           rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
           crossorigin="anonymous">
 
-    <?="<link rel='stylesheet' href='style/".$this->path.".css'>"?>
-    <!--<link rel="stylesheet" href="../../../public/style/layout.css">-->
-    <link rel='stylesheet' href='style/layout.css'>
+    <?="<link rel='stylesheet' type='text/css' href='/style/".$this->content['css'].".css'>"?>
+    <link rel='stylesheet' type="text/css" href='/style/layout.css'>
 </head>
 <body>
     <div class="wrapper">
