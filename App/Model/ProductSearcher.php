@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @Deprecated
+ */
 class ProductSearcher
 {
     private array $products = [];
