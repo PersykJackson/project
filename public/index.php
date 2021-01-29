@@ -12,6 +12,8 @@ try {
     $router->execute();
 } catch (BadRouteException $error) {
     $logger->warning($error->getMessage());
+} catch (StorageException $error) {
+    $logger->warning($error->getMessage());
 } catch (Exception $error) {
     echo $error->getMessage();
 }
