@@ -13,7 +13,7 @@ class View
     }
     public function prepare(): void
     {
-        preg_match("/\/([a-z]*$)/", $this->path, $matches);
+        preg_match("/\/([a-z A-Z]*$)/", $this->path, $matches);
         $this->content['css'] = $matches[1];
     }
     public function render(): void
