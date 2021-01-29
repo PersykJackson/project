@@ -5,7 +5,10 @@ class MainController extends Controller
 {
     public function index(): void
     {
-        $view = new View($this->path);
+        $storage = new ProductStorage('../App/Database/products.txt');
+        $product = $storage->getAll();
+        $view = new View($this->path, ['Product' => $product]);
         $view->render();
     }
+
 }

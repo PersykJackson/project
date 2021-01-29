@@ -9,42 +9,15 @@
                     <div class="products">
                         <h3>Популярные товары</h3><hr/>
                         <div class="row">
-                        <div class="col-4 col-md-2 product">
-                            <img class="rounded img-fluid product-img" src="/images/products/teddy-bear.jpg">
-                            <p>Плюшевый мишка</p>
-                            <strong>350 грн</strong><br/>
+                            <?php
+                            foreach ($this->content['data']['Product'] as $product) {
+                                echo "
+                                <div class='col-4 col-md-2 product'>
+                            <img class='rounded img-fluid product-img' src='".$product->img."'>
+                            <p>{$product->name}</p>
+                            <strong>{$product->cost} грн</strong><br/>
                             <button>В корзину</button>
-                        </div>
-                            <div class="col-4 col-md-2  product">
-                                <img class="rounded img-fluid product-img" src="/images/products/dxracer.jpg">
-                                <p>Игровое кресло</p>
-                                <strong>2700 грн</strong><br/>
-                                <button>В корзину</button>
-                            </div>
-                            <div class="col-4 col-md-2 product">
-                                <img class="rounded img-fluid product-img" src="/images/products/coca-cola.jpg">
-                                <p>Напиток</p>
-                                <strong>16 грн</strong><br/>
-                                <button>В корзину</button>
-                            </div>
-                            <div class="col-4 col-md-2 product">
-                                <img class="rounded img-fluid product-img" src="/images/products/phone.jpg">
-                                <p>Телефон Asus</p>
-                                <strong>6700 грн</strong><br/>
-                                <button>В корзину</button>
-                            </div>
-                            <div class="col-4 col-md-2 product">
-                                <img class="rounded img-fluid product-img" src="/images/products/acer.jpg">
-                                <p>Монитор Acer</p>
-                                <strong>9400 грн</strong><br/>
-                                <button>В корзину</button>
-                            </div>
-                            <div class="col-4 col-md-2 product">
-                                <img class="rounded img-fluid product-img" src="/images/products/sweter.jpg">
-                                <p>Свитер</p>
-                                <strong>760 грн</strong><br/>
-                                <button>В корзину</button>
-                            </div>
+                        </div>"; } ?>
                     </div>
                     </div>
 

@@ -13,7 +13,9 @@ function autoload(string $name)
         'MainController' => __DIR__.'/App/Controller/',
         'Controller' => __DIR__.'/App/Controller/',
         'View' => __DIR__.'/App/View/',
-        'BadRouteException' => __DIR__.'/App/Helpers/Exceptions/'
+        'BadRouteException' => __DIR__.'/App/Helpers/Exceptions/',
+        'ProductStorage' => __DIR__.'/App/Model/',
+        'Product' => __DIR__.'/App/Model/'
     ];
     $fileName = $name . '.php';
     include_once $classMap[$name].$fileName;

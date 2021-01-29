@@ -16,6 +16,9 @@ class Router
             $this->route = '/main/index';
         }
         preg_match('/\/(.*)\/(.*)$/', $this->route, $matches);
+        if (count($matches) < 3) {
+            throw new BadRouteException();
+        }
         $this->controller = ucfirst($matches[1]).'Controller';
         $this->action = $matches[2];
     }
