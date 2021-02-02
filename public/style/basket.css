@@ -1,7 +1,7 @@
 ul li{
     text-decoration: none;
     list-style: none;
-    display: inline-block;
+    display: block;
 }
 .basket{
     margin-top: 50px;
@@ -76,4 +76,5 @@ ul li{
 .counter{
     padding: 0;
     margin: 0;
+    height: max-content;
 }

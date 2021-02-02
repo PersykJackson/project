@@ -16,6 +16,7 @@ class AuthenticationController extends Controller
     public function index(): void
     {
         $view = new View($this->path);
+        $view->content['css'] = 'login';
         $view->render();
     }
     public function login(): void
