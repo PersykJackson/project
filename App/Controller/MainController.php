@@ -1,5 +1,9 @@
 <?php
 
+namespace Liloy\App\Controller;
+
+use Liloy\App\Model\ProductStorage;
+use Liloy\App\View\View;
 
 class MainController extends Controller
 {

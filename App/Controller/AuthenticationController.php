@@ -1,6 +1,9 @@
 <?php
 
+namespace Liloy\App\Controller;
 
+use Liloy\App\Authentication\Authentication;
+use Liloy\App\View\View;
 
 class AuthenticationController extends Controller
 {

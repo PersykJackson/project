@@ -1,5 +1,8 @@
 <?php
 
+namespace Liloy\App\Model;
+
+use Liloy\App\Helpers\Exceptions\StorageException;
 
 class ProductStorage
 {
@@ -11,7 +14,6 @@ class ProductStorage
         } else {
             throw new StorageException('File not found');
         }
-
     }
     private function parseToArr(int $id): array
     {
@@ -25,7 +27,7 @@ class ProductStorage
             if ($id === (int) $matches[1]) {
                 $product = explode(",", $item);
                 foreach ($product as $value) {
-                     $result = explode(' = ',trim($value));
+                     $result = explode(' = ', trim($value));
                     $productArray[$result[0]] = $result[1];
                 }
                 return $productArray;

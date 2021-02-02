@@ -1,6 +1,8 @@
 <?php
 
+namespace Liloy\App\Session;
 
+use Liloy\App\Helpers\Exceptions\Sess;
 
 class Sessioner
 {

@@ -1,5 +1,6 @@
 <?php
 
+namespace Liloy\App\Helpers\Logger;
 
 class Logger implements LoggerInterface
 {
@@ -53,6 +54,6 @@ class Logger implements LoggerInterface
     {
         $now = date('Y-m-d H:i:s');
         $file = "\n".$now.' '.$level.' - '.$message.' - '.implode($context);
-        file_put_contents(__DIR__.'/logs/'.$this->fileName, $file, FILE_APPEND);
+        file_put_contents('Logs/'.$this->fileName, $file, FILE_APPEND);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+namespace Liloy\App\View;
 
 class View
 {

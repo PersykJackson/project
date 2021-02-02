@@ -1,2 +1,4 @@
 .idea
 App/Helpers/Logger/logs
+/vendor/
+/App/Session/Sessions/

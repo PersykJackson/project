@@ -1,5 +1,8 @@
 <?php
 
+namespace Liloy\Router;
+
+use Liloy\App\Helpers\Exceptions\BadRouteException;
 
 class Router
 {
@@ -19,7 +22,7 @@ class Router
         if (count($matches) < 3) {
             throw new BadRouteException();
         }
-        $this->controller = ucfirst($matches[1]).'Controller';
+        $this->controller = 'Liloy\\App\\Controller\\'.ucfirst($matches[1]).'Controller';
         $this->action = $matches[2];
     }
     public function execute(): void
