@@ -5,12 +5,13 @@ namespace Liloy\App\View;
 class View
 {
     private string $path;
-    private array $content = [];
+    public array $content = [];
     private string $template = 'template.php';
     public function __construct(string $path, array $data = [])
     {
         $this->path = $path;
         $this->content['data'] = $data;
+        $this->prepare();
     }
     public function prepare(): void
     {
@@ -19,7 +20,7 @@ class View
     }
     public function render(): void
     {
-        $this->prepare();
+
         $name = __DIR__."/Layouts/".$this->path;
 
         if (file_exists($name.".html")) {

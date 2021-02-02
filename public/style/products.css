@@ -37,3 +37,6 @@
 .products button:hover{
     background: orange;
 }
+header{
+    height: max-content;
+}

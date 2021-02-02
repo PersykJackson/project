@@ -2,7 +2,7 @@
 
 namespace Liloy\App\Session;
 
-use Liloy\App\Helpers\Exceptions\Sess;
+use Liloy\App\Helpers\Exceptions\SessException;
 
 class Sessioner
 {

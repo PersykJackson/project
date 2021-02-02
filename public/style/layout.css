@@ -7,7 +7,10 @@ body{
 .wrapper{
     height: 100%;
     display: grid;
-    grid-template-rows: 1fr auto auto;
+    grid-template-rows: max-content auto auto;
+}
+main{
+    margin-bottom: 5%;
 }
 button{
     margin: 20px;
