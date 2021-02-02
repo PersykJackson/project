@@ -32,7 +32,7 @@
                                 <li class="nav-item"><a href="/main/basket">Корзина</a></li>
                             </div>
                             <div class="col-1 col-md-auto">
-                                <li class="nav-item"><a href="/account/register">Авторизация</a></li>
+                                <li class="nav-item"><a href="/account/login">Авторизация</a></li>
                             </div>
                         </div>
                     </div>
