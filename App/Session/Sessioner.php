@@ -1,6 +1,7 @@
 <?php
 
 
+
 class Sessioner
 {
     private string $sessionPath = __DIR__.'/Sessions';
@@ -34,7 +35,8 @@ class Sessioner
     }
     public function cookieExists(): bool
     {
-        if (file_exists($this->sessionPath.'sess_'.$this->getId())) {
+
+        if (array_key_exists('PHPSESSID', $_COOKIE)) {
             return true;
         }
         return false;
@@ -49,10 +51,10 @@ class Sessioner
     public function destroy(): void
     {
         session_destroy();
+        session_register_shutdown();
     }
     public function setSavePath(string $savePath = null): void
     {
-        var_dump(__DIR__);
         if ($savePath) {
             $this->sessionPath = $savePath;
             session_save_path($this->sessionPath);
@@ -66,11 +68,7 @@ class Sessioner
     }
     public function get($key): string
     {
-        if ($this->contains($key)) {
             return $_SESSION[$key];
-        } else {
-            throw new SessException("Session: $key not found.");
-        }
     }
     public function contains($key): bool
     {
