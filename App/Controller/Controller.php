@@ -1,5 +1,6 @@
 <?php
 
+namespace Liloy\App\Controller;
 
 abstract class Controller
 {

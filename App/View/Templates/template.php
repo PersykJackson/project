@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="wrapper">
-    <?php require_once __DIR__.'/../Layouts/header.html' ?>
+    <?php require_once __DIR__.'/../Layouts/header.php' ?>
     <?php echo $this->content['main']?>
     <?php require_once __DIR__.'/../Layouts/footer.html' ?>
     </div>

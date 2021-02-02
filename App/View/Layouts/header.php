@@ -31,9 +31,24 @@
                             <div class="col-1 col-md-auto">
                                 <li class="nav-item"><a href="/main/basket">Корзина</a></li>
                             </div>
-                            <div class="col-1 col-md-auto">
-                                <li class="nav-item"><a href="/account/login">Авторизация</a></li>
-                            </div>
+                            <?php
+
+                            if (array_key_exists('PHPSESSID', $_COOKIE)) {
+                                if (array_key_exists('auth', $_SESSION)) {
+                                    echo "<div class='col-1 col-md-auto'>
+                                <li class='nav-item'><a href='/authentication/logout'>Выход</a></li>
+                            </div>";
+                                } else {
+                                    echo "<div class='col-1 col-md-auto'>
+                                <li class='nav-item'><a href='/authentication/index'>Авторизация</a></li>
+                            </div>";
+                                }
+                            } else {
+                                echo "<div class='col-1 col-md-auto'>
+                                <li class='nav-item'><a href='/authentication/index'>Авторизация</a></li>
+                            </div>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

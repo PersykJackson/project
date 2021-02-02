@@ -1,6 +1,9 @@
 <?php
 
+namespace Liloy\App\Authentication;
 
+use Liloy\App\Session\Sessioner;
+use Liloy\App\Helpers\Exceptions\AuthException;
 
 class Authentication
 {

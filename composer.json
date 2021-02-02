@@ -1,0 +1,23 @@
+{
+    "name": "liloy/project",
+    "authors": [
+        {
+            "name": "Zagidullin Vladislav",
+            "email": "persyk32111@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Liloy\\App\\Controller\\" : "App/Controller/",
+            "Liloy\\App\\Authentication\\" : "App/Authentication/",
+            "Liloy\\App\\Helpers\\Exceptions\\" : "App/Helpers/Exceptions/",
+            "Liloy\\App\\Helpers\\" : "App/Helpers/",
+            "Liloy\\App\\Helpers\\Logger\\" : "App/Helpers/Logger/",
+            "Liloy\\App\\Model\\" : "App/Model/",
+            "Liloy\\App\\Session\\" : "App/Session/",
+            "Liloy\\App\\View\\" : "App/View/",
+            "Liloy\\Router\\" : "Router/"
+        }
+    }
+}
