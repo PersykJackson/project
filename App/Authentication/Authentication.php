@@ -30,6 +30,7 @@ class Authentication
                 && md5($pass) === $this->password) {
                 $this->sessioner->start();
                 $this->sessioner->set('auth', true);
+                setcookie('session', 1, 0, '/');
                 return true;
             }
         }
@@ -45,6 +46,7 @@ class Authentication
     public function logOut(): void
     {
         if ($this->isAuth()) {
+            setcookie('session', 0, 0, '/');
             $this->sessioner->delete('auth');
             $this->sessioner->destroy();
         } else {
