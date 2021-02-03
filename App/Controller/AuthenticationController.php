@@ -8,6 +8,7 @@ use Liloy\App\View\View;
 class AuthenticationController extends Controller
 {
     private Authentication $auth;
+    public array $errors = [];
     public function __construct(string $path)
     {
         parent::__construct($path);
@@ -24,7 +25,8 @@ class AuthenticationController extends Controller
         if ($this->auth->auth($_POST['login'], $_POST['password'])) {
             header('Location: /main/index');
         } else {
-            header('Location: /authentication/login');
+            setcookie('errors', "Неверный логин или пароль!", time() + 1);
+            header('Location: /authentication/index');
         }
     }
     public function logout(): void

@@ -20,10 +20,13 @@ if ($_SERVER['REQUEST_URI'] === '/favicon.ico') {
 try {
     $session = new Sessioner();
     $session->setSavePath();
-    if (array_key_exists('PHPSESSID', $_COOKIE)) {
-        $session->start();
-        echo "<script>console.log('Session has start!')</script>";
+    if (array_key_exists('session', $_COOKIE)) {
+        if ((int) $_COOKIE['session']) {
+            $session->start();
+            echo "<script>console.log('Session has start!')</script>";
+        }
     }
+
     $router = new Router($_SERVER['REQUEST_URI']);
     $router->execute();
 } catch (BadRouteException $error) {

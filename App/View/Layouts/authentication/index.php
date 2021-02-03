@@ -2,6 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <?php
+                if (isset($_COOKIE['errors'])) {
+                    echo "<div class='error'>{$_COOKIE['errors']}</div>" . '<br/>';
+                }
+                ?>
                 <form action="/authentication/login" method="post">
                     <label for="login">Логин</label><br/>
                     <input type="text" id="login" name="login" placeholder="Введите логин"><br/>

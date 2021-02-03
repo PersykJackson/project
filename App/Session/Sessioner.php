@@ -52,8 +52,9 @@ class Sessioner
     }
     public function destroy(): void
     {
+        setcookie('PHPSESSID', null, -1, '/');
+        session_gc();
         session_destroy();
-        session_register_shutdown();
     }
     public function setSavePath(string $savePath = null): void
     {
