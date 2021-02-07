@@ -2,6 +2,7 @@
 
 namespace Liloy\Router;
 
+use Liloy\App\Controller\ErrorController;
 use Liloy\App\Helpers\Exceptions\BadRouteException;
 
 class Router
@@ -38,6 +39,15 @@ class Router
             }
         } else {
             throw new BadRouteException();
+        }
+    }
+    public function run(): void
+    {
+        try {
+            $this->execute();
+        } catch (BadRouteException $error) {
+            $controller = new ErrorController('/errors/notFound');
+            $controller->notFound();
         }
     }
 }

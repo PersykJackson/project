@@ -15,9 +15,8 @@ use Liloy\App\Helpers\{
 if ($_SERVER['REQUEST_URI'] === '/favicon.ico') {
     die();
 }
-
+$log = new Logger(__DIR__.'/Logs/logger.log');
 try {
-    $log = new Logger(__DIR__.'/Logs/logger.log');
     $session = new Sessioner();
     $session->setSavePath();
     if (array_key_exists('session', $_COOKIE)) {
@@ -26,7 +25,7 @@ try {
         }
     }
     $router = new Router($_SERVER['REQUEST_URI']);
-    $router->execute();
+    $router->run();
 } catch (BadRouteException | SessException $error) {
     $log->warning($error->getMessage());
 } catch (AuthException $error) {
