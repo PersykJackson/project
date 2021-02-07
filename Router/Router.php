@@ -10,6 +10,7 @@ class Router
     private string $route;
     private string $controller;
     private string $action;
+    private string $get;
     public function __construct(string $route)
     {
         $this->route = $route;
@@ -18,6 +19,10 @@ class Router
     {
         if ($this->route === '/') {
             $this->route = '/main/index';
+        }
+        if (strrpos($this->route, '?')) {
+            $array = explode('?', $this->route);
+            $this->route = $array[0];
         }
         preg_match('/\/(.*)\/(.*)$/', $this->route, $matches);
         if (count($matches) < 3) {
