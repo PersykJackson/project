@@ -6,7 +6,14 @@
             "email": "persyk32111@gmail.com"
         }
     ],
-    "require": {},
+    "config": {
+        "github-oauth": {
+            "github.com": "3dc2687712318161ce4b6293632b4ff4c81b83e5"
+        }
+    },
+    "require": {
+        "liloy/logger": "^1.0"
+    },
     "autoload": {
         "psr-4": {
             "Liloy\\App\\Controller\\" : "App/Controller/",
