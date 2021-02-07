@@ -1,4 +1,8 @@
 <?php
+/**
+ * @param string $name
+ * @deprecated
+ */
 
 function autoload(string $name)
 {

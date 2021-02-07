@@ -10,12 +10,14 @@ class Authentication
     private string $login;
     private string $password;
     public Sessioner $sessioner;
+
     public function __construct()
     {
         $this->login = 'login';
         $this->password = md5('password');
         $this->sessioner = new Sessioner();
     }
+
     public function isAuth(): bool
     {
         if ($this->sessioner->contains('auth')) {
@@ -23,6 +25,7 @@ class Authentication
         }
         return false;
     }
+
     public function auth(string $login, string $pass): bool
     {
         if (!$this->isAuth()) {
@@ -36,6 +39,7 @@ class Authentication
         }
         return false;
     }
+
     public function getLogin(): string
     {
         if ($this->isAuth()) {
@@ -43,6 +47,7 @@ class Authentication
         }
         throw new AuthException('Auth: You are not authorized.');
     }
+
     public function logOut(): void
     {
         if ($this->isAuth()) {
