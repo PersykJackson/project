@@ -31,5 +31,4 @@ class MainController extends Controller
         $view = new View($this->path);
         $view->render();
     }
-
 }
