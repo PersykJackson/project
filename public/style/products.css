@@ -7,7 +7,6 @@
     .product button{
         align-items: center;
     }
-
 }
 .img-fluid{
     text-align: center;
@@ -30,12 +29,12 @@
     margin-top: 20px;
 }
 .products button{
-    background: white;
+    background-color: white;
     border: none;
     padding: 10px;
 }
 .products button:hover{
-    background: orange;
+    background-color: orange;
 }
 header{
     height: max-content;

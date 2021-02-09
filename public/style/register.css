@@ -1,23 +1,23 @@
 form{
     margin-top: 50px;
-    background: white;
+    background-color: white;
     width: max-content;
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 10px;
 }
-input{
-    background: white;
+.form input{
+    background-color: white;
     padding: 5px;
     margin-top: 10px;
     border: black solid 1px;
 }
-label{
+.form label{
     margin-top: 10px;
 }
-button{
+.btn{
     margin-top: 20px;
     border: none;
-    background: orange;
+    background-color: orange;
     padding: 10px;
 }

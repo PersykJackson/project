@@ -1,4 +1,4 @@
-ul li{
+.basket-list li{
     text-decoration: none;
     list-style: none;
     display: block;
@@ -60,7 +60,7 @@ ul li{
     margin: -4px;
     height: 100%;
     text-align: center;
-    background: orange;
+    background-color: orange;
     padding: 5px;
     width: 100%;
     max-width: max-content;
