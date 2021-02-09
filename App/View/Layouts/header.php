@@ -32,8 +32,6 @@
                                 <li class="nav-item"><a href="/main/basket">Корзина</a></li>
                             </div>
                             <?php
-
-
                             if (isset($_SESSION['auth'])) {
                                     echo "<div class='col-1 col-md-auto'>
                                 <li class='nav-item'><a href='/authentication/logout'>Выход</a></li>
@@ -42,8 +40,7 @@
                                 echo "<div class='col-1 col-md-auto'>
                                 <li class='nav-item'><a href='/authentication/index'>Авторизация</a></li>
                             </div>";
-                            }
-                            ?>
+                            }?>
                         </div>
                     </div>
                 </div>
