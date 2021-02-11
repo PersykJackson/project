@@ -14,7 +14,7 @@ class Storage
     {
         $this->db = $db;
     }
-    public function create(string $table, array $fields): bool
+    protected function create(string $table, array $fields): bool
     {
         $sql = "INSERT INTO $table(";
         $values = ') VALUES(';
@@ -32,41 +32,41 @@ class Storage
         }
         return false;
     }
-    public function select(string $table, array $cols = []): self
+    protected function select(string $table, array $cols = []): self
     {
         $sql = "SELECT ";
         $sql .= implode(', ', $cols);
         $this->sql = trim($sql, ', ') . " FROM $table";
         return $this;
     }
-    public function where(string $expression): self
+    protected function where(string $expression): self
     {
         $this->sql .= " WHERE ".$expression;
         return $this;
     }
-    public function leftJoin(string $join, string $on): self
+    protected function leftJoin(string $join, string $on): self
     {
         $this->sql .= " LEFT JOIN ".$join." ON ".$on;
         return $this;
     }
-    public function groupBy($group): self
+    protected function groupBy($group): self
     {
         $this->sql .= " GROUP BY".$group;
         return $this;
     }
-    public function orderBy(array $cols): self
+    protected function orderBy(array $cols): self
     {
         $sql = $this->sql .= " ORDER BY ";
         $sql .= implode(', ', $cols);
         $this->sql = trim($sql, ', ');
         return $this;
     }
-    public function params(array $params): self
+    protected function params(array $params): self
     {
         $this->params = $params;
         return $this;
     }
-    public function execute()
+    protected function execute()
     {
         /**
          * @return array|bool
@@ -78,7 +78,7 @@ class Storage
         }
         return $result;
     }
-    public function update(string $table, array $fields): self
+    protected function update(string $table, array $fields): self
     {
         $sql = "UPDATE $table SET ";
         foreach ($fields as $key => $value) {
@@ -88,7 +88,7 @@ class Storage
         $this->params = array_values($fields);
         return $this;
     }
-    public function delete(string $table, array $where): bool
+    protected function delete(string $table, array $where): bool
     {
         $key = array_key_first($where);
         $sql = "DELETE FROM $table WHERE " . $key . ' = ?;';
