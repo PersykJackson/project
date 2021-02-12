@@ -15,12 +15,11 @@
                                 <li class="nav-item"><a class="" href="#">Категории</a></li>
                                 <div class="drop-down">
                                     <ul>
-                                        <li>Компьютеры</li>
-                                        <li>Одежда</li>
-                                        <li>Для спорта</li>
-                                        <li>Аксессуары</li>
-                                        <li>Для детей</li>
-                                        <li>Другое</li>
+                                        <?php
+                                        foreach ($this->content['data']['Categories'] as $category) {
+                                            echo "<li><a href='/products/category?id=".$category->getId()."'>{$category->getName()}</a></li>";
+                                        }
+                                        ?>
                                     </ul>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@ namespace Liloy\App\Storage;
 
 class ProductStorage extends Storage
 {
-    private array $cols = ['id', 'name', 'img', 'cost', 'description'];
+    private array $cols = ['id', 'name', 'img', 'cost', 'description', 'category_id', 'discount'];
     public function getProductById($id): Product
     {
         $product = $this->select('products', $this->cols)->where("id = $id")->execute();
@@ -14,7 +14,6 @@ class ProductStorage extends Storage
     public function getProducts(): array
     {
         $products = $this->select('products', $this->cols)->orderBy(['id'])->execute();
-        var_dump($products);
         $all = [];
         foreach ($products as $product) {
             $all[] = new Product($product);
