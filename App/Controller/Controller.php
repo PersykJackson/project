@@ -9,9 +9,10 @@ use Liloy\App\Storage\CategoryStorage;
 abstract class Controller
 {
     protected string $path;
-    public array $categories;
-    public function __construct(string $path)
+    protected array $get;
+    public function __construct(string $path, array $get)
     {
         $this->path = $path;
+        $this->get = $get;
     }
 }
