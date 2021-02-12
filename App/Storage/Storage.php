@@ -73,7 +73,7 @@ class Storage
          */
         $prepared = $this->db->prepare($this->sql.';');
         $result = $prepared->execute($this->params);
-        if (strpos($this->sql, "SELECT")) {
+        if (stristr($this->sql, "SELECT")) {
             return $prepared->fetchAll(\PDO::FETCH_ASSOC);
         }
         return $result;

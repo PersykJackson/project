@@ -14,6 +14,7 @@ class ProductStorage extends Storage
     public function getProducts(): array
     {
         $products = $this->select('products', $this->cols)->orderBy(['id'])->execute();
+        var_dump($products);
         $all = [];
         foreach ($products as $product) {
             $all[] = new Product($product);

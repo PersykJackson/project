@@ -116,5 +116,4 @@ class User
     {
         $this->phone = $phone;
     }
-
 }
