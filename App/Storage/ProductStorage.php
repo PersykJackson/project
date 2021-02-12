@@ -3,8 +3,6 @@
 
 namespace Liloy\App\Storage;
 
-use Liloy\App\Storage\Product;
-
 class ProductStorage extends Storage
 {
     private array $cols = ['id', 'name', 'img', 'cost', 'description'];
