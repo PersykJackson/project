@@ -3,6 +3,8 @@
 namespace Liloy\App\Controller;
 
 use Liloy\App\Authentication\Authentication;
+use Liloy\App\Database\Connection;
+use Liloy\App\Storage\CategoryStorage;
 use Liloy\App\View\View;
 
 class AuthenticationController extends Controller
@@ -16,7 +18,9 @@ class AuthenticationController extends Controller
     }
     public function index(): void
     {
-        $view = new View($this->path);
+        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categories = $categoryStorage->getCategories();
+        $view = new View($this->path, ['Categories' => $categories]);
         $view->content['css'] = 'login';
         $view->render();
     }

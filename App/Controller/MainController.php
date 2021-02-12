@@ -2,33 +2,43 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Model\ProductStorage;
+use Liloy\App\Database\Connection;
+use Liloy\App\Storage\CategoryStorage;
+use Liloy\App\Storage\ProductStorage;
 use Liloy\App\View\View;
 
 class MainController extends Controller
 {
     public function index(): void
     {
-        $storage = new ProductStorage('../App/Database/products.txt');
-        $product = $storage->getAll();
-        $view = new View($this->path, ['Product' => $product]);
+        $productStorage = new ProductStorage(Connection::getDb());
+        $products = $productStorage->getProducts();
+        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categories = $categoryStorage->getCategories();
+        $view = new View($this->path, ['Product' => $products, 'Categories' => $categories]);
         $view->render();
     }
     public function products(): void
     {
-        $storage = new ProductStorage('../App/Database/products.txt');
-        $product = $storage->getAll();
-        $view = new View($this->path, ['Product' => $product]);
+        $productStorage = new ProductStorage(Connection::getDb());
+        $products = $productStorage->getProducts();
+        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categories = $categoryStorage->getCategories();
+        $view = new View($this->path, ['Product' => $products, 'Categories' => $categories]);
         $view->render();
     }
     public function basket(): void
     {
-        $view = new View($this->path);
+        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categories = $categoryStorage->getCategories();
+        $view = new View($this->path, ['Categories' => $categories]);
         $view->render();
     }
     public function productPage(): void
     {
-        $view = new View($this->path);
+        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categories = $categoryStorage->getCategories();
+        $view = new View($this->path, ['Categories' => $categories]);
         $view->render();
     }
 }

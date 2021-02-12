@@ -24,7 +24,9 @@
             "Liloy\\App\\Model\\" : "App/Model/",
             "Liloy\\App\\Session\\" : "App/Session/",
             "Liloy\\App\\View\\" : "App/View/",
-            "Liloy\\Router\\" : "Router/"
+            "Liloy\\Router\\" : "Router/",
+            "Liloy\\App\\Storage\\" : "App/Storage/",
+            "Liloy\\App\\Database\\" : "App/Database"
         }
     }
 }
