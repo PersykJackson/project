@@ -11,8 +11,6 @@ class User
     private string $login;
     private string $email;
     private string $phone;
-
-
     public function __construct(array $array)
     {
         $this->firstName = $array['first_name'];
@@ -24,11 +22,19 @@ class User
     }
 
     /**
-     * @return int
+     * @return int|mixed
      */
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param int|mixed $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
@@ -40,7 +46,15 @@ class User
     }
 
     /**
-     * @return string
+     * @param mixed|string $firstName
+     */
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed|string
      */
     public function getLastName(): string
     {
@@ -48,7 +62,15 @@ class User
     }
 
     /**
-     * @return string
+     * @param mixed|string $lastName
+     */
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return mixed|string
      */
     public function getLogin(): string
     {
@@ -56,7 +78,15 @@ class User
     }
 
     /**
-     * @return string
+     * @param mixed|string $login
+     */
+    public function setLogin(string $login): void
+    {
+        $this->login = $login;
+    }
+
+    /**
+     * @return mixed|string
      */
     public function getEmail(): string
     {
@@ -64,11 +94,27 @@ class User
     }
 
     /**
-     * @return string
+     * @param mixed|string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed|string
      */
     public function getPhone(): string
     {
         return $this->phone;
+    }
+
+    /**
+     * @param mixed|string $phone
+     */
+    public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
     }
 
 }
