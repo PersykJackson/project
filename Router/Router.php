@@ -10,7 +10,7 @@ class Router
     private string $route;
     private string $controller;
     private string $action;
-    private string $get;
+    private array $get = [];
     public function __construct(string $route)
     {
         $this->route = $route;
@@ -23,6 +23,12 @@ class Router
         if (strrpos($this->route, '?')) {
             $array = explode('?', $this->route);
             $this->route = $array[0];
+            $array = explode('&', $array[1]);
+            foreach ($array as $key => $value) {
+                preg_match('/(.*)\=(.*)/', $value, $matches);
+                $get[$matches[1]] = $matches[2];
+            }
+            $this->get = $get;
         }
         preg_match('/\/(.*)\/(.*)$/', $this->route, $matches);
         if (count($matches) < 3) {
@@ -36,7 +42,7 @@ class Router
         $this->prepare();
         if (class_exists($this->controller)) {
             if (method_exists($this->controller, $this->action)) {
-                $controller = new $this->controller($this->route);
+                $controller = new $this->controller($this->route, $this->get);
                 $action = $this->action;
                 $controller->$action();
             } else {
