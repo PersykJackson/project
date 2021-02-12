@@ -8,13 +8,11 @@ class Category
     private int $id;
     private string $name;
     private string $img;
-    private string $path;
     public function __construct(array $category)
     {
         $this->id = $category['id'];
         $this->name = $category['name'];
         $this->img = $category['img'];
-        $this->path = $category['path'];
     }
 
     /**
@@ -68,17 +66,4 @@ class Category
     /**
      * @return mixed|string
      */
-    public function getPath(): string
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param mixed|string $path
-     */
-    public function setPath(string $path): void
-    {
-        $this->path = $path;
-    }
-
 }
