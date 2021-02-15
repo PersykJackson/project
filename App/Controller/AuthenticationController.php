@@ -5,25 +5,34 @@ namespace Liloy\App\Controller;
 use Liloy\App\Authentication\Authentication;
 use Liloy\App\Database\Connection;
 use Liloy\App\Storage\CategoryStorage;
+use Liloy\App\Storage\UserStorage;
 use Liloy\App\View\View;
 
 class AuthenticationController extends Controller
 {
     private Authentication $auth;
+
     public array $errors = [];
-    public function __construct(string $path)
+
+    public function __construct(string $path, array $get = [])
     {
-        parent::__construct($path);
+        parent::__construct($path, $get);
         $this->auth = new Authentication();
     }
+
     public function index(): void
     {
-        $categoryStorage = new CategoryStorage(Connection::getDb());
-        $categories = $categoryStorage->getCategories();
-        $view = new View($this->path, ['Categories' => $categories]);
-        $view->content['css'] = 'login';
-        $view->render();
+        if ($this->auth->isAuth()) {
+            header("Location: /main/index");
+        } else {
+            $categoryStorage = new CategoryStorage(Connection::getDb());
+            $categories = $categoryStorage->getCategories();
+            $view = new View($this->path, ['Categories' => $categories]);
+            $view->content['css'] = 'login';
+            $view->render();
+        }
     }
+
     public function login(): void
     {
         if ($this->auth->auth($_POST['login'], $_POST['password'])) {
