@@ -6,114 +6,74 @@ namespace Liloy\App\Storage;
 class User
 {
     private int $id;
-    private string $firstName;
-    private string $lastName;
-    private string $login;
-    private string $email;
-    private string $phone;
-    public function __construct(array $array)
-    {
-        $this->firstName = $array['first_name'];
-        $this->lastName = $array['last_name'];
-        $this->id = $array['id'];
-        $this->login = $array['login'];
-        $this->email = $array['email'];
-        $this->phone = $array['phone'];
-    }
 
-    /**
-     * @return int|mixed
-     */
+    private string $firstName;
+
+    private string $lastName;
+
+    private string $login;
+
+    private string $email;
+
+    private string $password;
+
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int|mixed $id
-     */
-    public function setId(int $id): void
+    public function setPassword(string $password): self
     {
-        $this->id = $id;
+        $this->password = $password;
+        return $this;
     }
 
-    /**
-     * @return mixed|string
-     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
     public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    /**
-     * @param mixed|string $firstName
-     */
-    public function setFirstName(string $firstName): void
+    public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
+        return $this;
     }
 
-    /**
-     * @return mixed|string
-     */
     public function getLastName(): string
     {
         return $this->lastName;
     }
 
-    /**
-     * @param mixed|string $lastName
-     */
-    public function setLastName(string $lastName): void
+    public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+        return $this;
     }
 
-    /**
-     * @return mixed|string
-     */
     public function getLogin(): string
     {
         return $this->login;
     }
 
-    /**
-     * @param mixed|string $login
-     */
-    public function setLogin(string $login): void
+    public function setLogin(string $login): self
     {
         $this->login = $login;
+        return $this;
     }
 
-    /**
-     * @return mixed|string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param mixed|string $email
-     */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
-    }
-
-    /**
-     * @return mixed|string
-     */
-    public function getPhone(): string
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @param mixed|string $phone
-     */
-    public function setPhone(string $phone): void
-    {
-        $this->phone = $phone;
+        return $this;
     }
 }
