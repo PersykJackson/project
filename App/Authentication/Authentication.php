@@ -42,7 +42,7 @@ class Authentication
     public function getLogin(): string
     {
         if ($this->isAuth()) {
-            return $this->login;
+            return $this->sessioner->get('login');
         }
         throw new AuthException('Auth: You are not authorized.');
     }
@@ -50,7 +50,7 @@ class Authentication
     public function logOut(): void
     {
         if ($this->isAuth()) {
-            setcookie('session', 0, 0, '/');
+            setcookie('session', 0, 1, '/');
             $this->sessioner->delete('auth');
             $this->sessioner->destroy();
         } else {
