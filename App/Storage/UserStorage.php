@@ -9,9 +9,14 @@ class UserStorage extends Storage
 {
     public function getUserById($id): User
     {
-        $columns = ['first_name', 'last_name', 'login', 'password', 'email', 'phone'];
-        $user = $this->select('users', $columns)->where("id = $id")->execute();
-        return new User($user);
+        $columns = ['first_name', 'last_name', 'login', 'email'];
+        $result = $this->select('users', $columns)->where("id = $id")->execute();
+        $user = new User();
+        $user->setFirstName($result['first_name'])
+            ->setLastName($result['last_name'])
+            ->setLogin($result['login'])
+            ->setEmail($result['email']);
+        return $user;
     }
 
     public function userExistsByEmail(string $email): bool
