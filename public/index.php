@@ -6,12 +6,6 @@ use Liloy\App\Session\Sessioner;
 use Liloy\Router\Router;
 use Liloy\Logger\Logger;
 use Liloy\App\Database\Connection;
-use Liloy\App\Helpers\{
-    Exceptions\BadRouteException,
-    Exceptions\SessException,
-    Exceptions\AuthException,
-    Exceptions\StorageException,
-};
 
 if ($_SERVER['REQUEST_URI'] === '/favicon.ico') {
     die();
@@ -28,12 +22,6 @@ try {
     }
     $router = new Router($_SERVER['REQUEST_URI']);
     $router->run();
-} catch (BadRouteException | SessException $error) {
-    $log->warning($error->getMessage());
-} catch (AuthException $error) {
-    $log->warning($error->getMessage());
-} catch (StorageException $error) {
-    $log->warning($error->getMessage());
 } catch (Exception $error) {
     $log->warning($error->getMessage());
 }
