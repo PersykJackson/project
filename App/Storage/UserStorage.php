@@ -52,4 +52,17 @@ class UserStorage extends Storage
             'email' => $user->getEmail()];
         $this->create('users', $fields);
     }
+
+    public function auth(string $login, string $password): bool
+    {
+        $result = $this->select('users', ['login'])
+            ->where("login = ? AND password = ?")
+            ->params([$login, md5($password.'MaxiMarket')])
+            ->execute();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

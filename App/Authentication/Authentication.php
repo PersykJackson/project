@@ -2,19 +2,17 @@
 
 namespace Liloy\App\Authentication;
 
+use Liloy\App\Database\Connection;
 use Liloy\App\Session\Sessioner;
 use Liloy\App\Helpers\Exceptions\AuthException;
+use Liloy\App\Storage\UserStorage;
 
 class Authentication
 {
-    private string $login;
-    private string $password;
     public Sessioner $sessioner;
 
     public function __construct()
     {
-        $this->login = 'login';
-        $this->password = md5('password');
         $this->sessioner = new Sessioner();
     }
 
@@ -26,11 +24,12 @@ class Authentication
         return false;
     }
 
-    public function auth(string $login, string $pass): bool
+    public function auth(string $login, string $password): bool
     {
+
         if (!$this->isAuth()) {
-            if ($login === $this->login
-                && md5($pass) === $this->password) {
+            $storage = new UserStorage(Connection::getDb());
+            if ($storage->auth($login, $password)) {
                 $this->sessioner->start();
                 $this->sessioner->set('auth', true);
                 setcookie('session', 1, 0, '/');
