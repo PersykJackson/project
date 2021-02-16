@@ -4,10 +4,11 @@
 namespace Liloy\App\Controller;
 
 use Liloy\App\Database\Connection;
-use Liloy\App\Session\Sessioner;
 use Liloy\App\Storage\User;
 use Liloy\App\Storage\UserStorage;
 use Liloy\App\View\View;
+use Mailer\Messenger\Messenger;
+use Mailer\Messenger\TemplateType;
 
 class RegistrationController extends Controller
 {
@@ -16,6 +17,7 @@ class RegistrationController extends Controller
         $view = new View($this->path);
         $view->content['css'] = 'register';
         $view->render();
+        var_dump($_COOKIE);
     }
     public function register(): void
     {
@@ -23,6 +25,7 @@ class RegistrationController extends Controller
             $errors = $this->validate($_POST);
             if (count($errors) < 1) {
                 $storage = new UserStorage(Connection::getDb());
+                $mailer = new Messenger(parse_ini_file(__DIR__.'/../../.env'));
                 $user = new User();
                 $user->setPassword(md5($_POST['password'].'MaxiMarket'))
                     ->setEmail($_POST['email'])
@@ -30,9 +33,20 @@ class RegistrationController extends Controller
                     ->setFirstName($_POST['firstName'])
                     ->setLastName($_POST['lastName']);
                 $storage->register($user);
+                $mailer->setTemplate(
+                    TemplateType::REGISTER_COMPLETE,
+                    'Поздравляем с успешной регистрацией'
+                )->setTitle('MaxiMarket: успешная регистрация!')
+                    ->to($_POST['email'])->execute();
                 header('Location: /authentication/index');
             } else {
-                setcookie('errors', $errors[0], 0, '/registration/index');
+                $errors = array_unique($errors);
+                $string = "<ul>";
+                foreach ($errors as $error) {
+                    $string .= "<li>".$error."</li>";
+                }
+                $string .= "</ul>";
+                setcookie('errors', $string, time() + 2, '/registration');
                 header('Location: /registration/index');
             }
         } else {

@@ -2,7 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <?php var_dump($_COOKIE);?>
+                <?php if (isset($_COOKIE['errors'])) {
+                    echo $_COOKIE['errors'];
+                }?>
                 <form class="form" action="/registration/register" method="post">
                     <label for="name">Имя</label><br/>
                     <input type="text" id="name" name="firstName" placeholder="Введите имя"/><br/>
