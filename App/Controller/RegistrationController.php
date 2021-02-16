@@ -17,7 +17,6 @@ class RegistrationController extends Controller
         $view = new View($this->path);
         $view->content['css'] = 'register';
         $view->render();
-        var_dump($_COOKIE);
     }
     public function register(): void
     {
