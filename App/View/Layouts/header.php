@@ -9,7 +9,7 @@
                                 <li class="nav-item"><a href="/main/index">MaxiMarket</a></li>
                             </div>
                             <div class="col-1 col-md-4 col-lg-1">
-                                <li class="nav-item"><a href="/main/products">Товары</a></li>
+                                <li class="nav-item"><a href="/products/index">Товары</a></li>
                             </div>
                             <div class="col-1 col-md-4 col-lg-1 drop-trigger">
                                 <li class="nav-item"><a class="" href="#">Категории</a></li>
@@ -17,7 +17,7 @@
                                     <ul>
                                         <?php
                                         foreach ($this->content['data']['Categories'] as $category) {
-                                            echo "<li><a href='/products/category?id=".$category->getId()."'>{$category->getName()}</a></li>";
+                                            echo "<li><a href='/products/index?category=".$category->getId()."'>{$category->getName()}</a></li>";
                                         }
                                         ?>
                                     </ul>
