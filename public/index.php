@@ -23,5 +23,5 @@ try {
     $router = new Router($_SERVER['REQUEST_URI']);
     $router->run();
 } catch (Exception $error) {
-    $log->warning($error->getMessage());
+    $log->critical($error->getMessage());
 }

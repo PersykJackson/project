@@ -2,3 +2,5 @@
 /public/Logs/
 /vendor/
 /App/Session/Sessions/
+phpcs.phar
+.env
