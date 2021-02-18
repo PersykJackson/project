@@ -69,9 +69,12 @@ class Sessioner
     {
             $_SESSION[$key] = $value;
     }
-    public function get($key): string
+    public function get($key)
     {
-            return $_SESSION[$key];
+        if ($this->contains($key)) {
+            return   $_SESSION[$key];
+        }
+        return false;
     }
     public function contains($key): bool
     {
