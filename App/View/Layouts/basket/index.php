@@ -13,7 +13,8 @@
                                 <img class='rounded img-fluid product-img' src='".$item['item']->getImg()."'/>
                                     <div class='info'>
                                         <h3>{$item['item']->getName()}</h3>
-                                        <strong>".$item['item']->getCost() * $item['amount']."</strong>
+                                        <span>{$item['item']->getDescription()}</span><br/>
+                                        <strong>".($item['item']->getCost() * $item['amount'])."</strong>
                                         <div class='counter'>
                                             <button name='-'>-</button>
                                             <input type='text' value='".$item['amount']."' size='3' name='count'/>

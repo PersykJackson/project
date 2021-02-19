@@ -32,6 +32,9 @@
     color: orange;
     font-size: 20px;
 }
+.info{
+    text-align: center;
+}
 .grid button{
     height: max-content;
     margin-top: auto;

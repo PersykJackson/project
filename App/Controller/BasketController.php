@@ -17,7 +17,8 @@ class BasketController extends Controller
         $categories = $categoryStorage->getCategories();
         $productsStorage = new ProductStorage(Connection::getDb());
         $products = [];
-        foreach ($_SESSION['basket'] as $item) {
+        $session = new Sessioner();
+        foreach ($session->get('basket') as $item) {
             $products[] = ['item' => $productsStorage->getProductById($item['id']), 'amount' => $item['amount']];
         }
         $view = new View($this->path, ['Categories' => $categories, 'Products' => $products]);
@@ -34,14 +35,13 @@ class BasketController extends Controller
                 foreach ($basket as $key => $item) {
                     if ($item['id'] === $_POST['id']) {
                         $basket[$key]['amount']++;
-                        $basket[$key]['cost'] += $_POST['cost'];
                         $sessioner->set('basket', $basket);
                         return;
                     }
                 }
-                $basket[] = ['id' => $_POST['id'], 'amount' => 1, 'cost' => $_POST['cost']];
+                $basket[] = ['id' => $_POST['id'], 'amount' => 1];
             } else {
-                $basket[] = ['id' => $_POST['id'], 'amount' => 1, 'cost' => $_POST['cost']];
+                $basket[] = ['id' => $_POST['id'], 'amount' => 1];
             }
             $sessioner->set('basket', $basket);
         }
