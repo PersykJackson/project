@@ -10,7 +10,7 @@ class ProductStorage extends Storage
     public function getProductById($id): Product
     {
         $product = $this->select('products', $this->cols)->where("id = $id")->execute();
-        return new Product($product);
+        return new Product($product[0]);
     }
 
     public function getProductsByCategory(int $categoryId): array
