@@ -29,6 +29,7 @@ class ProductsController extends Controller
         $categoryStorage = new CategoryStorage(Connection::getDb());
         $categories = $categoryStorage->getCategories();
         $view = new View($this->path, ['Categories' => $categories]);
+
         $view->render();
     }
 }
