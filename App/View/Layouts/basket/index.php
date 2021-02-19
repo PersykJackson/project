@@ -32,7 +32,7 @@
                         <li>
                             <div class="total">
                             <strong>Итог: <?= $total ?> грн</strong><br/>
-                            <button>Перейти к оформлению</button>
+                                <button><a href="/order/index">Перейти к оформлению</a></button>
                             </div>
                         </li>
                     </ul>
