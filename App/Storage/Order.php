@@ -7,6 +7,8 @@ class Order
 {
     private int $id;
 
+    private int $userId;
+
     private string $address;
 
     private string $comment;
@@ -16,6 +18,17 @@ class Order
     private string $date;
 
     private array $amount = [];
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
+        return $this;
+    }
 
     public function getAmount(): array
     {

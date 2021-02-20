@@ -25,11 +25,13 @@ class OrderController extends Controller
             foreach ($session->get('basket') as $product) {
                 $amount[$product['id']] = $product['amount'];
             }
+
             $order->setAddress($_POST['address'])
                 ->setComment($_POST['comment'])
                 ->setPhone($_POST['phone'])
                 ->setDate($_POST['date'])
-                ->setAmount($amount);
+                ->setAmount($amount)
+                ->setUserId($session->get('id'));
             $orderStorage = new OrderStorage(Connection::getDb());
             $orderStorage->insertOrder($order);
             $session->delete('basket');
