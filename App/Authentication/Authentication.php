@@ -32,6 +32,10 @@ class Authentication
             if ($storage->auth($login, $password)) {
                 $this->sessioner->start();
                 $this->sessioner->set('auth', true);
+                $userStorage = new UserStorage(Connection::getDb());
+                var_dump($login);
+                $user = $userStorage->getUserByLogin($login);
+                $this->sessioner->set('id', $user->getId());
                 setcookie('session', 1, 0, '/');
                 return true;
             }

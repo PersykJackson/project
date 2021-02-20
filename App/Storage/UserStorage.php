@@ -65,4 +65,17 @@ class UserStorage extends Storage
             return false;
         }
     }
+    public function getUserByLogin(string $login): User
+    {
+        $result = $this->select('users', ['id', 'first_name', 'last_name', 'email', 'login'])
+            ->where('login = ?')
+            ->params([$login])
+            ->execute()[0];
+        $user = new User();
+        $user->setId($result['id'])
+            ->setEmail($result['email'])
+            ->setFirstName($result['first_name'])
+            ->setLastName($result['last_name']);
+        return $user;
+    }
 }
