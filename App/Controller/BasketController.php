@@ -18,8 +18,10 @@ class BasketController extends Controller
         $productsStorage = new ProductStorage(Connection::getDb());
         $products = [];
         $session = new Sessioner();
-        foreach ($session->get('basket') as $item) {
-            $products[] = ['item' => $productsStorage->getProductById($item['id']), 'amount' => $item['amount']];
+        if ($session->get('basket')) {
+            foreach ($session->get('basket') as $item) {
+                $products[] = ['item' => $productsStorage->getProductById($item['id']), 'amount' => $item['amount']];
+            }
         }
         $view = new View($this->path, ['Categories' => $categories, 'Products' => $products]);
         $view->content['css'] = 'basket';

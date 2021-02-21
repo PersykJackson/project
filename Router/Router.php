@@ -3,6 +3,7 @@
 namespace Liloy\Router;
 
 use Liloy\App\Controller\ErrorController;
+use Liloy\App\Database\Connection;
 use Liloy\App\Helpers\Exceptions\{
     AuthException,
     BadRouteException,
@@ -18,56 +19,49 @@ class Router
 
     private string $action;
 
-    private array $get = [];
+    private string $path;
+
+    private array $request = [];
 
     public function __construct(string $route)
     {
         $this->route = $route;
     }
 
-    public function prepare(): void
+    private function prepare(): void
     {
-        if ($this->route === '/') {
-            $this->route = '/main/index';
-        }
+        Connection::getInstance();
+        $parser = new RouteParser();
+        $request = new Request();
         if (strpos($this->route, '?')) {
-            preg_match('/^\/(.+)\/(.+)\?(.+)$/', $this->route, $matches);
             $exploded = explode('?', $this->route);
-            $this->route = $exploded[0];
-            $exploded = explode('&', $exploded[1]);
-            foreach ($exploded as $key => $value) {
-                $result = explode('=', $value);
-                $get[$result[0]] = $result[1];
-            }
-            $this->get = $get;
+            $parser->parse($exploded[0]);
+            $request->get($exploded[1]);
         } else {
-            preg_match('/^\/(.+)\/(.+)$/', $this->route, $matches);
+            $parser->parse($this->route);
         }
-        if (count($matches) < 3 || count($matches) > 4) {
-            throw new BadRouteException();
-        }
-        $this->controller = 'Liloy\\App\\Controller\\'.ucfirst($matches[1]).'Controller';
-        $this->action = $matches[2];
+        $this->controller = $parser->getController();
+        $this->action = $parser->getAction();
+        $this->path = $parser->getPath();
+        $this->request = $request->getRequest();
     }
 
-    public function execute(): void
+    private function execute(): void
     {
         $this->prepare();
-        if (class_exists($this->controller)) {
-            if (method_exists($this->controller, $this->action)) {
-                $controller = new $this->controller($this->route, $this->get);
-                $action = $this->action;
-                try {
-                    $controller->$action();
-                } catch (StorageException | AuthException | SessException $message) {
-                    $controller = new ErrorController('/errors/notFound');
-                    $controller->notFound();
-                }
-            } else {
-                throw new BadRouteException();
-            }
-        } else {
+        if (!class_exists($this->controller)) {
             throw new BadRouteException();
+        } elseif (!method_exists($this->controller, $this->action)) {
+            throw new BadRouteException();
+        } else {
+            $controller = new $this->controller($this->path, $this->request);
+            $action = $this->action;
+            try {
+                $controller->$action();
+            } catch (StorageException | AuthException | SessException $message) {
+                $controller = new ErrorController('/errors/notFound');
+                $controller->notFound();
+            }
         }
     }
 

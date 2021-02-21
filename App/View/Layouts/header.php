@@ -28,7 +28,10 @@
                     <div class="col-md-5 col-lg-4">
                         <div class="row justify-content-center">
                             <div class="col-1 col-md-auto">
-                                <li class="nav-item"><a href="/main/basket">Корзина</a></li>
+                                <li class="nav-item"><a href="/account/history">Аккаунт</a></li>
+                            </div>
+                            <div class="col-1 col-md-auto">
+                                <li class="nav-item"><a href="/basket/index">Корзина</a></li>
                             </div>
                             <?php
                             if (isset($_SESSION['auth'])) {
