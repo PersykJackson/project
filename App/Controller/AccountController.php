@@ -3,10 +3,11 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Database\Connection;
-use Liloy\App\Session\Sessioner;
+use Liloy\Framework\Database\Connection;
+use Liloy\Framework\Session\Sessioner;
 use Liloy\App\Storage\OrderStorage;
-use Liloy\App\View\View;
+use Liloy\Framework\Core\View;
+use Liloy\Framework\Core\Controller;
 
 class AccountController extends Controller
 {

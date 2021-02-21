@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Liloy\Router;
+namespace Liloy\Framework\Router;
 
 class Request
 {

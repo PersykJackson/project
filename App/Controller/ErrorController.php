@@ -3,9 +3,10 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Database\Connection;
+use Liloy\Framework\Database\Connection;
 use Liloy\App\Storage\CategoryStorage;
-use Liloy\App\View\View;
+use Liloy\Framework\Core\View;
+use Liloy\Framework\Core\Controller;
 
 class ErrorController extends Controller
 {

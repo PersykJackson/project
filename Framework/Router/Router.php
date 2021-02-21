@@ -1,14 +1,14 @@
 <?php
 
-namespace Liloy\Router;
+namespace Liloy\Framework\Router;
 
 use Liloy\App\Controller\ErrorController;
-use Liloy\App\Database\Connection;
-use Liloy\App\Helpers\Exceptions\{
+use Liloy\Framework\Database\Connection;
+use Liloy\Framework\Helpers\Exceptions\{
     AuthException,
     BadRouteException,
     SessException,
-    StorageException,
+    StorageException
 };
 
 class Router

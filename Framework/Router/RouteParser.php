@@ -1,9 +1,7 @@
 <?php
 
 
-namespace Liloy\Router;
-
-use Liloy\App\Helpers\Exceptions\BadRouteException;
+namespace Liloy\Framework\Router;
 
 class RouteParser
 {

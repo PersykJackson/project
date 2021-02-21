@@ -2,8 +2,8 @@
 
 include '../vendor/autoload.php';
 
-use Liloy\App\Session\Sessioner;
-use Liloy\Router\Router;
+use Liloy\Framework\Session\Sessioner;
+use Liloy\Framework\Router\Router;
 use Liloy\Logger\Logger;
 
 if ($_SERVER['REQUEST_URI'] === '/favicon.ico') {

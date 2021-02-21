@@ -89,6 +89,4 @@ class Order
         $this->date = $date;
         return $this;
     }
-
 }
-

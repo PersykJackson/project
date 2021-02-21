@@ -3,7 +3,7 @@
 
 namespace Liloy\App\Storage;
 
-use Liloy\App\Storage\User;
+use Liloy\Framework\Core\Storage;
 
 class UserStorage extends Storage
 {
@@ -65,6 +65,7 @@ class UserStorage extends Storage
             return false;
         }
     }
+
     public function getUserByLogin(string $login): User
     {
         $result = $this->select('users', ['id', 'first_name', 'last_name', 'email', 'login'])

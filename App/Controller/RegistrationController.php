@@ -3,10 +3,11 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Database\Connection;
+use Liloy\Framework\Database\Connection;
 use Liloy\App\Storage\User;
 use Liloy\App\Storage\UserStorage;
-use Liloy\App\View\View;
+use Liloy\Framework\Core\View;
+use Liloy\Framework\Core\Controller;
 use Mailer\Messenger\Messenger;
 use Mailer\Messenger\TemplateType;
 

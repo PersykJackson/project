@@ -1,6 +1,6 @@
 <?php
 
-namespace Liloy\App\Helpers\Exceptions;
+namespace Liloy\Framework\Helpers\Exceptions;
 
 class StorageException extends \Exception
 {
