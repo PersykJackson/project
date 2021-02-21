@@ -1,10 +1,10 @@
 <?php
 
-namespace Liloy\App\Authentication;
+namespace Liloy\Framework\Authentication;
 
-use Liloy\App\Database\Connection;
-use Liloy\App\Session\Sessioner;
-use Liloy\App\Helpers\Exceptions\AuthException;
+use Liloy\Framework\Database\Connection;
+use Liloy\Framework\Session\Sessioner;
+use Liloy\Framework\Helpers\Exceptions\AuthException;
 use Liloy\App\Storage\UserStorage;
 
 class Authentication

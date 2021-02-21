@@ -3,10 +3,11 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Database\Connection;
+use Liloy\Framework\Database\Connection;
 use Liloy\App\Storage\CategoryStorage;
 use Liloy\App\Storage\ProductStorage;
-use Liloy\App\View\View;
+use Liloy\Framework\Core\View;
+use Liloy\Framework\Core\Controller;
 
 class ProductsController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductsController extends Controller
     {
         $productStorage = new ProductStorage(Connection::getDb());
         if (isset($this->get['category'])) {
-            $products = $productStorage->getProductsByCategory((int)$this->get['category']);
+            $products = $productStorage->getProductsByCategory((int)$this->request['get']['category']);
         } else {
             $products = $productStorage->getProducts();
         }

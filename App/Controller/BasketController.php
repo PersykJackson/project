@@ -3,11 +3,12 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Database\Connection;
-use Liloy\App\Session\Sessioner;
+use Liloy\Framework\Database\Connection;
+use Liloy\Framework\Session\Sessioner;
 use Liloy\App\Storage\CategoryStorage;
 use Liloy\App\Storage\ProductStorage;
-use Liloy\App\View\View;
+use Liloy\Framework\Core\View;
+use Liloy\Framework\Core\Controller;
 
 class BasketController extends Controller
 {
@@ -18,8 +19,10 @@ class BasketController extends Controller
         $productsStorage = new ProductStorage(Connection::getDb());
         $products = [];
         $session = new Sessioner();
-        foreach ($session->get('basket') as $item) {
-            $products[] = ['item' => $productsStorage->getProductById($item['id']), 'amount' => $item['amount']];
+        if ($session->get('basket')) {
+            foreach ($session->get('basket') as $item) {
+                $products[] = ['item' => $productsStorage->getProductById($item['id']), 'amount' => $item['amount']];
+            }
         }
         $view = new View($this->path, ['Categories' => $categories, 'Products' => $products]);
         $view->content['css'] = 'basket';

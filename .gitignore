@@ -1,6 +1,6 @@
 .idea
 /public/Logs/
 /vendor/
-/App/Session/Sessions/
+/Framework/Session/Sessions/
 phpcs.phar
 .env

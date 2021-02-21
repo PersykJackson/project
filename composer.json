@@ -18,16 +18,16 @@
     "autoload": {
         "psr-4": {
             "Liloy\\App\\Controller\\" : "App/Controller/",
-            "Liloy\\App\\Authentication\\" : "App/Authentication/",
-            "Liloy\\App\\Helpers\\Exceptions\\" : "App/Helpers/Exceptions/",
-            "Liloy\\App\\Helpers\\" : "App/Helpers/",
-            "Liloy\\App\\Helpers\\Logger\\" : "App/Helpers/Logger/",
+            "Liloy\\Framework\\Authentication\\" : "Framework/Authentication/",
+            "Liloy\\Framework\\Helpers\\Exceptions\\" : "Framework/Helpers/Exceptions/",
+            "Liloy\\Framework\\Helpers\\" : "Framework/Helpers/",
             "Liloy\\App\\Model\\" : "App/Model/",
-            "Liloy\\App\\Session\\" : "App/Session/",
+            "Liloy\\Framework\\Session\\" : "Framework/Session/",
             "Liloy\\App\\View\\" : "App/View/",
-            "Liloy\\Router\\" : "Router/",
+            "Liloy\\Framework\\Router\\" : "Framework/Router/",
             "Liloy\\App\\Storage\\" : "App/Storage/",
-            "Liloy\\App\\Database\\" : "App/Database"
+            "Liloy\\Framework\\Database\\" : "Framework/Database",
+            "Liloy\\Framework\\Core\\" : "Framework/Core"
         }
     }
 }

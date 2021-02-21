@@ -2,11 +2,12 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Authentication\Authentication;
-use Liloy\App\Database\Connection;
+use Liloy\Framework\Authentication\Authentication;
+use Liloy\Framework\Database\Connection;
 use Liloy\App\Storage\CategoryStorage;
 use Liloy\App\Storage\UserStorage;
-use Liloy\App\View\View;
+use Liloy\Framework\Core\View;
+use Liloy\Framework\Core\Controller;
 
 class AuthenticationController extends Controller
 {
@@ -42,6 +43,7 @@ class AuthenticationController extends Controller
             header('Location: /authentication/index');
         }
     }
+
     public function logout(): void
     {
         $this->auth->logOut();

@@ -1,19 +1,23 @@
 <?php
 
 
-namespace Liloy\App\Storage;
+namespace Liloy\Framework\Core;
 
 use \PDO;
 
 class Storage
 {
     private PDO $db;
+
     private string $sql;
+
     private array $params = [];
+
     public function __construct($db)
     {
         $this->db = $db;
     }
+
     protected function create(string $table, array $fields): bool
     {
         $sql = "INSERT INTO $table(";
@@ -32,6 +36,7 @@ class Storage
         }
         return false;
     }
+
     protected function select(string $table, array $cols = []): self
     {
         $sql = "SELECT ";
@@ -39,21 +44,25 @@ class Storage
         $this->sql = trim($sql, ', ') . " FROM $table";
         return $this;
     }
+
     protected function where(string $expression): self
     {
         $this->sql .= " WHERE ".$expression;
         return $this;
     }
+
     protected function leftJoin(string $join, string $on): self
     {
         $this->sql .= " LEFT JOIN ".$join." ON ".$on;
         return $this;
     }
+
     protected function groupBy($group): self
     {
         $this->sql .= " GROUP BY".$group;
         return $this;
     }
+
     protected function orderBy(array $cols): self
     {
         $sql = $this->sql .= " ORDER BY ";
@@ -61,16 +70,15 @@ class Storage
         $this->sql = trim($sql, ', ');
         return $this;
     }
+
     protected function params(array $params): self
     {
         $this->params = $params;
         return $this;
     }
+
     protected function execute()
     {
-        /**
-         * @return array|bool
-         */
         $prepared = $this->db->prepare($this->sql.';');
         $result = $prepared->execute($this->params);
         if (stristr($this->sql, "SELECT")) {
@@ -78,6 +86,7 @@ class Storage
         }
         return $result;
     }
+
     protected function update(string $table, array $fields): self
     {
         $sql = "UPDATE $table SET ";
@@ -88,6 +97,7 @@ class Storage
         $this->params = array_values($fields);
         return $this;
     }
+
     protected function delete(string $table, array $where): bool
     {
         $key = array_key_first($where);

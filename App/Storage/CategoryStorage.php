@@ -3,6 +3,8 @@
 
 namespace Liloy\App\Storage;
 
+use Liloy\Framework\Core\Storage;
+
 class CategoryStorage extends Storage
 {
     public function getCategories(): array

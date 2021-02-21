@@ -3,7 +3,7 @@
 
 namespace Liloy\App\Storage;
 
-use Liloy\App\Session\Sessioner;
+use Liloy\Framework\Core\Storage;
 
 class OrderStorage extends Storage
 {

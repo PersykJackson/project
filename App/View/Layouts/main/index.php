@@ -15,7 +15,7 @@
                             <img class='rounded img-fluid product-img' src='".$product->getImg()."'/>
                             <p>{$product->getName()}</p>
                             <strong>{$product->getCost()} грн</strong><br/>
-                            <button>В корзину</button>
+                            <button onclick='toBasket({$product->getId()})'>В корзину</button>
                         </div>";
                             } ?>
                     </div>
@@ -27,7 +27,7 @@
                             <?php
                             foreach ($this->content['data']['Categories'] as $category) {
                                 echo "<div class='col-4 col-md-2 category'>
-                            <a href='/products/category?id=".$category->getId()."'><img class='rounded img-fluid category-img' src='".$category->getImg()."'/>
+                            <a href='/products/index?category=".$category->getId()."'><img class='rounded img-fluid category-img' src='".$category->getImg()."'/>
                                 <strong>{$category->getName()}</strong></a>
                             </div>";
                             } ?>

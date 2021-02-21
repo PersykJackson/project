@@ -3,11 +3,12 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Database\Connection;
-use Liloy\App\Session\Sessioner;
+use Liloy\Framework\Database\Connection;
+use Liloy\Framework\Session\Sessioner;
 use Liloy\App\Storage\Order;
 use Liloy\App\Storage\OrderStorage;
-use Liloy\App\View\View;
+use Liloy\Framework\Core\View;
+use Liloy\Framework\Core\Controller;
 
 class OrderController extends Controller
 {
@@ -16,6 +17,7 @@ class OrderController extends Controller
         $view = new View($this->path);
         $view->render();
     }
+
     public function new(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
