@@ -17,6 +17,7 @@ class Request
         $exploded = explode('&', $get);
         foreach ($exploded as $key => $value) {
             $result = explode('=', $value);
+            unset($get);
             $get[$result[0]] = $result[1];
         }
         $this->request['get'] = $get;

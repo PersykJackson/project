@@ -59,7 +59,7 @@ class Storage
 
     protected function groupBy($group): self
     {
-        $this->sql .= " GROUP BY".$group;
+        $this->sql .= " GROUP BY ".$group;
         return $this;
     }
 
@@ -95,6 +95,16 @@ class Storage
         }
         $this->sql = trim($sql, ', ');
         $this->params = array_values($fields);
+        return $this;
+    }
+
+    protected function limit(int $first, int $second = null): self
+    {
+        if ($second) {
+            $this->sql .= ' LIMIT '.$first.' OFFSET '.$second;
+        } else {
+            $this->sql .= ' LIMIT '.$first;
+        }
         return $this;
     }
 
