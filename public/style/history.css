@@ -1,0 +1,39 @@
+.container table {
+    margin-right: auto;
+    margin-left: auto;
+}
+main .container {
+    text-align: center;
+}
+.container table td {
+    margin: 5px;
+    padding: 5px;
+}
+.search {
+    background-color: rgba(80,80,80, 0.2);
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}
+.search * {
+    margin: 0;
+}
+.search input{
+    border: none;
+    background-color: rgba(80,80,80, 0.2);
+    text-align: center;
+    padding: 5px;
+}
+.search select{
+    background-color: rgba(80,80,80, 0.2);
+    border: none;
+    padding: 7px;
+}
+.search select:active, .search select:focus, .search input:focus{
+    outline: none;
+}
+table caption{
+    caption-side: top;
+    text-align: center;
+}

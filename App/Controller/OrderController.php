@@ -3,6 +3,7 @@
 
 namespace Liloy\App\Controller;
 
+use Liloy\App\Storage\CategoryStorage;
 use Liloy\Framework\Database\Connection;
 use Liloy\Framework\Session\Sessioner;
 use Liloy\App\Storage\Order;
@@ -14,7 +15,9 @@ class OrderController extends Controller
 {
     public function index(): void
     {
-        $view = new View($this->path);
+        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categories = $categoryStorage->getCategories();
+        $view = new View($this->path, ['Categories' => $categories]);
         $view->render();
     }
 
@@ -27,11 +30,10 @@ class OrderController extends Controller
             foreach ($session->get('basket') as $product) {
                 $amount[$product['id']] = $product['amount'];
             }
-
-            $order->setAddress($_POST['address'])
-                ->setComment($_POST['comment'])
-                ->setPhone($_POST['phone'])
-                ->setDate($_POST['date'])
+            $order->setAddress($this->request['post']['address'])
+                ->setComment($this->request['post']['comment'])
+                ->setPhone($this->request['post']['phone'])
+                ->setDate($this->request['post']['date'])
                 ->setAmount($amount)
                 ->setUserId($session->get('id'));
             $orderStorage = new OrderStorage(Connection::getDb());
