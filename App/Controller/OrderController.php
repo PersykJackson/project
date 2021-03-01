@@ -3,11 +3,11 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Storage\CategoryStorage;
+use Liloy\App\Storage\CategoryMapper;
 use Liloy\Framework\Database\Connection;
 use Liloy\Framework\Session\Sessioner;
 use Liloy\App\Storage\Order;
-use Liloy\App\Storage\OrderStorage;
+use Liloy\App\Storage\OrderMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 
@@ -15,7 +15,7 @@ class OrderController extends Controller
 {
     public function index(): void
     {
-        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categoryStorage = new CategoryMapper(Connection::getDb());
         $categories = $categoryStorage->getCategories();
         $view = new View($this->path, ['Categories' => $categories]);
         $view->render();
@@ -36,7 +36,7 @@ class OrderController extends Controller
                 ->setDate($this->request['post']['date'])
                 ->setAmount($amount)
                 ->setUserId($session->get('id'));
-            $orderStorage = new OrderStorage(Connection::getDb());
+            $orderStorage = new OrderMapper(Connection::getDb());
             $orderStorage->insertOrder($order);
             $session->delete('basket');
             header('Location: /main/index');

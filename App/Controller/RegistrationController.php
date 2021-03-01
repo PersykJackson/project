@@ -3,10 +3,10 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Storage\CategoryStorage;
+use Liloy\App\Storage\CategoryMapper;
 use Liloy\Framework\Database\Connection;
 use Liloy\App\Storage\User;
-use Liloy\App\Storage\UserStorage;
+use Liloy\App\Storage\UserMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 use Mailer\Messenger\Messenger;
@@ -16,7 +16,7 @@ class RegistrationController extends Controller
 {
     public function index(): void
     {
-        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categoryStorage = new CategoryMapper(Connection::getDb());
         $categories = $categoryStorage->getCategories();
         $view = new View($this->path, ['Categories' => $categories]);
         $view->content['css'] = 'register';
@@ -29,7 +29,7 @@ class RegistrationController extends Controller
         }
         $errors = $this->validate($this->request['post']);
         if (count($errors) < 1) {
-            $storage = new UserStorage(Connection::getDb());
+            $storage = new UserMapper(Connection::getDb());
             $mailer = new Messenger(parse_ini_file(__DIR__.'/../../.env'));
             $user = new User();
             $user->setPassword(md5($_POST['password'].'MaxiMarket'))
@@ -56,7 +56,7 @@ class RegistrationController extends Controller
     }
     private function validate(array $user): array
     {
-        $storage = new UserStorage(Connection::getDb());
+        $storage = new UserMapper(Connection::getDb());
         $errors = [];
         foreach ($user as $value) {
             if ($value === '') {

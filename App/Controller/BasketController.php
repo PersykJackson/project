@@ -5,8 +5,8 @@ namespace Liloy\App\Controller;
 
 use Liloy\Framework\Database\Connection;
 use Liloy\Framework\Session\Sessioner;
-use Liloy\App\Storage\CategoryStorage;
-use Liloy\App\Storage\ProductStorage;
+use Liloy\App\Storage\CategoryMapper;
+use Liloy\App\Storage\ProductMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 
@@ -14,9 +14,9 @@ class BasketController extends Controller
 {
     public function index(): void
     {
-        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categoryStorage = new CategoryMapper(Connection::getDb());
         $categories = $categoryStorage->getCategories();
-        $productsStorage = new ProductStorage(Connection::getDb());
+        $productsStorage = new ProductMapper(Connection::getDb());
         $products = [];
         $session = new Sessioner();
         if ($session->get('basket')) {

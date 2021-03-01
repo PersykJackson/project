@@ -3,9 +3,9 @@
 
 namespace Liloy\App\Storage;
 
-use Liloy\Framework\Core\Storage;
+use Liloy\Framework\Core\Mapper;
 
-class CategoryStorage extends Storage
+class CategoryMapper extends Mapper
 {
     public function getCategories(): array
     {

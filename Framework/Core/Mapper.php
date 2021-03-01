@@ -5,7 +5,7 @@ namespace Liloy\Framework\Core;
 
 use \PDO;
 
-class Storage
+class Mapper
 {
     private PDO $db;
 
@@ -31,10 +31,8 @@ class Storage
         $sql .= $values;
         $sql .= ");";
         $prepared = $this->db->prepare($sql);
-        if ($prepared->execute(array_values($fields))) {
-            return true;
-        }
-        return false;
+
+        return $prepared->execute(array_values($fields));
     }
 
     protected function select(string $table, array $cols = []): self
@@ -81,10 +79,8 @@ class Storage
     {
         $prepared = $this->db->prepare($this->sql.';');
         $result = $prepared->execute($this->params);
-        if (stristr($this->sql, "SELECT")) {
-            return $prepared->fetchAll(\PDO::FETCH_ASSOC);
-        }
-        return $result;
+
+        return $prepared->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     protected function update(string $table, array $fields): self
@@ -113,9 +109,7 @@ class Storage
         $key = array_key_first($where);
         $sql = "DELETE FROM $table WHERE " . $key . ' = ?;';
         $prepared = $this->db->prepare($sql);
-        if ($prepared->execute(array_values($where))) {
-            return true;
-        }
-        return false;
+
+        return $prepared->execute(array_values($where));
     }
 }

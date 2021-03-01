@@ -2,7 +2,7 @@
 
 namespace Liloy\Framework\Helpers\Exceptions;
 
-class StorageException extends \Exception
+class StorageException extends FrameworkException
 {
     protected $message = 'BadFile in storage class.';
 }

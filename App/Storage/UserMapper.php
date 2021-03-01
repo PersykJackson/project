@@ -3,9 +3,9 @@
 
 namespace Liloy\App\Storage;
 
-use Liloy\Framework\Core\Storage;
+use Liloy\Framework\Core\Mapper;
 
-class UserStorage extends Storage
+class UserMapper extends Mapper
 {
     public function getUserById($id): User
     {
@@ -25,10 +25,7 @@ class UserStorage extends Storage
         $user = $this->select('users', $columns)
             ->where("email = $email")
             ->execute();
-        if ($user) {
-            return true;
-        }
-        return false;
+        return (bool)$user;
     }
 
     public function userExistsByLogin(string $login): bool
@@ -37,13 +34,10 @@ class UserStorage extends Storage
         $user = $this->select('users', $columns)
             ->where("login = $login")
             ->execute();
-        if ($user) {
-            return true;
-        }
-        return false;
+        return (bool)$user;
     }
 
-    public function register(User $user): void
+    public function register(User $user): bool
     {
         $fields = ['login' => $user->getLogin(),
             'password' => $user->getPassword(),
@@ -51,6 +45,7 @@ class UserStorage extends Storage
             'last_name' => $user->getLastName(),
             'email' => $user->getEmail()];
         $this->create('users', $fields);
+        return $this->userExistsByLogin($user->getLogin());
     }
 
     public function auth(string $login, string $password): bool
@@ -59,16 +54,12 @@ class UserStorage extends Storage
             ->where("login = ? AND password = ?")
             ->params([$login, md5($password.'MaxiMarket')])
             ->execute();
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        return (bool)$result;
     }
 
     public function getUserByLogin(string $login): User
     {
-        $result = $this->select('users', ['id', 'first_name', 'last_name', 'email', 'login'])
+        $result = $this->select('users', ['id', 'first_name', 'last_name', 'email'])
             ->where('login = ?')
             ->params([$login])
             ->execute()[0];

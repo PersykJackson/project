@@ -2,7 +2,7 @@
 
 namespace Liloy\Framework\Helpers\Exceptions;
 
-class AuthException extends \Exception
+class AuthException extends FrameworkException
 {
     protected $message = 'AuthException';
 }
