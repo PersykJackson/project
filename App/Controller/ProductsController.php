@@ -15,15 +15,9 @@ class ProductsController extends Controller
 {
     public function index(): void
     {
-        $productStorage = new ProductMapper(Connection::getDb());
-        if (isset($this->request['get']['category'])) {
-            $products = $productStorage->getProductsByCategory((int)$this->request['get']['category']);
-        } else {
-            $products = $productStorage->getProducts();
-        }
         $categoryStorage = new CategoryMapper(Connection::getDb());
         $categories = $categoryStorage->getCategories();
-        $view = new View($this->path, ['Product' => $products, 'Categories' => $categories]);
+        $view = new View($this->path, ['Categories' => $categories]);
         $view->render();
     }
 
@@ -32,7 +26,19 @@ class ProductsController extends Controller
         $categoryStorage = new CategoryMapper(Connection::getDb());
         $categories = $categoryStorage->getCategories();
         $view = new View($this->path, ['Categories' => $categories]);
-
         $view->render();
+    }
+
+    public function all(): void
+    {
+        if ($_SERVER['REQUEST_METHOD']) {
+            $productStorage = new ProductMapper(Connection::getDb());
+            if (isset($this->request['ajax']['category'])) {
+                $products = $productStorage->getProductsByCategory((int)$this->request['get']['category']);
+            } else {
+                $products = $productStorage->getProducts();
+                echo json_encode($products);
+            }
+        }
     }
 }

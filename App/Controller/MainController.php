@@ -13,7 +13,7 @@ class MainController extends Controller
     public function index(): void
     {
         $productStorage = new ProductMapper(Connection::getDb());
-        $products = $productStorage->getProducts();
+        $products = $productStorage->getTopProducts();
         $categoryStorage = new CategoryMapper(Connection::getDb());
         $categories = $categoryStorage->getCategories();
         $view = new View($this->path, ['Product' => $products, 'Categories' => $categories]);

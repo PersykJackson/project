@@ -41,10 +41,9 @@ class ProductMapper extends Mapper
         }
         return $all;
     }
-
-    public function getProducts(): array
+    public function getTopProducts(): array
     {
-        $result = $this->select('products', $this->cols)->orderBy(['id'])->execute();
+        $result = $this->select('products', $this->cols)->orderBy(['id'])->limit(6)->execute();
         $all = [];
         foreach ($result as $value) {
             $product = new Product();
@@ -57,5 +56,11 @@ class ProductMapper extends Mapper
                 ->setName($value['name']);
         }
         return $all;
+    }
+    public function getProducts(): array
+    {
+        return $this->select('products', $this->cols)
+            ->orderBy(['id'])
+            ->execute();
     }
 }
