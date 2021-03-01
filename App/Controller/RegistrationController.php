@@ -27,34 +27,29 @@ class RegistrationController extends Controller
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             exit();
         }
-        $errors = $this->validate($this->request['post']);
+        $this->request['ajax'] = json_decode($this->request['ajax']);
+        $errors = $this->validate($this->request['ajax']);
         if (count($errors) < 1) {
             $storage = new UserMapper(Connection::getDb());
             $mailer = new Messenger(parse_ini_file(__DIR__.'/../../.env'));
             $user = new User();
-            $user->setPassword(md5($_POST['password'].'MaxiMarket'))
-                ->setEmail($this->request['post']['email'])
-                ->setLogin($this->request['post']['login'])
-                ->setFirstName($this->request['post']['firstName'])
-                ->setLastName($this->request['post']['lastName']);
+            $user->setPassword(md5($this->request['ajax']->password.'MaxiMarket'))
+                ->setEmail($this->request['ajax']->email)
+                ->setLogin($this->request['ajax']->login)
+                ->setFirstName($this->request['ajax']->firstName)
+                ->setLastName($this->request['ajax']->lastName);
             $storage->register($user);
             $mailer->setTemplate(
                 TemplateType::REGISTER_COMPLETE,
                 'Поздравляем с успешной регистрацией'
             )->setTitle('MaxiMarket: успешная регистрация!')
-                ->to($this->request['post']['email'])->execute();
-            header('Location: /authentication/index');
+                ->to($this->request['ajax']->email)->execute();
+            echo json_encode(['registration' => true]);
         } else {
-            $string = "<ul>";
-            foreach ($errors as $error) {
-                $string .= "<li>".$error."</li>";
-            }
-            $string .= "</ul>";
-            setcookie('errors', $string, time() + 2, '/registration');
-            header('Location: /registration/index');
+            echo json_encode($errors);
         }
     }
-    private function validate(array $user): array
+    private function validate(object $user): array
     {
         $storage = new UserMapper(Connection::getDb());
         $errors = [];
@@ -64,20 +59,20 @@ class RegistrationController extends Controller
                 break;
             }
         }
-        if (strlen($user['login']) < 5 || strlen($user['login'] > 20)) {
+        if (strlen($user->login) < 5 || strlen($user->login > 20)) {
             $errors[] = 'Логин должен быть длиннее 5-ти символов и короче 20-ти символов!';
         }
-        if ($user['password'] !== $user['confirm']) {
+        if ($user->password !== $user->confirm) {
             $errors[] = 'Пароли не совпадают!';
         }
-        if (strlen($user['password']) < 10 || !preg_match('/([a-zA-Z1-9])/', $user['password'])) {
+        if (strlen($user->password) < 10 || !preg_match('/([a-zA-Z1-9])/', $user->password)) {
             $errors[] = 'Пароль должен быть длиннее 10-ти символов,
              а также содержать хотя бы один буквенный символ и хотя бы одну цифру';
         }
-        if ($storage->userExistsByEmail($user['email'])) {
+        if ($storage->userExistsByEmail($user->email)) {
             $errors[] = 'Почта уже зарегистрирована!';
         }
-        if ($storage->userExistsByLogin($user['login'])) {
+        if ($storage->userExistsByLogin($user->login)) {
             $errors[] = 'Логин уже зарегистрирован!';
         }
         return $errors;
