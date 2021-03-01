@@ -19,25 +19,15 @@ class Product
 
     private string $description;
 
-    public function __construct(array $product)
-    {
-        $this->id = $product['id'];
-        $this->name = $product['name'];
-        $this->img = $product['img'];
-        $this->categoryId = $product['category_id'];
-        $this->discount = $product['discount'];
-        $this->cost = $product['cost'];
-        $this->description = $product['description'];
-    }
-
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getName(): string
@@ -45,9 +35,10 @@ class Product
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getImg(): string
@@ -55,9 +46,10 @@ class Product
         return $this->img;
     }
 
-    public function setImg(string $img): void
+    public function setImg(string $img): self
     {
         $this->img = $img;
+        return $this;
     }
 
     public function getCategoryId(): int
@@ -65,9 +57,10 @@ class Product
         return $this->categoryId;
     }
 
-    public function setCategoryId(int $categoryId): void
+    public function setCategoryId(int $categoryId): self
     {
         $this->categoryId = $categoryId;
+        return $this;
     }
 
     public function getDiscount(): int
@@ -75,9 +68,10 @@ class Product
         return $this->discount;
     }
 
-    public function setDiscount(int $discount): void
+    public function setDiscount(int $discount): self
     {
         $this->discount = $discount;
+        return $this;
     }
 
     public function getCost(): int
@@ -85,9 +79,10 @@ class Product
         return $this->cost;
     }
 
-    public function setCost(int $cost): void
+    public function setCost(int $cost): self
     {
         $this->cost = $cost;
+        return $this;
     }
 
     public function getDescription(): string
@@ -95,8 +90,9 @@ class Product
         return $this->description;
     }
 
-    public function setDescription(string $description): void
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
     }
 }

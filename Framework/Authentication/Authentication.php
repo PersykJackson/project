@@ -5,7 +5,7 @@ namespace Liloy\Framework\Authentication;
 use Liloy\Framework\Database\Connection;
 use Liloy\Framework\Session\Sessioner;
 use Liloy\Framework\Helpers\Exceptions\AuthException;
-use Liloy\App\Storage\UserStorage;
+use Liloy\App\Storage\UserMapper;
 
 class Authentication
 {
@@ -28,11 +28,11 @@ class Authentication
     {
 
         if (!$this->isAuth()) {
-            $storage = new UserStorage(Connection::getDb());
+            $storage = new UserMapper(Connection::getDb());
             if ($storage->auth($login, $password)) {
                 $this->sessioner->start();
                 $this->sessioner->set('auth', true);
-                $userStorage = new UserStorage(Connection::getDb());
+                $userStorage = new UserMapper(Connection::getDb());
                 var_dump($login);
                 $user = $userStorage->getUserByLogin($login);
                 $this->sessioner->set('id', $user->getId());

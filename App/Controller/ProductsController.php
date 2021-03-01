@@ -3,10 +3,10 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Storage\OrderStorage;
+use Liloy\App\Storage\OrderMapper;
 use Liloy\Framework\Database\Connection;
-use Liloy\App\Storage\CategoryStorage;
-use Liloy\App\Storage\ProductStorage;
+use Liloy\App\Storage\CategoryMapper;
+use Liloy\App\Storage\ProductMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 use Liloy\Framework\Session\Sessioner;
@@ -15,13 +15,13 @@ class ProductsController extends Controller
 {
     public function index(): void
     {
-        $productStorage = new ProductStorage(Connection::getDb());
+        $productStorage = new ProductMapper(Connection::getDb());
         if (isset($this->request['get']['category'])) {
             $products = $productStorage->getProductsByCategory((int)$this->request['get']['category']);
         } else {
             $products = $productStorage->getProducts();
         }
-        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categoryStorage = new CategoryMapper(Connection::getDb());
         $categories = $categoryStorage->getCategories();
         $view = new View($this->path, ['Product' => $products, 'Categories' => $categories]);
         $view->render();
@@ -29,7 +29,7 @@ class ProductsController extends Controller
 
     public function product(): void
     {
-        $categoryStorage = new CategoryStorage(Connection::getDb());
+        $categoryStorage = new CategoryMapper(Connection::getDb());
         $categories = $categoryStorage->getCategories();
         $view = new View($this->path, ['Categories' => $categories]);
 

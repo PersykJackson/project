@@ -4,8 +4,8 @@ namespace Liloy\App\Controller;
 
 use Liloy\Framework\Authentication\Authentication;
 use Liloy\Framework\Database\Connection;
-use Liloy\App\Storage\CategoryStorage;
-use Liloy\App\Storage\UserStorage;
+use Liloy\App\Storage\CategoryMapper;
+use Liloy\App\Storage\UserMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 
@@ -26,7 +26,7 @@ class AuthenticationController extends Controller
         if ($this->auth->isAuth()) {
             header("Location: /main/index");
         } else {
-            $categoryStorage = new CategoryStorage(Connection::getDb());
+            $categoryStorage = new CategoryMapper(Connection::getDb());
             $categories = $categoryStorage->getCategories();
             $view = new View($this->path, ['Categories' => $categories]);
             $view->content['css'] = 'login';

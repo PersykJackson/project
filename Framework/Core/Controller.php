@@ -2,6 +2,8 @@
 
 namespace Liloy\Framework\Core;
 
+use Liloy\Framework\Database\Connection;
+
 abstract class Controller
 {
     protected string $path;
@@ -12,5 +14,6 @@ abstract class Controller
     {
         $this->path = $path;
         $this->request = $request;
+        Connection::getInstance();
     }
 }
