@@ -4,6 +4,7 @@ namespace Liloy\Framework\Router;
 
 use Liloy\App\Controller\ErrorController;
 use Liloy\Framework\Helpers\Exceptions\FrameworkException;
+use Liloy\Framework\Helpers\Exceptions\BadRouteException;
 
 class Router
 {
@@ -31,13 +32,14 @@ class Router
         if (strpos($this->route, '?')) {
             $exploded = explode('?', $this->route);
             $parser->parse($exploded[0]);
-            $request->get($exploded[1]);
+            $request->setGet($exploded[1]);
         } else {
             $parser->parse($this->route);
         }
         $this->controller = $parser->getController();
         $this->action = $parser->getAction();
         $this->path = $parser->getPath();
+        $request->setPost();
         $this->request = $request->getRequest();
     }
 
