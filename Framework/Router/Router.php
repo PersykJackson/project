@@ -3,13 +3,7 @@
 namespace Liloy\Framework\Router;
 
 use Liloy\App\Controller\ErrorController;
-use Liloy\Framework\Database\Connection;
-use Liloy\Framework\Helpers\Exceptions\{
-    AuthException,
-    BadRouteException,
-    SessException,
-    StorageException
-};
+use Liloy\Framework\Helpers\Exceptions\FrameworkException;
 
 class Router
 {
@@ -23,6 +17,8 @@ class Router
 
     private array $request = [];
 
+    private const NOT_FOUND = '/errors/notFound';
+
     public function __construct(string $route)
     {
         $this->route = $route;
@@ -30,7 +26,6 @@ class Router
 
     private function prepare(): void
     {
-        Connection::getInstance();
         $parser = new RouteParser();
         $request = new Request();
         if (strpos($this->route, '?')) {
@@ -51,26 +46,21 @@ class Router
         $this->prepare();
         if (!class_exists($this->controller)) {
             throw new BadRouteException();
-        } elseif (!method_exists($this->controller, $this->action)) {
+        }
+        if (!method_exists($this->controller, $this->action)) {
             throw new BadRouteException();
-        } else {
+        }
             $controller = new $this->controller($this->path, $this->request);
             $action = $this->action;
-            try {
-                $controller->$action();
-            } catch (StorageException | AuthException | SessException $message) {
-                $controller = new ErrorController('/errors/notFound');
-                $controller->notFound();
-            }
-        }
+            $controller->$action();
     }
 
     public function run(): void
     {
         try {
             $this->execute();
-        } catch (BadRouteException $error) {
-            $controller = new ErrorController('/errors/notFound');
+        } catch (FrameworkException $error) {
+            $controller = new ErrorController(self::NOT_FOUND);
             $controller->notFound();
         }
     }

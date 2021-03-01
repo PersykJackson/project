@@ -11,10 +11,12 @@ class RouteParser
 
     private string $path;
 
+    private const INDEX = '/main/index';
+
     public function parse(string $route): void
     {
         if ($route === '/') {
-            $route = '/main/index';
+            $route = self::INDEX;
         }
         preg_match('/^\/(.+)\/(.+)$/', $route, $matches);
         if (count($matches) < 3) {
