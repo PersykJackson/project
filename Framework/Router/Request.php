@@ -7,12 +7,13 @@ class Request
 {
     private array $request = [];
 
-    public function __construct()
+    public function setPost(): void
     {
         $this->request['post'] = $_POST;
+        $this->request['ajax'] = file_get_contents('php://input');
     }
 
-    public function get(string $get): void
+    public function setGet(string $get): void
     {
         $exploded = explode('&', $get);
         foreach ($exploded as $key => $value) {

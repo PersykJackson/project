@@ -19,17 +19,19 @@ class AccountController extends Controller
         $view = new View($this->path, ['Categories' => $categories]);
         $view->render();
     }
-    public function search()
+
+    public function search(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $result = json_decode(file_get_contents('php://input'));
+            $result = json_decode($this->request['ajax']);
             $orderStorage = new OrderMapper(Connection::getDb());
             $session = new Sessioner();
             $orders = $orderStorage->search($session->get('id'), $result);
             echo json_encode($orders);
         }
     }
-    public function startSearch()
+
+    public function startSearch(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $orderStorage = new OrderMapper(Connection::getDb());
