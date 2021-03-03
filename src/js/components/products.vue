@@ -9,8 +9,14 @@
                :name="f.name"
                :cost="f.cost"
                :id="f.id"
-               :img="f.img">
+               :img="f.img"
+               v-if="checkPage(i)">
       </product>
+            <div class="pagination">
+              <button v-for="(f, i) of pagesCount" :key="i" v-on:click="changePage(i)" v-bind:disabled="disablePage(i)">
+                {{i+1}}
+              </button>
+            </div>
   </div>
   </div>
   </div>
@@ -27,59 +33,54 @@ export default {
     products: {
       type: Array,
       require: true
+    },
+    pagesCount: {
+      type: Number,
+      require: true
+    },
+    numberOfPage: {
+      type: Number,
+      require: true,
+      default: 0
     }
   },
   methods: {
     async getProducts() {
       return await sendPost('/products/all', 'all')
+    },
+    getCountPages() {
+      const productsCount = this.products.length;
+      return Math.ceil(productsCount / 12);
+    },
+    checkPage(productIndex) {
+      let firstItem = this.numberOfPage * 12
+      let lastItem = firstItem + 11
+      if (productIndex >= firstItem && productIndex <= lastItem) {
+        return true;
+      }
+      return false;
+    },
+    changePage(page) {
+      this.numberOfPage = page;
+    },
+    disablePage(page) {
+      if (page === this.numberOfPage) {
+        return true
+      }
+      return false
     }
   },
   async created() {
     this.products = await this.getProducts()
+    this.pagesCount = this.getCountPages()
   }
 }
 </script>
 
 <style scoped>
-@media (max-width: 767px) {
-  .left-nav .col-md-4, .left-nav .col-1 {
-    text-align: center;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  .product button{
-    align-items: center;
-  }
-}
-.img-fluid{
-  text-align: center;
+.pagination {
+  width: max-content;
   margin-left: auto;
   margin-right: auto;
-}
-.product-img{
-  width: 100%;
-  vertical-align: center;
-  margin: 0 0 10px 0;
-}
-.product{
-  text-align: center;
-  margin-top: auto;
-}
-.product button{
-  margin: 10px;
-}
-.products{
-  margin-top: 20px;
-}
-.products button{
-  background-color: white;
-  border: none;
-  padding: 10px;
-}
-.products button:hover{
-  background-color: orange;
-}
-header{
-  height: max-content;
 }
 </style>
