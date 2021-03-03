@@ -23,7 +23,9 @@ class BasketController extends Controller
             foreach ($session->get('basket') as $item) {
                 $products[] = ['item' => $productsStorage->getProductById($item['id']), 'amount' => $item['amount']];
             }
+
         }
+
         $view = new View($this->path, ['Categories' => $categories, 'Products' => $products]);
         $view->content['css'] = 'basket';
         $view->render();
@@ -33,18 +35,19 @@ class BasketController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $sessioner = new Sessioner();
+            $id = json_decode($this->request['ajax'])->id;
             if ($sessioner->contains('basket')) {
                 $basket = $sessioner->get('basket');
                 foreach ($basket as $key => $item) {
-                    if ($item['id'] === $_POST['id']) {
+                    if ($item['id'] === $id) {
                         $basket[$key]['amount']++;
                         $sessioner->set('basket', $basket);
                         return;
                     }
                 }
-                $basket[] = ['id' => $_POST['id'], 'amount' => 1];
+                $basket[] = ['id' => $id, 'amount' => 1];
             } else {
-                $basket[] = ['id' => $_POST['id'], 'amount' => 1];
+                $basket[] = ['id' => $id, 'amount' => 1];
             }
             $sessioner->set('basket', $basket);
         }

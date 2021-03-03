@@ -4,3 +4,4 @@
 /Framework/Session/Sessions/
 phpcs.phar
 .env
+/node_modules/

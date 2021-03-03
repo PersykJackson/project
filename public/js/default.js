@@ -5,10 +5,10 @@ async function sendGet(url)
         const result = await fetch(url, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/html'
             }
         });
-        return await result.json()
+        return await result.text()
     } catch (error) {
         console.log(error.message)
     }
@@ -37,9 +37,10 @@ async function reload()
 
     let newWrap = document.createElement('div')
     newWrap.innerHTML = answer
+
     newWrap = newWrap.getElementsByClassName('wrapper').item(0)
 
     let oldWrap = document.getElementById('wrapper')
     oldWrap.innerHTML = newWrap.innerHTML
-
+    console.log(newWrap.innerHTML)
 }
