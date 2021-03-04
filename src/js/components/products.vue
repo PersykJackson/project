@@ -42,6 +42,10 @@ export default {
       type: Number,
       require: true,
       default: 0
+    },
+    categories: {
+      type: Number,
+      require: false
     }
   },
   methods: {
@@ -73,6 +77,7 @@ export default {
   async created() {
     this.products = await this.getProducts()
     this.pagesCount = this.getCountPages()
+    this.categories = localStorage.getItem('category').parseInt()
   }
 }
 </script>

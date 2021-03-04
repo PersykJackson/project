@@ -31,14 +31,14 @@ class ProductsController extends Controller
 
     public function all(): void
     {
-        if ($_SERVER['REQUEST_METHOD']) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productStorage = new ProductMapper(Connection::getDb());
             if (isset($this->request['ajax']['category'])) {
-                $products = $productStorage->getProductsByCategory((int)$this->request['get']['category']);
+                $products = $productStorage->getProductsByCategory((int)$this->request['ajax']['category']);
             } else {
                 $products = $productStorage->getProducts();
-                echo json_encode($products);
             }
+            echo json_encode($products);
         }
     }
 }

@@ -27,4 +27,17 @@ class MainController extends Controller
         $view = new View($this->path, ['Categories' => $categories]);
         $view->render();
     }
+
+    public function categories(): void
+    {
+        if ($_SERVER['REQUEST_METHOD']  === 'POST') {
+            $categoryStorage = new CategoryMapper(Connection::getDb());
+            $arrayOfObjects = $categoryStorage->getCategories();
+            $arrayOfCategories = [];
+            foreach ($arrayOfObjects as $category) {
+                $arrayOfCategories[] = ['name' => $category->getName(), 'id' => $category->getId()];
+            }
+            echo json_encode($arrayOfCategories);
+        }
+    }
 }

@@ -14,7 +14,7 @@ async function sendGet(url)
     }
 }
 
-async function sendPost(url, data)
+async function sendPost(url, data = 'data')
 {
     try {
         const result = await fetch(url, {
@@ -28,19 +28,4 @@ async function sendPost(url, data)
     } catch (error) {
         console.log(error.message)
     }
-}
-
-async function reload()
-{
-    const uri = window.location.href;
-    const answer = await sendGet(uri)
-
-    let newWrap = document.createElement('div')
-    newWrap.innerHTML = answer
-
-    newWrap = newWrap.getElementsByClassName('wrapper').item(0)
-
-    let oldWrap = document.getElementById('wrapper')
-    oldWrap.innerHTML = newWrap.innerHTML
-    console.log(newWrap.innerHTML)
 }
