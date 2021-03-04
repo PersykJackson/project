@@ -49,4 +49,9 @@ class AuthenticationController extends Controller
         $this->auth->logOut();
         header('Location: /main/index');
     }
+
+    public function isAuth(): void
+    {
+        echo json_encode($this->auth->isAuth());
+    }
 }
