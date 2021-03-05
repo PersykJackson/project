@@ -5,19 +5,19 @@ namespace Liloy\App\Storage;
 
 class Product
 {
-    private int $id;
+    public int $id;
 
-    private string $name;
+    public string $name;
 
-    private string $img;
+    public string $img;
 
-    private int $categoryId;
+    public int $categoryId;
 
-    private int $discount;
+    public int $discount;
 
-    private int $cost;
+    public int $cost;
 
-    private string $description;
+    public string $description;
 
     public function getId(): int
     {
