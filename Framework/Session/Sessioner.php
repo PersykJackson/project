@@ -79,12 +79,22 @@ class Sessioner
             $_SESSION[$key] = $value;
     }
 
+    public function setAmount($key, $value): void
+    {
+        $_SESSION['basket'][$key]['amount'] = $value;
+    }
+
     public function get($key)
     {
         if ($this->contains($key)) {
             return   $_SESSION[$key];
         }
         return false;
+    }
+
+    public function getFromBasket($key)
+    {
+        return   $_SESSION['basket'][$key];
     }
 
     public function contains($key): bool
@@ -102,5 +112,10 @@ class Sessioner
         } else {
             throw new SessException("Session: $key not found.");
         }
+    }
+
+    public function deleteFromBasket($key): void
+    {
+        unset($_SESSION['basket'][$key]);
     }
 }

@@ -29,16 +29,27 @@ class ProductsController extends Controller
         $view->render();
     }
 
-    public function all(): void
+    public function getProducts(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productStorage = new ProductMapper(Connection::getDb());
-            if (isset($this->request['ajax']['category'])) {
-                $products = $productStorage->getProductsByCategory((int)$this->request['ajax']['category']);
+            if (json_decode($this->request['ajax'])->category) {
+                $products = $productStorage->getProductsByCategory((int)json_decode($this->request['ajax'])->category);
             } else {
                 $products = $productStorage->getProducts();
             }
-            echo json_encode($products);
+            $countPages = ceil(count($products) / 12);
+            $firstProduct = (json_decode($this->request['ajax'])->page - 1) * 12;
+            $lastProduct = $firstProduct + 11;
+            $page = [];
+            foreach ($products as $key => $product) {
+                if ($key >= $firstProduct && $key <= $lastProduct) {
+                    $page[] = $product;
+                }
+            }
+            $answer['countPages'] = $countPages;
+            $answer['page'] = $page;
+            echo json_encode($answer);
         }
     }
 }

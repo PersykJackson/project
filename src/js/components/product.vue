@@ -3,7 +3,7 @@
     <img class='rounded img-fluid product-img' :src="img"/>
     <p>{{name}}</p>
     <strong>{{cost}} грн</strong><br/>
-    <button @click="toBasket(id)">В корзину</button>
+    <button @click="toBasket">В корзину</button>
   </div>
 </template>
 
@@ -33,9 +33,9 @@ name: "Product",
     }
   },
   methods: {
-    toBasket(id)
+    toBasket()
     {
-      sendPost('/basket/add', {id: id})
+      sendPost('/basket/add', {id: this.id})
       reload()
     }
   }

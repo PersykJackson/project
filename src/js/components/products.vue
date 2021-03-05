@@ -2,6 +2,14 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12">
+        <div class="categories">
+          <div @click="none =! none">Категории</div>
+          <transition name="categories">
+            <ul v-if="none">
+              <li v-for="(val, index) in categories" @click="getProducts(1, val.id)"><a>{{val.name}}</a></li>
+            </ul>
+          </transition>
+        </div>
         <div class="products">
           <h3>Товары</h3><hr/>
           <div class="row">
@@ -9,15 +17,14 @@
                :name="f.name"
                :cost="f.cost"
                :id="f.id"
-               :img="f.img"
-               v-if="checkPage(i)">
+               :img="f.img">
       </product>
-            <div class="pagination">
-              <button v-for="(f, i) of pagesCount" :key="i" v-on:click="changePage(i)" v-bind:disabled="disablePage(i)">
-                {{i+1}}
-              </button>
-            </div>
+
   </div>
+          <pagination
+              :count-pages="countPages"
+              @changePage="getProducts($event)">
+          </pagination>
   </div>
   </div>
   </div>
@@ -26,58 +33,38 @@
 
 <script>
 import Product from "./product.vue";
+import Pagination from "./pagination.vue";
 export default {
   name: "products",
-  components: {Product},
+  components: {Pagination, Product},
   props: {
-    products: {
-      type: Array,
-      require: true
-    },
-    pagesCount: {
-      type: Number,
-      require: true
-    },
-    numberOfPage: {
-      type: Number,
-      require: true,
-      default: 0
-    },
-    categories: {
-      type: Number,
-      require: false
+  },
+  data() {
+    return {
+      categories: [],
+      products: [],
+      currentCategory: Number,
+      countPages: 1,
+      none: false
     }
   },
+  computed: {
+
+  },
   methods: {
-    async getProducts() {
-      return await sendPost('/products/all', 'all')
-    },
-    getCountPages() {
-      const productsCount = this.products.length;
-      return Math.ceil(productsCount / 12);
-    },
-    checkPage(productIndex) {
-      let firstItem = this.numberOfPage * 12
-      let lastItem = firstItem + 11
-      if (productIndex >= firstItem && productIndex <= lastItem) {
-        return true;
+    async getProducts(page, category = false) {
+      const data = {
+        page: page,
+        category: category
       }
-      return false;
-    },
-    changePage(page) {
-      this.numberOfPage = page;
-    },
-    disablePage(page) {
-      if (page === this.numberOfPage) {
-        return true
-      }
-      return false
+      const products = await sendPost('/products/getProducts', data)
+      this.products = products.page
+      this.countPages = products.countPages
     }
   },
   async created() {
-    this.products = await this.getProducts()
-    this.pagesCount = this.getCountPages()
-    this.categories = localStorage.getItem('category').parseInt()
+    const products = await this.getProducts(1)
+    this.categories = await sendPost('/main/categories')
   }
 }
 </script>
@@ -87,5 +74,28 @@ export default {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
+}
+.categories{
+  cursor: pointer;
+  text-align: center;
+}
+.categories ul{
+  list-style: none;
+  display: inline;
+  text-align: center;
+}
+.categories ul li{
+  padding: 5px;
+  text-align: center;
+}
+.categories ul li:hover{
+  background-color: orange;
+  text-align: center;
+}
+.categories-enter-active, .categories-leave-active {
+  transition: opacity .5s;
+}
+.categories-enter, .categories-leave-to {
+  opacity: 0;
 }
 </style>

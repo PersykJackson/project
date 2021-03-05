@@ -12,10 +12,41 @@ use Liloy\Framework\Core\Controller;
 
 class BasketController extends Controller
 {
+    private const UNSET = 'unset';
+
+    private const INCREMENT = 'increment';
+
+    private const DECREMENT = 'decrement';
+
     public function index(): void
     {
-        $categoryStorage = new CategoryMapper(Connection::getDb());
-        $categories = $categoryStorage->getCategories();
+        $view = new View($this->path);
+        $view->content['css'] = 'basket';
+        $view->render();
+    }
+
+    public function change(): void
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $session = new Sessioner();
+            $decodedRequest = json_decode($this->request['ajax']);
+            if ($decodedRequest->action === self::UNSET) {
+                $session->deleteFromBasket($decodedRequest->id);
+            } elseif ($decodedRequest->action === self::INCREMENT) {
+                $session->setAmount($decodedRequest->id, ($session->getFromBasket($decodedRequest->id)['amount'] + 1));
+            } elseif ($decodedRequest->action === self::DECREMENT) {
+                $session->setAmount($decodedRequest->id, $session->getFromBasket($decodedRequest->id)['amount'] - 1);
+                if ($session->getFromBasket($decodedRequest->id)['amount'] < 1) {
+                    $session->deleteFromBasket($decodedRequest->id);
+                }
+            }
+        }
+    }
+
+    public function getBasket(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $productsStorage = new ProductMapper(Connection::getDb());
         $products = [];
         $session = new Sessioner();
@@ -25,10 +56,7 @@ class BasketController extends Controller
             }
 
         }
-
-        $view = new View($this->path, ['Categories' => $categories, 'Products' => $products]);
-        $view->content['css'] = 'basket';
-        $view->render();
+        echo json_encode($products);
     }
 
     public function add(): void
