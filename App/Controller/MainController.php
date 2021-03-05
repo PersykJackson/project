@@ -3,8 +3,8 @@
 namespace Liloy\App\Controller;
 
 use Liloy\Framework\Database\Connection;
-use Liloy\App\Storage\CategoryMapper;
-use Liloy\App\Storage\ProductMapper;
+use Liloy\App\Mappers\CategoryMapper;
+use Liloy\App\Mappers\ProductMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 

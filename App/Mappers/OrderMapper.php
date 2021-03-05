@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Liloy\App\Storage;
+namespace Liloy\App\Mappers;
 
 use Liloy\Framework\Core\Mapper;
 use Liloy\Framework\Database\Connection;

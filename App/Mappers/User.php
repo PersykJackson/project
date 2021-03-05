@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Liloy\App\Storage;
+namespace Liloy\App\Mappers;
 
 class User
 {
