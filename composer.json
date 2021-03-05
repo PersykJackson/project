@@ -25,9 +25,10 @@
             "Liloy\\Framework\\Session\\" : "Framework/Session/",
             "Liloy\\App\\View\\" : "App/View/",
             "Liloy\\Framework\\Router\\" : "Framework/Router/",
-            "Liloy\\App\\Storage\\" : "App/Storage/",
-            "Liloy\\Framework\\Database\\" : "Framework/Database",
-            "Liloy\\Framework\\Core\\" : "Framework/Core"
+            "Liloy\\App\\Mappers\\" : "App/Mappers/",
+            "Liloy\\Framework\\Database\\" : "Framework/Database/",
+            "Liloy\\Framework\\Core\\" : "Framework/Core/",
+            "Liloy\\Framework\\Helpers\\Services\\" : "Framework/Helpers/Services/"
         }
     }
 }

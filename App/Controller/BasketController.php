@@ -4,9 +4,9 @@
 namespace Liloy\App\Controller;
 
 use Liloy\Framework\Database\Connection;
+use Liloy\Framework\Helpers\Services\BasketService;
 use Liloy\Framework\Session\Sessioner;
-use Liloy\App\Storage\CategoryMapper;
-use Liloy\App\Storage\ProductMapper;
+use Liloy\App\Mappers\ProductMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 
@@ -29,16 +29,16 @@ class BasketController extends Controller
     {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $session = new Sessioner();
+            $basket = new BasketService(new Sessioner());
             $decodedRequest = json_decode($this->request['ajax']);
             if ($decodedRequest->action === self::UNSET) {
-                $session->deleteFromBasket($decodedRequest->id);
+                $basket->delete($decodedRequest->id);
             } elseif ($decodedRequest->action === self::INCREMENT) {
-                $session->setAmount($decodedRequest->id, ($session->getFromBasket($decodedRequest->id)['amount'] + 1));
+                $basket->setAmount($decodedRequest->id, $basket->getAmount($decodedRequest->id) + 1);
             } elseif ($decodedRequest->action === self::DECREMENT) {
-                $session->setAmount($decodedRequest->id, $session->getFromBasket($decodedRequest->id)['amount'] - 1);
-                if ($session->getFromBasket($decodedRequest->id)['amount'] < 1) {
-                    $session->deleteFromBasket($decodedRequest->id);
+                $basket->setAmount($decodedRequest->id, $basket->getAmount($decodedRequest->id) - 1);
+                if ($basket->getAmount($decodedRequest->id) < 1) {
+                    $basket->delete($decodedRequest->id);
                 }
             }
         }

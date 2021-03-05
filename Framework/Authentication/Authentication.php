@@ -5,7 +5,7 @@ namespace Liloy\Framework\Authentication;
 use Liloy\Framework\Database\Connection;
 use Liloy\Framework\Session\Sessioner;
 use Liloy\Framework\Helpers\Exceptions\AuthException;
-use Liloy\App\Storage\UserMapper;
+use Liloy\App\Mappers\UserMapper;
 
 class Authentication
 {

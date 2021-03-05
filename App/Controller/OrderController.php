@@ -3,11 +3,10 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Storage\CategoryMapper;
 use Liloy\Framework\Database\Connection;
 use Liloy\Framework\Session\Sessioner;
-use Liloy\App\Storage\Order;
-use Liloy\App\Storage\OrderMapper;
+use Liloy\App\Mappers\Order;
+use Liloy\App\Mappers\OrderMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 
@@ -15,9 +14,7 @@ class OrderController extends Controller
 {
     public function index(): void
     {
-        $categoryStorage = new CategoryMapper(Connection::getDb());
-        $categories = $categoryStorage->getCategories();
-        $view = new View($this->path, ['Categories' => $categories]);
+        $view = new View($this->path);
         $view->render();
     }
 

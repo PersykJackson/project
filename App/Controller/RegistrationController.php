@@ -3,10 +3,9 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\App\Storage\CategoryMapper;
 use Liloy\Framework\Database\Connection;
-use Liloy\App\Storage\User;
-use Liloy\App\Storage\UserMapper;
+use Liloy\App\Mappers\User;
+use Liloy\App\Mappers\UserMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 use Mailer\Messenger\Messenger;
@@ -16,9 +15,7 @@ class RegistrationController extends Controller
 {
     public function index(): void
     {
-        $categoryStorage = new CategoryMapper(Connection::getDb());
-        $categories = $categoryStorage->getCategories();
-        $view = new View($this->path, ['Categories' => $categories]);
+        $view = new View($this->path);
         $view->content['css'] = 'register';
         $view->render();
     }
