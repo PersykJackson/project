@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class="col-md-5 col-lg-4">
-            <div class="row justify-content-center" v-if="isAuth">
+            <div class="row justify-content-center" v-if="auth">
                 <div class='col-1 col-md-auto'>
                   <li class='nav-item'><a href='/basket/index'>Корзина</a></li>
                 </div>
@@ -41,12 +41,18 @@ export default {
 name: "v-header",
   props: {
   },
+  data() {
+    return {
+      auth: Boolean
+    }
+  },
   methods: {
     async isAuth() {
       return await sendPost('/Authentication/isAuth')
     }
   },
   async created() {
+  this.auth = await this.isAuth()
   }
 }
 </script>
