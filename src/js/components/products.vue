@@ -2,6 +2,11 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12">
+        <div class="categories">
+          <ul>
+            <li v-for="(val, index) in categories"><button @click="">{{val.name}}</button></li>
+          </ul>
+        </div>
         <div class="products">
           <h3>Товары</h3><hr/>
           <div class="row">
@@ -30,22 +35,14 @@ export default {
   name: "products",
   components: {Product},
   props: {
-    products: {
-      type: Array,
-      require: true
-    },
-    pagesCount: {
-      type: Number,
-      require: true
-    },
-    numberOfPage: {
-      type: Number,
-      require: true,
-      default: 0
-    },
-    categories: {
-      type: Number,
-      require: false
+  },
+  data() {
+    return {
+      categories: [],
+      products: [],
+      pagesCount: Number,
+      numberOfPage: 1,
+      currentCategory: Number
     }
   },
   methods: {
@@ -57,7 +54,7 @@ export default {
       return Math.ceil(productsCount / 12);
     },
     checkPage(productIndex) {
-      let firstItem = this.numberOfPage * 12
+      let firstItem = (this.numberOfPage - 1) * 12
       let lastItem = firstItem + 11
       if (productIndex >= firstItem && productIndex <= lastItem) {
         return true;
@@ -65,19 +62,25 @@ export default {
       return false;
     },
     changePage(page) {
-      this.numberOfPage = page;
+      this.numberOfPage = page + 1;
     },
     disablePage(page) {
       if (page === this.numberOfPage) {
         return true
       }
       return false
+    },
+    checkCategory(categoryId) {
+      if (this.currentCategory === 'undefined' || this.currentCategory === categoryId) {
+        return true;
+      }
+      return false;
     }
   },
   async created() {
     this.products = await this.getProducts()
     this.pagesCount = this.getCountPages()
-    this.categories = localStorage.getItem('category').parseInt()
+    this.categories = await sendPost('/main/categories')
   }
 }
 </script>
