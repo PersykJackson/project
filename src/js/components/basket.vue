@@ -13,12 +13,12 @@
                   <span>{{product.item.description}}</span><br/>
                   <strong>{{product.item.cost * product.amount}}</strong>
                   <div class='counter'>
-                    <button name='-' @click="action(key, decrement)">-</button>
+                    <button name='-' @click="action(product.item.id, decrement)">-</button>
                     <input type='text' :value="product.amount" size='3' name='count'/>
-                    <button name='+' @click="action(key, increment)">+</button>
+                    <button name='+' @click="action(product.item.id, increment)">+</button>
                   </div>
                 </div>
-                <button @click="action(key, unset)">Убрать</button>
+                <button @click="action(product.item.id, unset)">Убрать</button>
               </div>
             </div>
           </li>
