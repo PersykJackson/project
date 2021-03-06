@@ -33,7 +33,6 @@ class Authentication
                 $this->sessioner->start();
                 $this->sessioner->set('auth', true);
                 $userStorage = new UserMapper(Connection::getDb());
-                var_dump($login);
                 $user = $userStorage->getUserByLogin($login);
                 $this->sessioner->set('id', $user->getId());
                 setcookie('session', 1, 0, '/');

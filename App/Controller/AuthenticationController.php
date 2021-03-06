@@ -31,13 +31,17 @@ class AuthenticationController extends Controller
 
     public function login(): void
     {
-        if ($this->auth->auth($_POST['login'], $_POST['password'])) {
-            header('Location: /main/index');
+        $decodedRequest = json_decode($this->request['ajax']);
+        if (empty($decodedRequest->login) || empty($decodedRequest->password)) {
+            $answer = "Данные не были введены!";
+        } elseif ($this->auth->auth($decodedRequest->login, $decodedRequest->password)) {
+            $answer = true;
         } else {
-            setcookie('errors', "Неверный логин или пароль!", time() + 1);
-            header('Location: /authentication/index');
+            $answer = "Неправильный логин или пароль!";
         }
+            echo json_encode($answer);
     }
+
 
     public function logout(): void
     {

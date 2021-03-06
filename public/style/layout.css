@@ -4,10 +4,13 @@ html{
 body{
     height: 100%;
 }
-.wrapper{
+#app{
     height: 100%;
     display: grid;
-    grid-template-rows: max-content auto auto;
+    grid-template-rows: max-content auto max-content;
+}
+.wrapper {
+    height: 100%;
 }
 main{
     margin-bottom: 5%;
@@ -20,6 +23,9 @@ button{
 }
 button:hover{
     background-color: orange;
+}
+button:focus{
+    outline: none;
 }
 .footer-wrap{
     margin-top: auto;
