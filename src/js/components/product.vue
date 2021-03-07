@@ -1,6 +1,6 @@
 <template>
   <div class='col-4 col-md-2 product'>
-    <img class='rounded img-fluid product-img' :src="img"/>
+    <img class='rounded img-fluid product-img' :src="img" alt="product-img"/>
     <p>{{name}}</p>
     <strong>{{cost}} грн</strong><br/>
     <button @click="toBasket">В корзину</button>
@@ -20,11 +20,11 @@ name: "Product",
       require: true
     },
     cost: {
-      type: String,
+      type: Number,
       require: true
     },
     id: {
-      type: String,
+      type: Number,
       require: true
     },
     description: {
