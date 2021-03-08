@@ -21,7 +21,7 @@
             <h3>Популярные категории</h3><hr/>
             <div class='col-4 col-md-2 category' v-for="category in categories">
                 <img class='rounded img-fluid category-img' :src="category.img" alt="category-img"/>
-                <strong>{{category.name}}</strong>
+                <strong>{{category.name}}</strong><br/>
                 <button @click="goTo(category.id)">Перейти</button>
             </div>
           </div>
@@ -44,7 +44,8 @@ name: "v-main",
   },
   methods: {
     goTo(id) {
-      console.log(id)
+      localStorage.setItem('category', id)
+      window.location.href = '/products/index'
     }
   },
   async created() {
@@ -55,5 +56,8 @@ name: "v-main",
 </script>
 
 <style scoped>
-
+  .category button {
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
