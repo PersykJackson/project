@@ -20,21 +20,22 @@ class AccountController extends Controller
     public function search(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $result = json_decode($this->request['ajax']);
+            $decodedRequest = json_decode($this->request['ajax']);
             $orderStorage = new OrderMapper(Connection::getDb());
             $session = new Sessioner();
-            $orders = $orderStorage->search($session->get('id'), $result);
-            echo json_encode($orders);
-        }
-    }
-
-    public function startSearch(): void
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $orderStorage = new OrderMapper(Connection::getDb());
-            $session = new Sessioner();
-            $orders = $orderStorage->startSearch($session->get('id'));
-            echo json_encode($orders);
+            $orders = $orderStorage->search($session->get('id'), $decodedRequest);
+            $countPages = ceil(count($orders) / 5);
+            $firstProduct = (json_decode($this->request['ajax'])->page - 1) * 5;
+            $lastProduct = $firstProduct + 4;
+            $page = [];
+            foreach ($orders as $key => $product) {
+                if ($key >= $firstProduct && $key <= $lastProduct) {
+                    $page[] = $product;
+                }
+            }
+            $answer['countPages'] = $countPages;
+            $answer['page'] = $page;
+            echo json_encode($answer);
         }
     }
 }

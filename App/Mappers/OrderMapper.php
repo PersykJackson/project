@@ -41,22 +41,19 @@ class OrderMapper extends Mapper
 
     public function search(int $id, object $obj): array
     {
-        $result = $this->select('orders', ['*'])
+        $result = $this->select(
+            'orders',
+            [
+                'id',
+                'address',
+                'phone',
+                'date',
+                'comment'
+            ]
+        )
             ->where("user_id = ? AND {$obj->type} LIKE ?")
             ->orderBy([$obj->sort])
             ->params([$id, '%'.$obj->search.'%'])
-            ->execute();
-        foreach ($result as $key => $value) {
-            $result[$key]['products'] = $this->getOrderProductsByOrderId($value['id']);
-        }
-        return $result;
-    }
-
-    public function startSearch(int $id): array
-    {
-        $result = $this->select('orders', ['*'])
-            ->where("user_id = ?")
-            ->params([$id])
             ->execute();
         foreach ($result as $key => $value) {
             $result[$key]['products'] = $this->getOrderProductsByOrderId($value['id']);

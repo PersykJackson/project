@@ -20,9 +20,6 @@ name: "pagination",
       currentPage: 1
     }
   },
-  computed: {
-
-  },
   methods: {
     isDisabled(index){
       return index + 1 === this.currentPage
