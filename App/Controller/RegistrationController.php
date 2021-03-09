@@ -24,27 +24,26 @@ class RegistrationController extends Controller
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             exit();
         }
-        $this->request['ajax'] = json_decode($this->request['ajax']);
-        $errors = $this->validate($this->request['ajax']);
+        $decodedRequest = json_decode($this->request['ajax']);
+        $errors = $this->validate($decodedRequest);
         if (count($errors) < 1) {
+            $errors = false;
             $storage = new UserMapper(Connection::getDb());
             $mailer = new Messenger(parse_ini_file(__DIR__.'/../../.env'));
             $user = new User();
-            $user->setPassword(md5($this->request['ajax']->password.'MaxiMarket'))
-                ->setEmail($this->request['ajax']->email)
-                ->setLogin($this->request['ajax']->login)
-                ->setFirstName($this->request['ajax']->firstName)
-                ->setLastName($this->request['ajax']->lastName);
+            $user->setPassword(md5($decodedRequest->password.'MaxiMarket'))
+                ->setEmail($decodedRequest->email)
+                ->setLogin($decodedRequest->login)
+                ->setFirstName($decodedRequest->firstName)
+                ->setLastName($decodedRequest->lastName);
             $storage->register($user);
             $mailer->setTemplate(
                 TemplateType::REGISTER_COMPLETE,
                 'Поздравляем с успешной регистрацией'
             )->setTitle('MaxiMarket: успешная регистрация!')
-                ->to($this->request['ajax']->email)->execute();
-            echo json_encode(['registration' => true]);
-        } else {
-            echo json_encode($errors);
+                ->to($decodedRequest->email)->execute();
         }
+            echo json_encode($errors);
     }
     private function validate(object $user): array
     {

@@ -10,7 +10,7 @@ class UserMapper extends Mapper
     public function getUserById($id): User
     {
         $columns = ['first_name', 'last_name', 'login', 'email'];
-        $result = $this->select('users', $columns)->where("id = $id")->execute();
+        $result = $this->select('users', $columns)->where("id = ?")->params([$id])->execute();
         $user = new User();
         $user->setFirstName($result['first_name'])
             ->setLastName($result['last_name'])
@@ -23,7 +23,8 @@ class UserMapper extends Mapper
     {
         $columns = ['email'];
         $user = $this->select('users', $columns)
-            ->where("email = $email")
+            ->where("email = ?")
+            ->params([$email])
             ->execute();
         return (bool)$user;
     }
@@ -32,7 +33,8 @@ class UserMapper extends Mapper
     {
         $columns = ['login'];
         $user = $this->select('users', $columns)
-            ->where("login = $login")
+            ->where("login = ?")
+            ->params([$login])
             ->execute();
         return (bool)$user;
     }
