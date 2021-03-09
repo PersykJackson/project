@@ -59,8 +59,20 @@ class ProductMapper extends Mapper
     }
     public function getProducts(): array
     {
-        return $this->select('products', $this->cols)
+        $productsArray = $this->select('products', $this->cols)
             ->orderBy(['id'])
             ->execute();
+        $all = [];
+        foreach ($productsArray as $value) {
+            $product = new Product();
+            $all[] = $product->setId($value['id'])
+                ->setDescription($value['description'])
+                ->setCost($value['cost'])
+                ->setImg($value['img'])
+                ->setCategoryId($value['category_id'])
+                ->setDiscount($value['discount'])
+                ->setName($value['name']);
+        }
+        return $all;
     }
 }

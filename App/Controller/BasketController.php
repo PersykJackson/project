@@ -54,9 +54,9 @@ class BasketController extends Controller
             foreach ($session->get('basket') as $item) {
                 $products[] = ['item' => $productsStorage->getProductById($item['id']), 'amount' => $item['amount']];
             }
-
+            echo json_encode($products);
         }
-        echo json_encode($products);
+
     }
 
     public function add(): void

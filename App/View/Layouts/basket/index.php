@@ -3,6 +3,3 @@
 
     </basket>
 </main>
-<script>
-
-</script>

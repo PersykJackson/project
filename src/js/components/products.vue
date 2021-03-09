@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-12">
         <div class="categories">
-          <div @click="none =! none">Категории</div>
+          <div @click="none =! none">Категории ▼</div>
           <transition name="categories">
             <ul v-if="none">
               <li v-for="(val, index) in categories" @click="getProducts(1, val.id)"><a>{{val.name}}</a></li>
@@ -63,7 +63,13 @@ export default {
     }
   },
   async created() {
-    const products = await this.getProducts(1)
+    const category = localStorage.getItem('category')
+    if (category) {
+      const products = await this.getProducts(1, category)
+      localStorage.removeItem('category')
+    } else {
+      const products = await this.getProducts(1)
+    }
     this.categories = await sendPost('/main/categories')
   }
 }

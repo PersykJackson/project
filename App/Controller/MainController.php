@@ -12,19 +12,7 @@ class MainController extends Controller
 {
     public function index(): void
     {
-        $productStorage = new ProductMapper(Connection::getDb());
-        $products = $productStorage->getTopProducts();
-        $categoryStorage = new CategoryMapper(Connection::getDb());
-        $categories = $categoryStorage->getCategories();
-        $view = new View($this->path, ['Product' => $products, 'Categories' => $categories]);
-        $view->render();
-    }
-
-    public function basket(): void
-    {
-        $categoryStorage = new CategoryMapper(Connection::getDb());
-        $categories = $categoryStorage->getCategories();
-        $view = new View($this->path, ['Categories' => $categories]);
+        $view = new View($this->path);
         $view->render();
     }
 
@@ -35,7 +23,11 @@ class MainController extends Controller
             $arrayOfObjects = $categoryStorage->getCategories();
             $arrayOfCategories = [];
             foreach ($arrayOfObjects as $category) {
-                $arrayOfCategories[] = ['name' => $category->getName(), 'id' => $category->getId()];
+                $arrayOfCategories[] = [
+                    'name' => $category->getName(),
+                    'id' => $category->getId(),
+                    'img' => $category->getImg()
+                ];
             }
             echo json_encode($arrayOfCategories);
         }

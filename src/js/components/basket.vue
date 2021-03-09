@@ -57,9 +57,11 @@ name: "basket",
   computed: {
     total: function () {
       let total = 0
-      this.products.forEach(function (product) {
-        total += product.item.cost * product.amount
-      })
+      if (typeof this.products === 'object') {
+        this.products.forEach(function (product) {
+          total += product.item.cost * product.amount
+        })
+      }
       return total
     }
   },
