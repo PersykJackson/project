@@ -3,6 +3,7 @@
 
 namespace Liloy\App\Controller;
 
+use Liloy\App\Mappers\UserMapper;
 use Liloy\Framework\Database\Connection;
 use Liloy\Framework\Session\Sessioner;
 use Liloy\App\Mappers\OrderMapper;
@@ -11,10 +12,35 @@ use Liloy\Framework\Core\Controller;
 
 class AccountController extends Controller
 {
+    public function index(): void
+    {
+        $view = new View($this->path);
+        $view->render();
+    }
+
     public function history(): void
     {
         $view = new View($this->path);
         $view->render();
+    }
+
+    public function info(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userStorage = new UserMapper(Connection::getDb());
+            $orderMapper = new OrderMapper(Connection::getDb());
+            $session = new Sessioner();
+            $ordersCount = $orderMapper->getCountOrders($session->get('id'));
+            $user = $userStorage->getUserById($session->get('id'));
+            $userArray = [
+                'firstName' => $user->getFirstName(),
+                'lastName' => $user->getLastName(),
+                'login' => $user->getLogin(),
+                'email' => $user->getEmail(),
+                'ordersCount' => $ordersCount
+            ];
+            echo json_encode($userArray);
+        }
     }
 
     public function search(): void

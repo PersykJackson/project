@@ -60,4 +60,13 @@ class OrderMapper extends Mapper
         }
         return $result;
     }
+
+    public function getCountOrders(int $id): int
+    {
+        $result = $this->select('orders', ['count(id)'])
+            ->where('user_id = ?')
+            ->params([$id])
+            ->execute()[0];
+        return $result['count(id)'];
+    }
 }

@@ -10,7 +10,10 @@ class UserMapper extends Mapper
     public function getUserById($id): User
     {
         $columns = ['first_name', 'last_name', 'login', 'email'];
-        $result = $this->select('users', $columns)->where("id = ?")->params([$id])->execute();
+        $result = $this->select('users', $columns)
+            ->where("id = ?")
+            ->params([$id])
+            ->execute()[0];
         $user = new User();
         $user->setFirstName($result['first_name'])
             ->setLastName($result['last_name'])
