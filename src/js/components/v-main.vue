@@ -60,4 +60,7 @@ name: "v-main",
     margin-left: auto;
     margin-right: auto;
   }
+  strong{
+    cursor: pointer;
+  }
 </style>
