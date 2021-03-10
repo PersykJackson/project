@@ -55,7 +55,7 @@ name: "registration",
       if (errors) {
         this.info = errors
       } else {
-        window.location.href = '/authentication/index'
+       window.location.href = '/authentication/index'
       }
     }
   }

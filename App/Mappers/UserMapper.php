@@ -4,6 +4,7 @@
 namespace Liloy\App\Mappers;
 
 use Liloy\Framework\Core\Mapper;
+use Liloy\Logger\Logger;
 
 class UserMapper extends Mapper
 {
@@ -50,6 +51,11 @@ class UserMapper extends Mapper
             'last_name' => $user->getLastName(),
             'email' => $user->getEmail()];
         $this->create('users', $fields);
+        $id = $this->select('users', ['id'])
+            ->where('login = ?')
+            ->params([$user->getLogin()])
+            ->execute()[0]['id'];
+        $this->create('users_roles', ['user_id' => $id, 'role_id' => 1]);
         return $this->userExistsByLogin($user->getLogin());
     }
 
