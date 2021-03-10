@@ -16,8 +16,8 @@ class OrderMapper extends Mapper
             'date' => $order->getDate(),
             'user_id' => $order->getUserId()]);
         $id = (int)$this->select('orders', ['id'])
-            ->where("date = ? AND comment = ?")
-            ->params([$order->getDate(), $order->getComment()])
+            ->orderBy(['id DESC'])
+            ->limit(1)
             ->execute()[0]['id'];
         foreach ($order->getAmount() as $productId => $amount) {
             $this->create('orders_products', ['order_id' => $id,

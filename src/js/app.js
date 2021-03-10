@@ -8,6 +8,7 @@ Vue.component('v-main', require('./components/v-main.vue').default)
 Vue.component('registration', require('./components/registration.vue').default)
 Vue.component('history', require('./components/history.vue').default)
 Vue.component('info', require('./components/info.vue').default)
+Vue.component('order', require('./components/order.vue').default)
 
 const app = new Vue({
     el: '#app'

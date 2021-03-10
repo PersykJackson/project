@@ -46,17 +46,20 @@ class BasketController extends Controller
 
     public function getBasket(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST')
-        $productsStorage = new ProductMapper(Connection::getDb());
-        $products = [];
-        $session = new Sessioner();
-        if ($session->get('basket')) {
-            foreach ($session->get('basket') as $item) {
-                $products[] = ['item' => $productsStorage->getProductById($item['id']), 'amount' => $item['amount']];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $productsStorage = new ProductMapper(Connection::getDb());
+            $products = [];
+            $session = new Sessioner();
+            if ($session->get('basket')) {
+                foreach ($session->get('basket') as $item) {
+                    $products[] = [
+                        'item' => $productsStorage->getProductById($item['id']),
+                        'amount' => $item['amount']
+                    ];
+                }
+                echo json_encode($products);
             }
-            echo json_encode($products);
         }
-
     }
 
     public function add(): void
