@@ -17,4 +17,12 @@ class CategoryMapper extends Mapper
         }
         return $all;
     }
+
+    public function getNameById(int $id): string
+    {
+        return $this->select('categories', ['name'])
+            ->where('id = ?')
+            ->params([$id])
+            ->execute()[0]['name'];
+    }
 }

@@ -20,23 +20,28 @@ class OrderController extends Controller
 
     public function new(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $decodedRequest = json_decode($this->request['ajax']);
+            if ($decodedRequest->address === '' || $decodedRequest->phone === '') {
+                echo json_encode(false);
+                exit();
+            }
             $session = new Sessioner();
             $order = new Order();
             $amount = [];
             foreach ($session->get('basket') as $product) {
                 $amount[$product['id']] = $product['amount'];
             }
-            $order->setAddress($this->request['post']['address'])
-                ->setComment($this->request['post']['comment'])
-                ->setPhone($this->request['post']['phone'])
-                ->setDate($this->request['post']['date'])
+            $order->setAddress($decodedRequest->address)
+                ->setComment($decodedRequest->comment)
+                ->setPhone($decodedRequest->phone)
+                ->setDate($decodedRequest->date)
                 ->setAmount($amount)
                 ->setUserId($session->get('id'));
             $orderStorage = new OrderMapper(Connection::getDb());
             $orderStorage->insertOrder($order);
             $session->delete('basket');
-            header('Location: /main/index');
+            echo json_encode(true);
         }
     }
 }

@@ -22,6 +22,16 @@ class ProductsController extends Controller
         $view->render();
     }
 
+    public function getProduct(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $decodedRequest = json_decode($this->request['ajax']);
+            $productMapper = new ProductMapper(Connection::getDb());
+            $product = $productMapper->getProductById($decodedRequest->id);
+            echo json_encode($product);
+        }
+    }
+
     public function getTopProducts(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -37,8 +37,6 @@ import Pagination from "./pagination.vue";
 export default {
   name: "products",
   components: {Pagination, Product},
-  props: {
-  },
   data() {
     return {
       categories: [],
@@ -47,9 +45,6 @@ export default {
       countPages: 1,
       none: false
     }
-  },
-  computed: {
-
   },
   methods: {
     async getProducts(page, category = false) {

@@ -16,8 +16,8 @@ class OrderMapper extends Mapper
             'date' => $order->getDate(),
             'user_id' => $order->getUserId()]);
         $id = (int)$this->select('orders', ['id'])
-            ->where("date = ? AND comment = ?")
-            ->params([$order->getDate(), $order->getComment()])
+            ->orderBy(['id DESC'])
+            ->limit(1)
             ->execute()[0]['id'];
         foreach ($order->getAmount() as $productId => $amount) {
             $this->create('orders_products', ['order_id' => $id,
@@ -41,7 +41,16 @@ class OrderMapper extends Mapper
 
     public function search(int $id, object $obj): array
     {
-        $result = $this->select('orders', ['*'])
+        $result = $this->select(
+            'orders',
+            [
+                'id',
+                'address',
+                'phone',
+                'date',
+                'comment'
+            ]
+        )
             ->where("user_id = ? AND {$obj->type} LIKE ?")
             ->orderBy([$obj->sort])
             ->params([$id, '%'.$obj->search.'%'])
@@ -52,15 +61,12 @@ class OrderMapper extends Mapper
         return $result;
     }
 
-    public function startSearch(int $id): array
+    public function getCountOrders(int $id): int
     {
-        $result = $this->select('orders', ['*'])
-            ->where("user_id = ?")
+        $result = $this->select('orders', ['count(id)'])
+            ->where('user_id = ?')
             ->params([$id])
-            ->execute();
-        foreach ($result as $key => $value) {
-            $result[$key]['products'] = $this->getOrderProductsByOrderId($value['id']);
-        }
-        return $result;
+            ->execute()[0];
+        return $result['count(id)'];
     }
 }

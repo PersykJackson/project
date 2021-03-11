@@ -22,7 +22,9 @@
 }
 .product{
     text-align: center;
+    height: 100%;
     margin-top: auto;
+    padding-top: 5px;
 }
 .product button{
     margin: 10px;
@@ -52,4 +54,15 @@
 }
 .category a{
     text-decoration: none;
+}
+.category button{
+    background-color: white;
+}
+.category:hover button{
+    background-color: orange;
+}
+.category:hover strong{color: orange;
+}
+.product:hover button{
+    background-color: orange;
 }

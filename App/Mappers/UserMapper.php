@@ -4,13 +4,17 @@
 namespace Liloy\App\Mappers;
 
 use Liloy\Framework\Core\Mapper;
+use Liloy\Logger\Logger;
 
 class UserMapper extends Mapper
 {
     public function getUserById($id): User
     {
         $columns = ['first_name', 'last_name', 'login', 'email'];
-        $result = $this->select('users', $columns)->where("id = ?")->params([$id])->execute();
+        $result = $this->select('users', $columns)
+            ->where("id = ?")
+            ->params([$id])
+            ->execute()[0];
         $user = new User();
         $user->setFirstName($result['first_name'])
             ->setLastName($result['last_name'])
@@ -47,6 +51,11 @@ class UserMapper extends Mapper
             'last_name' => $user->getLastName(),
             'email' => $user->getEmail()];
         $this->create('users', $fields);
+        $id = $this->select('users', ['id'])
+            ->where('login = ?')
+            ->params([$user->getLogin()])
+            ->execute()[0]['id'];
+        $this->create('users_roles', ['user_id' => $id, 'role_id' => 1]);
         return $this->userExistsByLogin($user->getLogin());
     }
 
@@ -71,5 +80,13 @@ class UserMapper extends Mapper
             ->setFirstName($result['first_name'])
             ->setLastName($result['last_name']);
         return $user;
+    }
+
+    public function getRole(int $id): int
+    {
+        return $this->select('users_roles', ['role_id'])
+            ->where('user_id = ?')
+            ->params([$id])
+            ->execute()[0]['role_id'];
     }
 }

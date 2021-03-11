@@ -37,3 +37,8 @@ table caption{
     caption-side: top;
     text-align: center;
 }
+.pagination{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}

@@ -41,6 +41,7 @@ class ProductMapper extends Mapper
         }
         return $all;
     }
+
     public function getTopProducts(): array
     {
         $result = $this->select('products', $this->cols)->orderBy(['id'])->limit(6)->execute();
@@ -57,6 +58,7 @@ class ProductMapper extends Mapper
         }
         return $all;
     }
+
     public function getProducts(): array
     {
         $productsArray = $this->select('products', $this->cols)
@@ -74,5 +76,25 @@ class ProductMapper extends Mapper
                 ->setName($value['name']);
         }
         return $all;
+    }
+
+    public function getCountProductByCategory(int $id): int
+    {
+        return $this->select('products', ['count(*)'])
+            ->where('category_id = ?')
+            ->params([$id])
+            ->execute()[0]['count(*)'];
+    }
+
+    public function insertProduct(Product $product): bool
+    {
+        return $this->create('products', [
+            'name' => $product->getName(),
+            'img' => $product->getImg(),
+            'category_id' => $product->getCategoryId(),
+            'discount' => $product->getDiscount(),
+            'cost' => $product->getCost(),
+            'description' => $product->getDescription()
+        ]);
     }
 }

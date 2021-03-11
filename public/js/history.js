@@ -65,6 +65,3 @@ async function startPaint()
     localStorage.setItem('orders', await JSON.stringify(answer))
     paintOrders()
 }
-
-startPaint()
-searchOrders()
