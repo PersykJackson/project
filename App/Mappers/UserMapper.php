@@ -81,4 +81,12 @@ class UserMapper extends Mapper
             ->setLastName($result['last_name']);
         return $user;
     }
+
+    public function getRole(int $id): int
+    {
+        return $this->select('users_roles', ['role_id'])
+            ->where('user_id = ?')
+            ->params([$id])
+            ->execute()[0]['role_id'];
+    }
 }

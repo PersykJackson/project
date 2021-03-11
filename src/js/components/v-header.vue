@@ -15,6 +15,9 @@
           </div>
           <div class="col-md-5 col-lg-4">
             <div class="row justify-content-center" v-if="auth">
+              <div class='col-1 col-md-auto admin_panel' v-if="access">
+                <a href="/admin/index">Админ панель</a>
+              </div>
                 <div class='col-1 col-md-auto'>
                   <li class='nav-item'><a href='/basket/index'>Корзина</a></li>
                 </div>
@@ -43,7 +46,8 @@ name: "v-header",
   },
   data() {
     return {
-      auth: Boolean
+      auth: Boolean,
+      access: false
     }
   },
   methods: {
@@ -52,7 +56,8 @@ name: "v-header",
     }
   },
   async created() {
-  this.auth = await this.isAuth()
+    this.auth = await this.isAuth()
+    this.access = await sendPost('/account/isAdmin')
   }
 }
 </script>

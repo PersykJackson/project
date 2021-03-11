@@ -64,4 +64,17 @@ class AccountController extends Controller
             echo json_encode($answer);
         }
     }
+    public function isAdmin(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userMapper = new UserMapper(Connection::getDb());
+            $session = new Sessioner();
+            $roleId = $userMapper->getRole($session->get('id'));
+            if ($roleId === 2) {
+                echo json_encode(true);
+            } else {
+                echo json_encode(false);
+            }
+        }
+    }
 }

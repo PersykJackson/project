@@ -10,6 +10,7 @@ Vue.component('history', require('./components/history.vue').default)
 Vue.component('info', require('./components/info.vue').default)
 Vue.component('order', require('./components/order.vue').default)
 Vue.component('product-page', require('./components/product-page.vue').default)
+Vue.component('admin', require('./components/admin.vue').default)
 
 const app = new Vue({
     el: '#app'

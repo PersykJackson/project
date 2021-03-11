@@ -29,3 +29,18 @@ async function sendPost(url, data = 'data')
         console.log(error.message)
     }
 }
+
+async function sendFile(url, data)
+{
+    try {
+        const result = await fetch(url, {
+            method: 'POST',
+            headers: {
+    },
+        body: data
+    });
+        return await result.json()
+    } catch (error) {
+        console.log(error.message)
+    }
+}
