@@ -10,14 +10,15 @@
         <label for="address" class="required">Ваш адрес</label><br/>
         <input v-model="address" type="text" id="address" name="address"/><br/>
         <label for="date" class="required">Дата доставки</label><br/>
-        <input v-model="date" type="date" id="date" name="date" :min="now" :max="maxDate"/><br/>
+        <input v-model="date" type="date" id="date" name="date" :min="minDate" :max="maxDate"/><br/>
         <label for="comment">Комментарий</label><br/>
         <textarea v-model="comment" id="comment" name="comment"></textarea><br/>
-        <button @click="sendData()" type="button">Заказать</button>
+        <button v-if="basket.length" @click="sendData()" type="button">Заказать</button>
+        <div v-else>В вашей корзине нет товаров!<br/><a href="/products/index">Вернуться к товарам</a></div>
       </form>
     </div>
     <div class="basket">
-      <div class="product" v-for="product in products">
+      <div class="product" v-for="product in basket">
         <div class="img"><img :src="product.item.img"/></div>
         <span>{{product.item.name}}</span>
         <span>{{product.amount}} x <strong>{{product.item.cost}} грн</strong></span>
@@ -34,24 +35,27 @@ export default {
 name: "order",
  data(){
   return {
-    products: Object,
+    basket: false,
     total: 0,
     maxDate: Date,
+    minDate: Date,
     phone: '',
     address: '',
-    date: '',
+    date: Date,
     comment: '',
     error: false
   }
  },
   methods: {
     getTotal(){
-      let total = 0
-      this.products.forEach(function (product){
-        total += product.item.cost * product.amount
-      })
-      return total
-    },
+        let total = 0
+        if (typeof this.basket === 'object') {
+          for (let key in this.basket) {
+            total += this.basket[key].item.cost * this.basket[key].amount
+          }
+        }
+        return total
+      },
     async sendData(){
       const data = {
         phone: this.phone,
@@ -60,7 +64,6 @@ name: "order",
         comment: this.comment
       }
       const errors = await sendPost('/order/new', data)
-      console.log(errors)
       if (!errors) {
         this.error = 'Не все обязательные поля заполнены'
       } else {
@@ -69,9 +72,10 @@ name: "order",
     }
   },
   async created() {
-    this.products = await sendPost('/basket/getBasket')
+    this.basket = await sendPost('/basket/getBasket')
     this.total = this.getTotal()
     this.date = new Date().toISOString().split('T')[0]
+    this.minDate = this.date
     this.maxDate = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0]
   }
 }
@@ -93,6 +97,7 @@ name: "order",
     width: 100%;
     display: grid;
     grid-template-columns: 30% 40% 30%;
+    height: max-content;
   }
   .product img{
     width: 100%;
