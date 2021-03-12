@@ -36,7 +36,7 @@ class Account extends \Liloy\Framework\Core\Model
     {
         $orderMapper = new OrderMapper($this->db);
         $session = new Sessioner();
-        $orders = $orderMapper->search($session->get('id'), $request);
+        $orders = $orderMapper->searchOrders($session->get('id'), $request);
         $countPages = ceil(count($orders) / 5);
         $firstProduct = ($request->page - 1) * 5;
         $lastProduct = $firstProduct + 4;

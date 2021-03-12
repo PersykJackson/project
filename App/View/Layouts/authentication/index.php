@@ -1,5 +1,4 @@
 <main>
     <authentication>
-
     </authentication>
 </main>

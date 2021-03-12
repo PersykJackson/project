@@ -3,11 +3,9 @@
 
 namespace Liloy\Framework\Database;
 
-use \PDO;
-
 class Connection
 {
-    private static PDO $db;
+    private static \PDO $db;
 
     private static self $instance;
 
@@ -15,7 +13,7 @@ class Connection
     {
         if (!isset(self::$instance)) {
             $config = parse_ini_file(__DIR__ . '/config.env');
-            self::$db = new PDO(
+            self::$db = new \PDO(
                 "mysql:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}",
                 $config['user'],
                 $config['password']
@@ -25,7 +23,7 @@ class Connection
         return self::$instance;
     }
 
-    public static function getDb(): PDO
+    public static function getDb(): \PDO
     {
         return self::$db;
     }

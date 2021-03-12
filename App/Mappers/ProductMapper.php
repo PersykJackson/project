@@ -7,31 +7,31 @@ use Liloy\Framework\Core\Mapper;
 
 class ProductMapper extends Mapper
 {
-    private array $cols = ['id', 'name', 'img', 'cost', 'description', 'category_id', 'discount'];
+    private array $columns = ['id', 'name', 'img', 'cost', 'description', 'category_id', 'discount'];
 
     public function getProductById($id): Product
     {
-        $result = $this->select('products', $this->cols)->where("id = $id")->execute()[0];
-        $product = new Product();
-        $product->setId($result['id'])
-            ->setDescription($result['description'])
-            ->setCost($result['cost'])
-            ->setImg($result['img'])
-            ->setCategoryId($result['category_id'])
-            ->setDiscount($result['discount'])
-            ->setName($result['name']);
-        return $product;
+        $product = $this->select('products', $this->columns)->where("id = $id")->execute()[0];
+        $productInObject = new Product();
+        $productInObject->setId($product['id'])
+            ->setDescription($product['description'])
+            ->setCost($product['cost'])
+            ->setImg($product['img'])
+            ->setCategoryId($product['category_id'])
+            ->setDiscount($product['discount'])
+            ->setName($product['name']);
+        return $productInObject;
     }
 
     public function getProductsByCategory(int $categoryId): array
     {
-        $result = $this->select('products', $this->cols)
+        $products = $this->select('products', $this->cols)
             ->where("category_id = $categoryId")
             ->execute();
-        $all = [];
-        foreach ($result as $value) {
+        $arrayOfObjects = [];
+        foreach ($products as $value) {
             $product = new Product();
-            $all[] = $product->setId($value['id'])
+            $arrayOfObjects[] = $product->setId($value['id'])
                 ->setDescription($value['description'])
                 ->setCost($value['cost'])
                 ->setImg($value['img'])
@@ -39,16 +39,32 @@ class ProductMapper extends Mapper
                 ->setDiscount($value['discount'])
                 ->setName($value['name']);
         }
-        return $all;
+        return $arrayOfObjects;
     }
 
     public function getTopProducts(): array
     {
-        $result = $this->select('products', $this->cols)->orderBy(['id'])->limit(6)->execute();
-        $all = [];
-        foreach ($result as $value) {
+        $topProducts = $this->select('products as p', [
+            'p.id',
+            'p.name',
+            'p.img',
+            'p.cost',
+            'p.description',
+            'p.category_id',
+            'p.discount',
+            'op.count'
+        ])
+            ->leftJoin(
+                '(select product_id, count(*) as count from orders_products group by product_id) as op',
+                'p.id = op.product_id'
+            )
+            ->orderBy(['op.count DESC'])
+            ->limit(6)
+            ->execute();
+        $arrayOfObjects = [];
+        foreach ($topProducts as $value) {
             $product = new Product();
-            $all[] = $product->setId($value['id'])
+            $arrayOfObjects[] = $product->setId($value['id'])
                 ->setDescription($value['description'])
                 ->setCost($value['cost'])
                 ->setImg($value['img'])
@@ -56,18 +72,18 @@ class ProductMapper extends Mapper
                 ->setDiscount($value['discount'])
                 ->setName($value['name']);
         }
-        return $all;
+        return $arrayOfObjects;
     }
 
     public function getProducts(): array
     {
-        $productsArray = $this->select('products', $this->cols)
+        $productsArray = $this->select('products', $this->columns)
             ->orderBy(['id'])
             ->execute();
-        $all = [];
+        $arrayOfObjects = [];
         foreach ($productsArray as $value) {
             $product = new Product();
-            $all[] = $product->setId($value['id'])
+            $arrayOfObjects[] = $product->setId($value['id'])
                 ->setDescription($value['description'])
                 ->setCost($value['cost'])
                 ->setImg($value['img'])
@@ -75,7 +91,7 @@ class ProductMapper extends Mapper
                 ->setDiscount($value['discount'])
                 ->setName($value['name']);
         }
-        return $all;
+        return $arrayOfObjects;
     }
 
     public function getCountProductByCategory(int $id): int

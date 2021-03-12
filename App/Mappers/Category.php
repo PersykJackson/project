@@ -11,21 +11,15 @@ class Category
 
     private string $img;
 
-    public function __construct(array $category)
-    {
-        $this->id = $category['id'];
-        $this->name = $category['name'];
-        $this->img = $category['img'];
-    }
-
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getName(): string
@@ -33,9 +27,10 @@ class Category
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
     }
 
     public function getImg(): string
@@ -43,8 +38,9 @@ class Category
         return $this->img;
     }
 
-    public function setImg(string $img): void
+    public function setImg(string $img): self
     {
         $this->img = $img;
+        return $this;
     }
 }

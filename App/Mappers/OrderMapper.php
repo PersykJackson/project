@@ -39,9 +39,9 @@ class OrderMapper extends Mapper
         return $products;
     }
 
-    public function search(int $id, object $obj): array
+    public function searchOrders(int $id, object $obj): array
     {
-        $result = $this->select(
+        $searchResult = $this->select(
             'orders',
             [
                 'id',
@@ -55,18 +55,18 @@ class OrderMapper extends Mapper
             ->orderBy([$obj->sort])
             ->params([$id, '%'.$obj->search.'%'])
             ->execute();
-        foreach ($result as $key => $value) {
-            $result[$key]['products'] = $this->getOrderProductsByOrderId($value['id']);
+        $orders = [];
+        foreach ($searchResult as $key => $value) {
+            $orders[$key]['products'] = $this->getOrderProductsByOrderId($value['id']);
         }
-        return $result;
+        return $orders;
     }
 
     public function getCountOrders(int $id): int
     {
-        $result = $this->select('orders', ['count(id)'])
+        return $this->select('orders', ['count(id)'])
             ->where('user_id = ?')
             ->params([$id])
-            ->execute()[0];
-        return $result['count(id)'];
+            ->execute()[0]['count(id)'];
     }
 }
