@@ -34,5 +34,9 @@ name: "pagination",
 </script>
 
 <style scoped>
-
+.pagination{
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>

@@ -97,4 +97,9 @@ class ProductMapper extends Mapper
             'description' => $product->getDescription()
         ]);
     }
+
+    public function removeProductById(int $id): bool
+    {
+        return $this->delete('products', ['id' => $id]);
+    }
 }
