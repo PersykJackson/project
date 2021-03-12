@@ -11,11 +11,11 @@ class Account extends \Liloy\Framework\Core\Model
 {
     public function getAccountInfo(): array
     {
-        $userStorage = new UserMapper($this->db);
+        $userMapper = new UserMapper($this->db);
         $orderMapper = new OrderMapper($this->db);
         $session = new Sessioner();
         $ordersCount = $orderMapper->getCountOrders($session->get('id'));
-        $user = $userStorage->getUserById($session->get('id'));
+        $user = $userMapper->getUserById($session->get('id'));
         return [
             'firstName' => $user->getFirstName(),
             'lastName' => $user->getLastName(),
@@ -34,9 +34,9 @@ class Account extends \Liloy\Framework\Core\Model
 
     public function searchFromHistory($request): array
     {
-        $orderStorage = new OrderMapper($this->db);
+        $orderMapper = new OrderMapper($this->db);
         $session = new Sessioner();
-        $orders = $orderStorage->search($session->get('id'), $request);
+        $orders = $orderMapper->search($session->get('id'), $request);
         $countPages = ceil(count($orders) / 5);
         $firstProduct = ($request->page - 1) * 5;
         $lastProduct = $firstProduct + 4;

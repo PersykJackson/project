@@ -9,11 +9,11 @@ class Products extends \Liloy\Framework\Core\Model
 {
     public function getProductsWithPagination($request): array
     {
-        $productStorage = new ProductMapper($this->db);
+        $productMapper = new ProductMapper($this->db);
         if ($request->category) {
-            $products = $productStorage->getProductsByCategory((int)$request->category);
+            $products = $productMapper->getProductsByCategory((int)$request->category);
         } else {
-            $products = $productStorage->getProducts();
+            $products = $productMapper->getProducts();
         }
         $countPages = ceil(count($products) / 12);
         $firstProduct = ($request->page - 1) * 12;

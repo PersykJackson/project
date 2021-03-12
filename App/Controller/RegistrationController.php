@@ -3,13 +3,8 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\Framework\Database\Connection;
-use Liloy\App\Mappers\User;
-use Liloy\App\Mappers\UserMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
-use Mailer\Messenger\Messenger;
-use Mailer\Messenger\TemplateType;
 
 class RegistrationController extends Controller
 {

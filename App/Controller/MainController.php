@@ -2,8 +2,6 @@
 
 namespace Liloy\App\Controller;
 
-use Liloy\Framework\Database\Connection;
-use Liloy\App\Mappers\CategoryMapper;
 use Liloy\Framework\Core\View;
 use Liloy\Framework\Core\Controller;
 

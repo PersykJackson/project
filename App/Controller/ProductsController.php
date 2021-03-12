@@ -35,8 +35,8 @@ class ProductsController extends Controller
     public function getTopProducts(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $productStorage = new ProductMapper(Connection::getDb());
-            $products = $productStorage->getTopProducts();
+            $productMapper = new ProductMapper(Connection::getDb());
+            $products = $productMapper->getTopProducts();
             echo json_encode($products);
         }
     }

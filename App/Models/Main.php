@@ -9,8 +9,8 @@ class Main extends \Liloy\Framework\Core\Model
 {
     public function getCategories(): array
     {
-        $categoryStorage = new CategoryMapper($this->db);
-        $arrayOfObjects = $categoryStorage->getCategories();
+        $categoryMapper = new CategoryMapper($this->db);
+        $arrayOfObjects = $categoryMapper->getCategories();
         $arrayOfCategories = [];
         foreach ($arrayOfObjects as $category) {
             $arrayOfCategories[] = [

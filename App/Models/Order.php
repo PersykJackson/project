@@ -29,8 +29,8 @@ class Order extends \Liloy\Framework\Core\Model
             ->setDate($request->date)
             ->setAmount($amount)
             ->setUserId($session->get('id'));
-        $orderStorage = new OrderMapper($this->db);
-        $orderStorage->insertOrder($order);
+        $orderMapper = new OrderMapper($this->db);
+        $orderMapper->insertOrder($order);
         $session->delete('basket');
         return true;
     }

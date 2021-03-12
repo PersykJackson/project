@@ -33,13 +33,13 @@ class Basket extends Model
 
     public function getBasket(): array
     {
-        $productsStorage = new ProductMapper($this->db);
+        $productMapper = new ProductMapper($this->db);
         $products = [];
         $session = new Sessioner();
         if ($session->get('basket')) {
             foreach ($session->get('basket') as $item) {
                 $products[] = [
-                    'item' => $productsStorage->getProductById($item['id']),
+                    'item' => $productMapper->getProductById($item['id']),
                     'amount' => $item['amount']
                 ];
             }
