@@ -44,24 +44,8 @@ class ProductsController extends Controller
     public function getProducts(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $productStorage = new ProductMapper(Connection::getDb());
-            if (json_decode($this->request['ajax'])->category) {
-                $products = $productStorage->getProductsByCategory((int)json_decode($this->request['ajax'])->category);
-            } else {
-                $products = $productStorage->getProducts();
-            }
-            $countPages = ceil(count($products) / 12);
-            $firstProduct = (json_decode($this->request['ajax'])->page - 1) * 12;
-            $lastProduct = $firstProduct + 11;
-            $page = [];
-            foreach ($products as $key => $product) {
-                if ($key >= $firstProduct && $key <= $lastProduct) {
-                    $page[] = $product;
-                }
-            }
-            $answer['countPages'] = $countPages;
-            $answer['page'] = $page;
-            echo json_encode($answer);
+            $decodedRequest = json_decode($this->request['ajax']);
+            echo json_encode($this->getModel()->getProductsWithPagination($decodedRequest));
         }
     }
 }
