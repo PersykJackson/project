@@ -16,4 +16,11 @@ abstract class Controller
         $this->request = $request;
         Connection::getInstance();
     }
+
+    public function getModel()
+    {
+        preg_match('/Liloy\\\App\\\Controller\\\(.*)Controller/', get_class($this), $matches);
+        $modelName = 'Liloy\\App\\Models\\'.$matches[1];
+        return new $modelName(Connection::getDb());
+    }
 }

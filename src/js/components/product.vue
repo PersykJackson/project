@@ -43,7 +43,6 @@ name: "Product",
     toBasket()
     {
       sendPost('/basket/add', {id: this.id})
-      reload()
     }
   }
 }

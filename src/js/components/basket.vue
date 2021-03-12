@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="basket">
           <ul class="basket-list">
-            <li v-for="(product, key) in products">
+            <li v-for="product in products">
             <div class='product'>
               <div class='grid'>
                 <img class='rounded img-fluid product-img' :src="product.item.img"/>
@@ -14,18 +14,21 @@
                   <strong>{{product.item.cost * product.amount}}</strong>
                   <div class='counter'>
                     <button name='-' @click="action(product.item.id, decrement)">-</button>
-                    <input type='text' :value="product.amount" size='3' name='count'/>
+                    <input type='text' :value="product.amount" size='3' name='count' disabled/>
                     <button name='+' @click="action(product.item.id, increment)">+</button>
                   </div>
                 </div>
-                <button @click="action(product.item.id, unset)">Убрать</button>
+                <button class="deleteProduct" @click="action(product.item.id, unset)"></button>
               </div>
             </div>
           </li>
             <li>
-              <div class="total">
+              <div v-if="total" class="total">
                 <strong>Итог: {{total}} грн</strong><br/>
                 <button><a href="/order/index">Перейти к оформлению</a></button>
+              </div>
+              <div v-else>
+                <p>Ваша корзина пуста</p>
               </div>
             </li>
           </ul>
@@ -51,16 +54,16 @@ name: "basket",
   },
   data() {
   return {
-    products: []
+    products: {}
   }
   },
   computed: {
     total: function () {
       let total = 0
       if (typeof this.products === 'object') {
-        this.products.forEach(function (product) {
-          total += product.item.cost * product.amount
-        })
+        for (let key in this.products) {
+          total += this.products[key].item.cost * this.products[key].amount
+        }
       }
       return total
     }
@@ -75,7 +78,6 @@ name: "basket",
     },
     async getBasket() {
       this.products = await sendPost('/basket/getBasket')
-      this
     }
   },
   created() {
@@ -85,5 +87,41 @@ name: "basket",
 </script>
 
 <style scoped>
-
+  .total a{
+    text-decoration: none;
+    color: black;
+  }
+  .deleteProduct{
+    position: relative;
+    height: 33px;
+    width: 33px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-bottom: auto;
+  }
+  .deleteProduct::after, .deleteProduct::before{
+    background-color: black;
+    width: 2px;
+    height: 33px;
+    content: ' ';
+  }
+  .deleteProduct:before, .deleteProduct:after {
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+  }
+  .deleteProduct:before {
+    transform: rotate(45deg);
+  }
+  .deleteProduct:after {
+    transform: rotate(-45deg);
+  }
+  .basket-list li{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 </style>

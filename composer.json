@@ -21,7 +21,7 @@
             "Liloy\\Framework\\Authentication\\" : "Framework/Authentication/",
             "Liloy\\Framework\\Helpers\\Exceptions\\" : "Framework/Helpers/Exceptions/",
             "Liloy\\Framework\\Helpers\\" : "Framework/Helpers/",
-            "Liloy\\App\\Model\\" : "App/Model/",
+            "Liloy\\App\\Models\\" : "App/Models/",
             "Liloy\\Framework\\Session\\" : "Framework/Session/",
             "Liloy\\App\\View\\" : "App/View/",
             "Liloy\\Framework\\Router\\" : "Framework/Router/",

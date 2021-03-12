@@ -18,7 +18,7 @@ main{
 button{
     margin: 20px;
     border: none;
-    background-color: rgba(80,80,80, 0.2);
+    background-color: white;
     padding: 10px;
 }
 button:hover{
