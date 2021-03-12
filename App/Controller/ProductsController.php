@@ -35,8 +35,8 @@ class ProductsController extends Controller
     public function getTopProducts(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $productStorage = new ProductMapper(Connection::getDb());
-            $products = $productStorage->getTopProducts();
+            $productMapper = new ProductMapper(Connection::getDb());
+            $products = $productMapper->getTopProducts();
             echo json_encode($products);
         }
     }
@@ -44,35 +44,8 @@ class ProductsController extends Controller
     public function getProducts(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $productStorage = new ProductMapper(Connection::getDb());
-            if (json_decode($this->request['ajax'])->category) {
-                $products = $productStorage->getProductsByCategory((int)json_decode($this->request['ajax'])->category);
-            } else {
-                $products = $productStorage->getProducts();
-            }
-            $countPages = ceil(count($products) / 12);
-            $firstProduct = (json_decode($this->request['ajax'])->page - 1) * 12;
-            $lastProduct = $firstProduct + 11;
-            $page = [];
-            foreach ($products as $key => $product) {
-                if ($key >= $firstProduct && $key <= $lastProduct) {
-                    $page[] = $product;
-                }
-            }
-            $answer['countPages'] = $countPages;
-            $answer['page'] = $page;
-            echo json_encode($answer);
-        }
-    }
-
-    public function remove(): void
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $decodedRequest = json_decode($this->request['ajax']);
-            $productMapper = new ProductMapper(Connection::getDb());
-            $src = $productMapper->getProductById($decodedRequest->id)->getImg();
-            unlink(trim($src, '/'));
-            echo json_encode($productMapper->removeProductById($decodedRequest->id));
+            echo json_encode($this->getModel()->getProductsWithPagination($decodedRequest));
         }
     }
 }

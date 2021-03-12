@@ -11,6 +11,9 @@ class Request
     {
         $this->request['post'] = $_POST;
         $this->request['ajax'] = file_get_contents('php://input');
+        if (isset($_FILES['file'])) {
+            $this->request['file'] = $_FILES['file'];
+        }
     }
 
     public function setGet(string $get): void
