@@ -64,15 +64,4 @@ class ProductsController extends Controller
             echo json_encode($answer);
         }
     }
-
-    public function remove(): void
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $decodedRequest = json_decode($this->request['ajax']);
-            $productMapper = new ProductMapper(Connection::getDb());
-            $src = $productMapper->getProductById($decodedRequest->id)->getImg();
-            unlink(trim($src, '/'));
-            echo json_encode($productMapper->removeProductById($decodedRequest->id));
-        }
-    }
 }

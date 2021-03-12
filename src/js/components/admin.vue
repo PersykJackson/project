@@ -66,7 +66,7 @@ name: "admin",
       this.toggle = !this.toggle
     },
     async remove(id){
-      const result = await sendPost('/products/remove', {id: id})
+      const result = await sendPost('/admin/remove', {id: id})
       await this.getProducts(this.currentPage)
     },
     async send(){

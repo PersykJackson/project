@@ -5,7 +5,6 @@ namespace Liloy\App\Models;
 
 use Liloy\App\Mappers\OrderMapper;
 use Liloy\App\Mappers\UserMapper;
-use Liloy\Framework\Database\Connection;
 use Liloy\Framework\Session\Sessioner;
 
 class Account extends \Liloy\Framework\Core\Model
