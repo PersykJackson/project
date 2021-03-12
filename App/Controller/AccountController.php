@@ -34,6 +34,7 @@ class AccountController extends Controller
             echo json_encode($this->getModel()->searchFromHistory($decodedRequest));
         }
     }
+
     public function isAdmin(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

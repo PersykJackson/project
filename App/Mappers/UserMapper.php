@@ -4,23 +4,22 @@
 namespace Liloy\App\Mappers;
 
 use Liloy\Framework\Core\Mapper;
-use Liloy\Logger\Logger;
 
 class UserMapper extends Mapper
 {
     public function getUserById($id): User
     {
         $columns = ['first_name', 'last_name', 'login', 'email'];
-        $result = $this->select('users', $columns)
+        $user = $this->select('users', $columns)
             ->where("id = ?")
             ->params([$id])
             ->execute()[0];
-        $user = new User();
-        $user->setFirstName($result['first_name'])
-            ->setLastName($result['last_name'])
-            ->setLogin($result['login'])
-            ->setEmail($result['email']);
-        return $user;
+        $userObject = new User();
+        $userObject->setFirstName($user['first_name'])
+            ->setLastName($user['last_name'])
+            ->setLogin($user['login'])
+            ->setEmail($user['email']);
+        return $userObject;
     }
 
     public function userExistsByEmail(string $email): bool
@@ -70,16 +69,16 @@ class UserMapper extends Mapper
 
     public function getUserByLogin(string $login): User
     {
-        $result = $this->select('users', ['id', 'first_name', 'last_name', 'email'])
+        $user = $this->select('users', ['id', 'first_name', 'last_name', 'email'])
             ->where('login = ?')
             ->params([$login])
             ->execute()[0];
-        $user = new User();
-        $user->setId($result['id'])
-            ->setEmail($result['email'])
-            ->setFirstName($result['first_name'])
-            ->setLastName($result['last_name']);
-        return $user;
+        $userObject = new User();
+        $userObject->setId($user['id'])
+            ->setEmail($user['email'])
+            ->setFirstName($user['first_name'])
+            ->setLastName($user['last_name']);
+        return $userObject;
     }
 
     public function getRole(int $id): int

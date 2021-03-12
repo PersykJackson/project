@@ -1,4 +1,4 @@
 <main>
-        <products>
-        </products>
+    <products>
+    </products>
 </main>

@@ -9,11 +9,14 @@ class CategoryMapper extends Mapper
 {
     public function getCategories(): array
     {
-        $cols = ['id', 'name', 'img'];
-        $categories = $this->select('categories', $cols)->orderBy(['id'])->execute();
+        $columns = ['id', 'name', 'img'];
+        $categories = $this->select('categories', $columns)->orderBy(['id'])->execute();
         $all = [];
         foreach ($categories as $category) {
-            $all[] = new Category($category);
+            $all[] = (new Category())
+                ->setImg($category['img'])
+                ->setName($category['name'])
+                ->setId($category['id']);
         }
         return $all;
     }
