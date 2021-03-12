@@ -14,6 +14,12 @@ class OrderController extends Controller
         $view->render();
     }
 
+    public function orderSuccess(): void
+    {
+        $view = new View($this->path);
+        $view->render();
+    }
+
     public function new(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
