@@ -67,7 +67,12 @@ name: "order",
       if (!errors) {
         this.error = 'Не все обязательные поля заполнены'
       } else {
-        window.location.href = '/main/index'
+        const info = {
+          date: this.date,
+          total: this.total
+        }
+        localStorage.setItem('orderInfo', JSON.stringify(info))
+        window.location.href = '/order/orderSuccess'
       }
     }
   },

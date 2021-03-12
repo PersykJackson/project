@@ -5,6 +5,7 @@ namespace Liloy\App\Mappers;
 
 use Liloy\Framework\Core\Mapper;
 use Liloy\Framework\Database\Connection;
+use Liloy\Framework\Session\Sessioner;
 
 class OrderMapper extends Mapper
 {
