@@ -55,11 +55,10 @@ class OrderMapper extends Mapper
             ->orderBy([$obj->sort])
             ->params([$id, '%'.$obj->search.'%'])
             ->execute();
-        $orders = [];
         foreach ($searchResult as $key => $value) {
-            $orders[$key]['products'] = $this->getOrderProductsByOrderId($value['id']);
+            $searchResult[$key]['products'] = $this->getOrderProductsByOrderId($value['id']);
         }
-        return $orders;
+        return $searchResult;
     }
 
     public function getCountOrders(int $id): int

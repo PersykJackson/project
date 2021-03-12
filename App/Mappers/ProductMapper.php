@@ -25,7 +25,7 @@ class ProductMapper extends Mapper
 
     public function getProductsByCategory(int $categoryId): array
     {
-        $products = $this->select('products', $this->cols)
+        $products = $this->select('products', $this->columns)
             ->where("category_id = $categoryId")
             ->execute();
         $arrayOfObjects = [];
