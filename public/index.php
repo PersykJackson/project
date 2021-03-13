@@ -9,6 +9,7 @@ use Liloy\Logger\Logger;
 if ($_SERVER['REQUEST_URI'] === '/favicon.ico') {
     die();
 }
+
 $log = new Logger(__DIR__.'/Logs/logger.log');
 try {
     $session = new Sessioner();

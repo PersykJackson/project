@@ -2,6 +2,8 @@
 /public/Logs/
 /vendor/
 /Framework/Session/Sessions/
+/Framework/Database/config.env
+/Framework/Database/test_config.env
 phpcs.phar
 .env
 /node_modules/
