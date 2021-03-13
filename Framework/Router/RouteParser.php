@@ -3,6 +3,8 @@
 
 namespace Liloy\Framework\Router;
 
+use Liloy\Framework\Helpers\Exceptions\BadRouteException;
+
 class RouteParser
 {
     private string $controller;

@@ -3,6 +3,7 @@
 
 namespace Liloy\Framework\Helpers\Services;
 
+use Liloy\Framework\Helpers\Exceptions\BasketException;
 use Liloy\Framework\Session\Sessioner;
 
 class BasketService
@@ -25,10 +26,10 @@ class BasketService
         $this->session->set('basket', $basket);
     }
 
-    public function set($key, $value): void
+    public function set(array $value): void
     {
         $basket = $this->session->get('basket');
-        $basket[$key] = $value;
+        $basket[] = $value;
         $this->session->set('basket', $basket);
     }
 
@@ -51,15 +52,17 @@ class BasketService
                 return $basket[$key]['amount'];
             }
         }
-        return 0;
+        throw new BasketException('Id not found');
     }
 
-    public function get(array $floors)
+    public function get(int $id): array
     {
         $basket = $this->session->get('basket');
-        foreach ($floors as $floor) {
-            $basket = $basket[$floor];
+        foreach ($basket as $key => $item) {
+            if ($item['id'] == $id) {
+                return $item;
+            }
         }
-        return $basket;
+        throw new BasketException('Id not found');
     }
 }

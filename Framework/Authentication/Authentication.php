@@ -28,8 +28,8 @@ class Authentication
     {
 
         if (!$this->isAuth()) {
-            $storage = new UserMapper(Connection::getDb());
-            if ($storage->auth($login, $password)) {
+            $mapper = new UserMapper(Connection::getDb());
+            if ($mapper->auth($login, $password)) {
                 $this->sessioner->start();
                 $this->sessioner->set('auth', true);
                 $userStorage = new UserMapper(Connection::getDb());

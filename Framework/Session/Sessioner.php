@@ -10,11 +10,11 @@ class Sessioner
 
     public function start(): bool
     {
-        if (session_status() !== 0) {
+        if (session_status() !== 0 && !$this->sessionExists()) {
             session_start();
             return true;
         } else {
-            throw new SessException('Session: Session disabled.');
+            throw new SessException('Session: Session disabled or already exists.');
         }
     }
 
@@ -42,19 +42,12 @@ class Sessioner
 
     public function cookieExists(): bool
     {
-
-        if (array_key_exists('PHPSESSID', $_COOKIE)) {
-            return true;
-        }
-        return false;
+        return array_key_exists('PHPSESSID', $_COOKIE);
     }
 
     public function sessionExists(): bool
     {
-        if (session_status() === 3) {
-            return true;
-        }
-        return false;
+        return session_status() === 2;
     }
 
     public function destroy(): void
@@ -90,10 +83,7 @@ class Sessioner
 
     public function contains($key): bool
     {
-        if (isset($_SESSION[$key])) {
-            return true;
-        }
-        return false;
+        return isset($_SESSION[$key]);
     }
 
     public function delete($key): void
