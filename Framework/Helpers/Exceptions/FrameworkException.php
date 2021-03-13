@@ -3,7 +3,9 @@
 
 namespace Liloy\Framework\Helpers\Exceptions;
 
-class FrameworkException extends \Exception
+use Exception;
+
+class FrameworkException extends Exception
 {
 
 }

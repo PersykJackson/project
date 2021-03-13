@@ -5,7 +5,7 @@ namespace Liloy\Framework\Core;
 
 use \PDO;
 
-class Mapper
+abstract class Mapper
 {
     private PDO $db;
 

@@ -7,9 +7,7 @@
         }
     ],
     "config": {
-        "github-oauth": {
-
-        }
+        "github-oauth": {}
     },
     "require": {
         "liloy/logger": "^1.0",
@@ -17,18 +15,23 @@
     },
     "autoload": {
         "psr-4": {
-            "Liloy\\App\\Controller\\" : "App/Controller/",
-            "Liloy\\Framework\\Authentication\\" : "Framework/Authentication/",
-            "Liloy\\Framework\\Helpers\\Exceptions\\" : "Framework/Helpers/Exceptions/",
-            "Liloy\\Framework\\Helpers\\" : "Framework/Helpers/",
-            "Liloy\\App\\Models\\" : "App/Models/",
-            "Liloy\\Framework\\Session\\" : "Framework/Session/",
-            "Liloy\\App\\View\\" : "App/View/",
-            "Liloy\\Framework\\Router\\" : "Framework/Router/",
-            "Liloy\\App\\Mappers\\" : "App/Mappers/",
-            "Liloy\\Framework\\Database\\" : "Framework/Database/",
-            "Liloy\\Framework\\Core\\" : "Framework/Core/",
-            "Liloy\\Framework\\Helpers\\Services\\" : "Framework/Helpers/Services/"
+            "Liloy\\App\\Controller\\": "App/Controller/",
+            "Liloy\\Framework\\Authentication\\": "Framework/Authentication/",
+            "Liloy\\Framework\\Helpers\\Exceptions\\": "Framework/Helpers/Exceptions/",
+            "Liloy\\Framework\\Helpers\\": "Framework/Helpers/",
+            "Liloy\\App\\Models\\": "App/Models/",
+            "Liloy\\Framework\\Session\\": "Framework/Session/",
+            "Liloy\\App\\View\\": "App/View/",
+            "Liloy\\Framework\\Router\\": "Framework/Router/",
+            "Liloy\\App\\Mappers\\": "App/Mappers/",
+            "Liloy\\Framework\\Database\\": "Framework/Database/",
+            "Liloy\\Framework\\Core\\": "Framework/Core/",
+            "Liloy\\Framework\\Helpers\\Services\\": "Framework/Helpers/Services/"
         }
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.1",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "codeception/module-asserts": "^1.3"
     }
 }

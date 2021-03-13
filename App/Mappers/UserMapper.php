@@ -9,7 +9,7 @@ class UserMapper extends Mapper
 {
     public function getUserById($id): User
     {
-        $columns = ['first_name', 'last_name', 'login', 'email'];
+        $columns = ['first_name', 'last_name', 'login', 'email', 'id'];
         $user = $this->select('users', $columns)
             ->where("id = ?")
             ->params([$id])
@@ -18,7 +18,8 @@ class UserMapper extends Mapper
         $userObject->setFirstName($user['first_name'])
             ->setLastName($user['last_name'])
             ->setLogin($user['login'])
-            ->setEmail($user['email']);
+            ->setEmail($user['email'])
+            ->setId($user['id']);
         return $userObject;
     }
 

@@ -3,7 +3,7 @@
 
 namespace Liloy\Framework\Core;
 
-class Model
+abstract class Model
 {
     protected \PDO $db;
 

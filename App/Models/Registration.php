@@ -41,7 +41,7 @@ class Registration extends \Liloy\Framework\Core\Model
         foreach ($user as $value) {
             if ($value === '') {
                 $errors[] = 'Поля не могут быть пустыми!';
-                break;
+                return $errors;
             }
         }
         if (strlen($user->login) < 5 || strlen($user->login > 20)) {
