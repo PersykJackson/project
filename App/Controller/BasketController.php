@@ -30,6 +30,13 @@ class BasketController extends Controller
         }
     }
 
+    public function getCountProducts(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            echo json_encode($this->getModel()->getCount());
+        }
+    }
+
     public function add(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === "POST") {

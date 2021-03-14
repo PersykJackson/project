@@ -65,4 +65,9 @@ class BasketService
         }
         throw new BasketException('Id not found');
     }
+
+    public function getBasket(): array
+    {
+        return $this->session->get('basket');
+    }
 }

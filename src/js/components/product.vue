@@ -40,9 +40,12 @@ name: "Product",
     }
   },
   methods: {
-    toBasket()
-    {
+    async toBasket() {
       sendPost('/basket/add', {id: this.id})
+      this.$store.commit({
+        type: 'set',
+        count: await sendPost('/basket/getCountProducts')
+      })
     }
   }
 }

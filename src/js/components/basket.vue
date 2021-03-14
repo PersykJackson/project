@@ -11,7 +11,7 @@
                 <div class='info'>
                   <h3>{{product.item.name}}</h3>
                   <span>{{product.item.description}}</span><br/>
-                  <strong>{{product.item.cost * product.amount}}</strong>
+                  <strong class="cost">{{product.item.cost * product.amount}}</strong>
                   <div class='counter'>
                     <button name='-' @click="action(product.item.id, decrement)">-</button>
                     <input type='text' :value="product.amount" size='3' name='count' disabled/>
@@ -25,7 +25,7 @@
             <li>
               <div v-if="total" class="total">
                 <strong>Итог: {{total}} грн</strong><br/>
-                <button><a href="/order/index">Перейти к оформлению</a></button>
+                <a href="/order/index"><button>Перейти к оформлению</button></a>
               </div>
               <div v-else>
                 <p>Ваша корзина пуста</p>
@@ -69,12 +69,17 @@ name: "basket",
     }
   },
   methods: {
-    action(id, action) {
-      sendPost('/basket/change', {
+    async action(id, action) {
+      await sendPost('/basket/change', {
         action: action,
         id: id
       })
-      this.getBasket()
+      let count = await sendPost('/basket/getCountProducts')
+      this.$store.commit({
+        type: 'set',
+        count: count
+      })
+      await this.getBasket()
     },
     async getBasket() {
       this.products = await sendPost('/basket/getBasket')
@@ -123,5 +128,8 @@ name: "basket",
   .basket-list li{
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+  .cost::after{
+    content: ' грн';
   }
 </style>

@@ -9,24 +9,32 @@ main .container {
     margin: 5px;
     padding: 5px;
 }
+.categories{
+    top: 3% !important;
+}
 .search {
-    background-color: rgba(80,80,80, 0.2);
+    background-color: white;
     width: max-content;
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
+    border-radius: 5px;
+}
+.search button{
+    background-color: white;
 }
 .search * {
     margin: 0;
 }
 .search input{
-    border: none;
-    background-color: rgba(80,80,80, 0.2);
+    background-color: white;
     text-align: center;
     padding: 5px;
+    width: 300px;
+    border: 1px solid black;
 }
 .search select{
-    background-color: rgba(80,80,80, 0.2);
+    background-color: white;
     border: none;
     padding: 7px;
 }
