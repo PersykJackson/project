@@ -29,3 +29,4 @@ class CategoryMapperCest
         $I->assertEquals('Машинки', $categoryName);
     }
 }
+php vendor/bin/codecept generate:cest acceptance First

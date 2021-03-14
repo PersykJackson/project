@@ -8,8 +8,11 @@
               <div class="col-1 col-md-4 col-lg-1">
                 <li class="nav-item"><a href="/main/index">MaxiMarket</a></li>
               </div>
-              <div class="col-1 col-md-4 col-lg-1">
+              <div class="nav-products col-1 col-md-4 col-lg-1">
                 <li class="nav-item"><a href="/products/index">Товары</a></li>
+                <div class="categories">
+                  <li v-for="category in categories" @click="goTo(category.id)">{{category.name}}</li>
+                </div>
               </div>
             </div>
           </div>
@@ -47,21 +50,46 @@ name: "v-header",
   data() {
     return {
       auth: Boolean,
-      access: false
+      access: false,
+      categories: Object
     }
   },
   methods: {
     async isAuth() {
       return await sendPost('/Authentication/isAuth')
+    },
+    goTo(id) {
+      localStorage.setItem('category', id)
+      window.location.href = '/products/index'
     }
   },
   async created() {
     this.auth = await this.isAuth()
     this.access = await sendPost('/account/isAdmin')
+    this.categories = await sendPost('/main/categories')
   }
 }
 </script>
 
 <style scoped>
-
+  .nav-products .categories{
+    opacity: 0;
+    position: absolute;
+    top: 15px;
+    list-style: none;
+    cursor: pointer;
+    background-color: white;
+    padding: 10px;
+  }
+  .nav-products .categories li{
+    padding: 10px;
+  }
+  .nav-products .categories li:hover{
+    background-color: orange;
+  }
+  .nav-products:hover .categories{
+    opacity: 100%;
+    transition: 1s;
+    z-index: 1;
+  }
 </style>

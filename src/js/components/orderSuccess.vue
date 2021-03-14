@@ -26,7 +26,7 @@ name: "order-success",
       this.orderInfo = orderInfo
       localStorage.removeItem('orderInfo')
     } else {
-      //window.location.href = '/main/index'
+      window.location.href = '/main/index'
     }
   }
 }
