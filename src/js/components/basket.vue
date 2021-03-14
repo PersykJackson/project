@@ -69,12 +69,16 @@ name: "basket",
     }
   },
   methods: {
-    action(id, action) {
-      sendPost('/basket/change', {
+    async action(id, action) {
+      await sendPost('/basket/change', {
         action: action,
         id: id
       })
-      this.getBasket()
+      this.$store.commit({
+        type: 'set',
+        count: await sendPost('/basket/getCountProducts')
+      })
+      await this.getBasket()
     },
     async getBasket() {
       this.products = await sendPost('/basket/getBasket')

@@ -65,4 +65,15 @@ class Basket extends Model
         }
         $sessioner->set('basket', $basket);
     }
+
+    public function getCount(): int
+    {
+        $basketService = new BasketService(new Sessioner());
+        $basket = $basketService->getBasket();
+        $count = 0;
+        foreach ($basket as $value) {
+            $count += $value['amount'];
+        }
+        return $count;
+    }
 }
