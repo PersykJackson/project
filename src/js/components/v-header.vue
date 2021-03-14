@@ -73,6 +73,7 @@ name: "v-header",
 
 <style scoped>
   .nav-products .categories{
+    display: none;
     opacity: 0;
     position: absolute;
     top: 15px;
@@ -88,6 +89,7 @@ name: "v-header",
     background-color: orange;
   }
   .nav-products:hover .categories{
+    display: block;
     opacity: 100%;
     transition: 1s;
     z-index: 1;

@@ -2,14 +2,6 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12">
-        <div class="categories">
-          <div @click="none =! none">Категории ▼</div>
-          <transition name="categories">
-            <ul v-if="none">
-              <li v-for="(val, index) in categories" @click="getProducts(1, val.id)"><a>{{val.name}}</a></li>
-            </ul>
-          </transition>
-        </div>
         <div class="products">
           <h3>Товары</h3><hr/>
           <div class="row">
@@ -39,7 +31,6 @@ export default {
   components: {Pagination, Product},
   data() {
     return {
-      categories: [],
       products: [],
       currentCategory: Number,
       countPages: 1,
@@ -65,7 +56,6 @@ export default {
     } else {
       const products = await this.getProducts(1)
     }
-    this.categories = await sendPost('/main/categories')
   }
 }
 </script>
