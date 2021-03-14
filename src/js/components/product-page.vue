@@ -40,7 +40,10 @@ name: "product-page",
     grid-template-columns: 60% 40%;
   }
   .image img{
-    width: 100%;
+    height: 500px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
   }
   .info{
     grid-row: 1/3;

@@ -80,4 +80,7 @@ name: "v-main",
   strong{
     cursor: pointer;
   }
+  .carousel button{
+    z-index: 0;
+  }
 </style>

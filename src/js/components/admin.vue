@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div class="toggle" @click="switchToggle">Переключить</div>
+    <div class="toggle" v-if="toggle" @click="switchToggle">Перейти к удалению товаров</div>
+    <div class="toggle" v-else @click="switchToggle">Перейти к добавлению товаров</div>
     <form v-if="toggle">
       <div v-if="result">{{result}}</div>
       <label for="name">Введите название</label><br/>

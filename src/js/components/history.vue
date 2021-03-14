@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container col-md-4 col-lg-12">
     <div id="search" class="search">
-      <input v-model="searchData" id="search_data"/>
+      <input v-model="searchData" id="search_data" class="search_data"/>
       <select v-model="searchType" id="search_type" name="search_type">
         <option value="phone" selected>По номеру</option>
         <option value="address">По адресу</option>
@@ -13,12 +13,12 @@
       </select>
       <button @click="searchOrders()">Поиск</button>
     </div>
-    <table v-if="orders" id="table">
+    <table v-if="orders" id="table" class="orders">
       <caption>Ваши заказы</caption>
         <tr>
           <td>Телефон</td>
-          <td>Дата</td>
-          <td>Коммантарий</td>
+          <td @click="sort">Дата</td>
+          <td>Комментарий</td>
           <td>Адрес</td>
           <td>Товары</td>
         </tr>
@@ -84,5 +84,16 @@ name: "history",
 </script>
 
 <style scoped>
-
+  @media (max-width: 650px) {
+    .search{
+      display: grid;
+      grid-template-columns: 35% 35% 30%;
+    }
+    .search_data{
+      grid-column: 1/4;
+    }
+  }
+  .orders td{
+    border: 1px solid black;
+  }
 </style>

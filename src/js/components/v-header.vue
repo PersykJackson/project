@@ -23,7 +23,7 @@
                 </div>
                 <div class='col-1 col-md-auto'>
                   <li class='nav-item'>
-                    <a href='/basket/index'><span v-if="count" class="basket_count">{{count}}</span>
+                    <a href='/basket/index'><span v-if="count !== 0" class="basket_count">{{count}}</span>
                       <span v-else-if="onloadCount" class="basket_count">{{onloadCount}}</span>Корзина</a></li>
                 </div>
               <div class='col-1 col-md-auto'>
@@ -60,6 +60,10 @@ name: "v-header",
   },
   computed: {
     count: function (){
+      let count = this.$store.state.count
+      if (count === 0) {
+        this.onloadCount = false
+      }
       return this.$store.state.count
     }
   },
@@ -82,10 +86,10 @@ name: "v-header",
 </script>
 
 <style scoped>
-  .nav-products .categories{
-    display: none;
+  .categories{
     opacity: 0;
     position: absolute;
+    display: none;
     top: 15px;
     list-style: none;
     cursor: pointer;
