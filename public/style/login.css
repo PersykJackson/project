@@ -5,3 +5,6 @@ main{
 .error{
     color: red;
 }
+.categories{
+    top: 3% !important;
+}
