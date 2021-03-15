@@ -19,7 +19,7 @@
           <div class="col-md-7 col-lg-7">
             <div class="row justify-content-end" v-if="auth">
                 <div class='col-1 col-md-auto admin_panel' v-if="access">
-                  <li class='nav-item'><a href="/admin/index">Админ панель</a></li>
+                  <li class='nav-item'><a id="admin" href="/admin/index">Админ панель</a></li>
                 </div>
                 <div class='col-1 col-md-auto'>
                   <li class='nav-item'>
@@ -27,10 +27,10 @@
                       <span v-else-if="onloadCount" class="basket_count">{{onloadCount}}</span>Корзина</a></li>
                 </div>
               <div class='col-1 col-md-auto'>
-                <li class='nav-item'><a href='/account/index'>Аккаунт</a></li>
+                <li class='nav-item'><a id="account" href='/account/index'>Аккаунт</a></li>
               </div>
               <div class='col-1 col-md-auto'>
-                <li class='nav-item'><a href='/authentication/logout'>Выход</a></li>
+                <li class='nav-item'><a id="exit" href='/authentication/logout'>Выход</a></li>
               </div>
             </div>
             <div class="row justify-content-end" v-else>

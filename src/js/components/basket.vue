@@ -25,7 +25,7 @@
             <li>
               <div v-if="total" class="total">
                 <strong>Итог: {{total}} грн</strong><br/>
-                <a href="/order/index"><button>Перейти к оформлению</button></a>
+                <a id="submit" href="/order/index"><button>Перейти к оформлению</button></a>
               </div>
               <div v-else>
                 <p>Ваша корзина пуста</p>
@@ -85,8 +85,12 @@ name: "basket",
       this.products = await sendPost('/basket/getBasket')
     }
   },
-  created() {
-    this.getBasket()
+  async created() {
+    await this.getBasket()
+    const isAuth = await sendPost('/authentication/isAuth')
+    if (!isAuth) {
+      window.location.href = '/main/index'
+    }
   }
 }
 </script>

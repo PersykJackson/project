@@ -11,7 +11,7 @@
         <option value="id" selected>default</option>
         <option value="date">Дата</option>
       </select>
-      <button @click="searchOrders()">Поиск</button>
+      <button id="submit" @click="searchOrders()">Поиск</button>
     </div>
     <table v-if="orders" id="table" class="orders">
       <caption>Ваши заказы</caption>
@@ -75,10 +75,14 @@ name: "history",
       this.countPages = answer.countPages
       }
     },
-  created() {
+  async created() {
     this.sortType = 'id'
     this.searchType = 'phone'
-    this.searchOrders()
+    await this.searchOrders()
+    const isAuth = await sendPost('/authentication/isAuth')
+    if (!isAuth) {
+      window.location.href = '/main/index'
+    }
   }
 }
 </script>

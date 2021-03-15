@@ -1,11 +1,11 @@
 <template>
   <div class='col-4 col-md-2 product'>
-    <a :href="href">
+    <a :id="'product'+id" :href="href">
     <img class='rounded img-fluid product-img' :src="img" alt="product-img"/>
     <p>{{name}}</p>
     </a>
     <strong>{{cost}} грн</strong><br/>
-    <button @click="toBasket">В корзину</button>
+    <button :id="'id'+id" @click="toBasket">В корзину</button>
   </div>
 </template>
 

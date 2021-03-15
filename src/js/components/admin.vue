@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="toggle" v-if="toggle" @click="switchToggle">Перейти к удалению товаров</div>
-    <div class="toggle" v-else @click="switchToggle">Перейти к добавлению товаров</div>
+    <div id="toggle_delete" class="toggle" v-if="toggle" @click="switchToggle">Перейти к удалению товаров</div>
+    <div id="toggle_add" class="toggle" v-else @click="switchToggle">Перейти к добавлению товаров</div>
     <form v-if="toggle">
       <div v-if="result">{{result}}</div>
       <label for="name">Введите название</label><br/>
@@ -12,7 +12,7 @@
       <input v-model="cost" id="price" type="number" name="price"/><br/>
       <label for="category">Выберете категорию</label><br/>
       <select v-model="categoryId" id="category" name="category">
-        <option v-for="category in categories" :value="category.id">{{category.name}}</option>
+        <option v-for="category in categories" :name="category.id" :value="category.id">{{category.name}}</option>
       </select><br/>
       <label class="fileButton" for="img">
         <div v-if="!image">
@@ -21,7 +21,7 @@
         <div v-else>✓</div>
       </label><br/>
       <input @change="getImage" id="img" class="file" type="file" name="img"/>
-      <button @click="send" type="button">Отправить</button>
+      <button id="submit" @click="send" type="button">Отправить</button>
     </form>
     <div class="deletePage" v-else>
       <ul>

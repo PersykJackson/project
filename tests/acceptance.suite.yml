@@ -7,7 +7,11 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser:
-            url: http://localhost:8005
+        - WebDriver:
+            url: 'http://localhost:8005/'
+            browser: firefox
+            path: ''
+            capabilities:
+                acceptInsecureCerts: true # allow self-signed certificates
         - \Helper\Acceptance
 step_decorators: ~        

@@ -13,7 +13,7 @@
         <input v-model="date" type="date" id="date" name="date" :min="minDate" :max="maxDate"/><br/>
         <label for="comment">Комментарий</label><br/>
         <textarea v-model="comment" id="comment" name="comment"></textarea><br/>
-        <button v-if="basket.length" @click="sendData()" type="button">Заказать</button>
+        <button id="submit" v-if="basket.length" @click="sendData()" type="button">Заказать</button>
         <div v-else>В вашей корзине нет товаров!<br/><a href="/products/index">Вернуться к товарам</a></div>
       </form>
     </div>

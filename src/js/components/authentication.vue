@@ -13,7 +13,7 @@
           <input v-model="login" type="text" id="login" name="login" placeholder="Введите логин"/><br/>
           <label for="pass">Пароль</label><br/>
           <input v-model="password" type="password" id="pass" name="password" placeholder="Введите пароль"/><br/>
-          <button type="button" @click="sendData">Вход</button>
+          <button type="button" @click="sendData" name="submit">Вход</button>
           <a href="/registration/index">Регистрация</a>
         </form>
       </div>

@@ -6,7 +6,7 @@
     <div class="info">
       <p class="big">{{data.name}}</p>
       <p class="big">{{data.cost}} грн</p>
-      <button @click="toBasket">В корзину</button>
+      <button name="toBasket" @click="toBasket">В корзину</button>
       <p class="big"><strong>Описание: </strong></p>
       <p class="description">{{data.description}}</p>
     </div>
