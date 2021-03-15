@@ -37,6 +37,9 @@ main{
     margin-top: auto;
     margin-bottom: auto;
 }
+.categories{
+    top: 3% !important;
+}
 @media (max-width: 500px) {
     .product{
         grid-template-columns: 1fr;
