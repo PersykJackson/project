@@ -20,7 +20,7 @@
           <input v-model="password" type="password" id="password" name="password" placeholder="Введите пароль"/><br/>
           <label for="confirm">Подтвердие пароль</label><br/>
           <input v-model="confirm" type="password" id="confirm" name="confirm" placeholder="Проверка пароля"/><br/>
-          <button @click="sendData" class="button" type="button">Зарегистрироваться</button>
+          <button @click="sendData" name="submit" class="button" type="button">Зарегистрироваться</button>
         </form>
       </div>
     </div>

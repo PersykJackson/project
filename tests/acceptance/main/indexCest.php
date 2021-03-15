@@ -10,10 +10,10 @@ class indexCest
     }
 
     // tests
-    public function tryToTest(AcceptanceTester $I)
+    public function tryToTestMain(AcceptanceTester $I)
     {
-        $I->amOnPage('/authentication/index');
-        sleep(1);
-        $I->see('Логин');
+        $I->amOnPage('/main/index');
+        $I->see('Популярные товары');
+        $I->see('Популярные категории');
     }
 }

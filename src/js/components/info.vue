@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="links">
-      <a href="/account/history">История заказов</a>
+      <a id="history" href="/account/history">История заказов</a>
     </div>
     <div class="info">
       <p>Имя: {{info.firstName}}</p>
@@ -26,8 +26,12 @@ name: "info",
       this.info = await sendPost('/account/info')
     }
   },
-  created() {
-    this.getInfo()
+  async created() {
+    await this.getInfo()
+    const isAuth = await sendPost('/authentication/isAuth')
+    if (!isAuth) {
+      window.location.href = '/main/index'
+    }
   }
 }
 </script>

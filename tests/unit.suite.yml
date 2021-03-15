@@ -7,4 +7,10 @@ modules:
     enabled:
         - Asserts
         - \Helper\Unit
+        - Db:
+            dsn: "%dbconnection%:host=%host%;dbname=%dbname%"
+            user: "%user%"
+            password: "%password%"
+            populate: true
+            populator: 'mysql --user=$user --password=$password $dbname < tests/_data/dump.sql'
     step_decorators: ~        

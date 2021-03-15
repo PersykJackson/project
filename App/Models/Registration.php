@@ -44,7 +44,7 @@ class Registration extends \Liloy\Framework\Core\Model
                 return $errors;
             }
         }
-        if (strlen($user->login) < 5 || strlen($user->login > 20)) {
+        if (strlen($user->login) < 5 || strlen($user->login) > 20) {
             $errors[] = 'Логин должен быть длиннее 5-ти символов и короче 20-ти символов!';
         }
         if ($user->password !== $user->confirm) {
