@@ -17,7 +17,7 @@
       <caption>Ваши заказы</caption>
         <tr>
           <td>Телефон</td>
-          <td @click="sort">Дата</td>
+          <td>Дата</td>
           <td>Комментарий</td>
           <td>Адрес</td>
           <td>Товары</td>
